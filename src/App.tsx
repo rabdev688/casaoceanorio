@@ -1,4 +1,4 @@
-import { useState, useEffect, useId, FormEvent } from "react";
+import { useState, useEffect, useId, useRef, FormEvent } from "react";
 import type { DateRange } from "react-day-picker";
 
 import { DateField } from "@/components/date-field";
@@ -262,6 +262,7 @@ function App() {
 
   // Lightbox
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   // Amenity Tabs
   const [activeAmenityTab, setActiveAmenityTab] = useState<
@@ -1041,8 +1042,37 @@ function App() {
               </div>
             </button>
           ))}
+
+          {/* 6th tile — fills the empty bottom-right on desktop, hidden on mobile */}
+          <button
+            className="gallery-item item-6"
+            onClick={() => setLightbox(5)}
+            type="button"
+          >
+            <img
+              src={photos[5].src}
+              alt={photos[5].title}
+              loading="lazy"
+            />
+            <div className="gallery-caption">
+              <span className="title">{photos[5].title}</span>
+              <span className="index">
+                06 / 0{photos.length}
+              </span>
+            </div>
+            <div className="gallery-viewall-overlay">
+              <button
+                className="primary gallery-viewall-btn"
+                onClick={(e) => { e.stopPropagation(); setLightbox(0); }}
+                type="button"
+              >
+                View all {photos.length} photos <Icon type="arrow" />
+              </button>
+            </div>
+          </button>
         </div>
 
+        {/* Mobile-only standalone button (hidden on desktop via CSS) */}
         <div className="gallery-more-btn-wrap">
           <button
             className="primary"
@@ -1062,6 +1092,21 @@ function App() {
           onClick={() => setLightbox(null)}
           role="dialog"
           aria-modal="true"
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const delta = touchStartX.current - e.changedTouches[0].clientX;
+            if (Math.abs(delta) > 40) {
+              if (delta > 0) {
+                setLightbox((lightbox + 1) % photos.length);
+              } else {
+                setLightbox((lightbox - 1 + photos.length) % photos.length);
+              }
+            }
+            touchStartX.current = null;
+          }}
         >
           <button
             className="lightbox-close"
@@ -1146,13 +1191,7 @@ function App() {
             />
           </div>
 
-          <div className="video-badges">
-            <span className="video-badge">Dolphins in the estuaries</span>
-            <span className="video-badge">Walking distance to South Beach</span>
-            <span className="video-badge">Tybee Beach Pier & Pavilion</span>
-            <span className="video-badge">Fort Screven & the lighthouse</span>
-            <span className="video-badge">Fresh Low Country seafood</span>
-          </div>
+
         </div>
       </section>
 
@@ -1298,7 +1337,7 @@ function App() {
         </div>
       </section>
 
-      {/* --- Reviews Section --- */}
+      {/* --- Reviews Section ---
       <section className="reviews section reveal" id="reviews">
         <p className="eyebrow light">Notes from 200+ five-star guests</p>
         <div className="review-stars">★★★★★</div>
@@ -1334,7 +1373,7 @@ function App() {
             Next <Icon type="chevron-right" />
           </button>
         </div>
-      </section>
+      </section> */}
 
       {/* --- Interactive Calendar & Rate Estimator --- */}
       <section className="calendar-section section reveal" id="booking">
@@ -1406,7 +1445,7 @@ function App() {
       </section>
 
       {/* --- FAQ Accordion Section --- */}
-      <section className="faq-section section reveal" id="faq">
+      {/* <section className="faq-section section reveal" id="faq">
         <div className="section-head" style={{ textAlign: "center" }}>
           <p className="eyebrow">Everything you need to know</p>
           <h2>Frequently asked questions.</h2>
@@ -1433,7 +1472,7 @@ function App() {
             );
           })}
         </div>
-      </section>
+      </section> */}
 
       {/* --- Direct Booking & Contact Form Section --- */}
       <section className="contact-section section reveal" id="contact">
