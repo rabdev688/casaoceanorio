@@ -230,7 +230,7 @@ function BookingBar({
         />
       </label>
       <label htmlFor={guestsId}>
-        <span>Guests (Sleeps 12+)</span>
+        <span>Guests (sleeps 12+)</span>
         <select
           id={guestsId}
           value={guests}
@@ -244,7 +244,7 @@ function BookingBar({
         </select>
       </label>
       <button className="primary" onClick={handleSearch} type="button">
-        Check Direct Rates <Icon type="arrow" />
+        Check availability <Icon type="arrow" />
       </button>
     </div>
   )
@@ -820,8 +820,8 @@ function App() {
             <div>
               <div className="mobile-nav-top">
                 <a className="brand" href="#top" onClick={() => setMobileMenuOpen(false)}>
-                  <span>CASA</span> OCEANO <em>RIO</em>
-                  <small className="location-tag">Tybee Island, GA</small>
+                  Casa Oceano Rio
+                  <small className="location-tag">Tybee Island, Georgia</small>
                 </a>
                 <button
                   className="mobile-nav-close"
@@ -884,8 +884,8 @@ function App() {
       {/* --- Desktop & Mobile Header --- */}
       <header className="nav">
         <a className="brand" href="#top">
-          <span>CASA</span> OCEANO <em>RIO</em>
-          <small className="location-tag">Tybee Island, GA</small>
+          Casa Oceano Rio
+          <small className="location-tag">Tybee Island, Georgia</small>
         </a>
 
         <nav>
@@ -904,7 +904,7 @@ function App() {
             <Icon type="phone" /> (912) 398-4113
           </a>
           <a className="nav-cta" href="#contact">
-            Book Direct & Save
+            Book direct
           </a>
           <button
             className="hamburger-btn"
@@ -923,12 +923,11 @@ function App() {
           <div className="hero-copy">
             <div className="hero-subhead">
               <p className="eyebrow light">Tybee Island, Georgia · South Beach</p>
-              <span className="hero-tag">200+ 5-Star Reviews</span>
             </div>
             <h1>
               Where the river
               <br />
-              <i>meets the ocean.</i>
+              meets the ocean.
             </h1>
             <p className="intro">
               Handcrafted in 1984 by Savannah native Willie and family-cherished with Shelly. A
@@ -937,8 +936,8 @@ function App() {
             </p>
 
             <div className="hero-direct-badge">
-              <span className="dot" />
-              <span>Book directly with Willie & Shelly — avoid VRBO platform fees!</span>
+              <Icon type="check" />
+              <span>Book directly with Willie & Shelly and skip the platform fees.</span>
             </div>
           </div>
 
@@ -986,11 +985,11 @@ function App() {
       {/* --- Story Section: Willie & Shelly's Tybee Legacy --- */}
       <section className="story section reveal" id="story">
         <div className="section-head">
-          <p className="eyebrow">A Savannah Family Legacy Since 1984</p>
+          <p className="eyebrow">A Savannah family legacy since 1984</p>
           <h2>
-            Handcrafted with love.
+            Built by hand in 1984.
             <br />
-            <i>Cherished since 2010.</i>
+            Hosting guests since 2010.
           </h2>
         </div>
 
@@ -1010,7 +1009,7 @@ function App() {
             <div className="owner-badge">
               <div className="owner-badge-text">
                 <strong>Savannah Natives Willie & Shelly</strong>
-                <span>Direct owners & hosts · 200+ five-star verified guest reviews</span>
+                <span>Direct owners & hosts · welcoming guests since 2010</span>
               </div>
             </div>
 
@@ -1030,7 +1029,7 @@ function App() {
             </div>
 
             <a className="text-link" href="#contact">
-              Inquire Directly with Willie & Shelly <Icon type="arrow" />
+              Inquire directly with Willie & Shelly <Icon type="arrow" />
             </a>
           </div>
 
@@ -1045,11 +1044,6 @@ function App() {
               src={photos[2].src}
               alt="Spacious living room with 75 inch TV and fireplace"
             />
-            <span className="stamp">
-              EST. 1984
-              <br />
-              TYBEE GA
-            </span>
           </div>
         </div>
       </section>
@@ -1057,10 +1051,8 @@ function App() {
       {/* --- Rooms & Spaces Breakdown Section --- */}
       <section className="spaces-section section reveal" id="spaces">
         <div className="section-head">
-          <p className="eyebrow">Thoughtful Multi-Level Design</p>
-          <h2>
-            Rooms & spaces made to <i>gather.</i>
-          </h2>
+          <p className="eyebrow">Thoughtful multi-level design</p>
+          <h2>Rooms & spaces made to gather.</h2>
         </div>
 
         <div className="spaces-grid">
@@ -1166,10 +1158,8 @@ function App() {
       {/* --- Interactive Image Gallery with Enhanced Lightbox --- */}
       <section className="gallery section" id="gallery">
         <div className="section-head reveal">
-          <p className="eyebrow">Explore Every Corner</p>
-          <h2>
-            Space to unwind on <i>Tybee.</i>
-          </h2>
+          <p className="eyebrow">Explore every corner</p>
+          <h2>Space to unwind on Tybee.</h2>
         </div>
 
         <div className="gallery-grid reveal">
@@ -1200,7 +1190,7 @@ function App() {
             onClick={() => setLightbox(0)}
             type="button"
           >
-            View All {photos.length} Photos in High-Res Lightbox <Icon type="arrow" />
+            View all {photos.length} photos <Icon type="arrow" />
           </button>
         </div>
       </section>
@@ -1269,10 +1259,8 @@ function App() {
       {/* --- YouTube Video Tour Section --- */}
       <section className="video-section reveal" id="video">
         <div className="video-container">
-          <p className="eyebrow light">Coastal Georgia Paradise</p>
-          <h2>
-            Explore <i>Tybee Island.</i>
-          </h2>
+          <p className="eyebrow light">Coastal Georgia paradise</p>
+          <h2>Explore Tybee Island.</h2>
           <p
             className="intro"
             style={{ margin: '16px auto 36px', maxWidth: '640px', textAlign: 'center' }}
@@ -1292,11 +1280,11 @@ function App() {
           </div>
 
           <div className="video-badges">
-            <span className="video-badge">🐬 Wild Dolphin Sightings</span>
-            <span className="video-badge">🏖️ Walking Distance to South Beach</span>
-            <span className="video-badge">🎣 Tybee Beach Pier & Pavilion</span>
-            <span className="video-badge">🏰 Historic Fort Screven & Lighthouse</span>
-            <span className="video-badge">🦞 Fresh Low Country Seafood</span>
+            <span className="video-badge">Dolphins in the estuaries</span>
+            <span className="video-badge">Walking distance to South Beach</span>
+            <span className="video-badge">Tybee Beach Pier & Pavilion</span>
+            <span className="video-badge">Fort Screven & the lighthouse</span>
+            <span className="video-badge">Fresh Low Country seafood</span>
           </div>
         </div>
       </section>
@@ -1304,10 +1292,8 @@ function App() {
       {/* --- Amenity Categories with Tabs --- */}
       <section className="amenities section reveal" id="amenities">
         <div className="section-head">
-          <p className="eyebrow">Every Comfort Anticipated</p>
-          <h2>
-            Effortless coastal <i>living.</i>
-          </h2>
+          <p className="eyebrow">Every comfort anticipated</p>
+          <h2>Effortless coastal living.</h2>
         </div>
 
         {/* Tab Buttons */}
@@ -1348,10 +1334,9 @@ function App() {
 
         {/* Amenity Grid */}
         <div className="amenity-grid">
-          {amenityCategories[activeAmenityTab].map((item, idx) => (
+          {amenityCategories[activeAmenityTab].map((item) => (
             <div key={item.name} className="amenity-item">
               <div className="amenity-item-top">
-                <span className="num">0{idx + 1}</span>
                 <Icon type={item.icon} />
               </div>
               <div>
@@ -1363,10 +1348,18 @@ function App() {
         </div>
 
         <div className="amenities-note">
-          <span>🚭 <b>No Smoking</b></span>
-          <span>🐾 <b>No Pets Allowed</b> (preserves a pristine allergen-free environment)</span>
-          <span>👶 <b>Children Always Welcome</b></span>
-          <span>🚗 <b>Free On-Site Parking Included</b></span>
+          <span>
+            <b>No smoking</b> anywhere on the property
+          </span>
+          <span>
+            <b>No pets</b>, which keeps the home allergen-free
+          </span>
+          <span>
+            <b>Children welcome</b>
+          </span>
+          <span>
+            <b>Free on-site parking</b> for up to 4 vehicles
+          </span>
         </div>
       </section>
 
@@ -1374,11 +1367,7 @@ function App() {
       <section className="location section reveal" id="location">
         <div className="location-copy">
           <p className="eyebrow light">Tybee Island · South Beach District</p>
-          <h2>
-            Where the river
-            <br />
-            <i>meets the ocean.</i>
-          </h2>
+          <h2>One block from the sand.</h2>
           <p>
             Casa Oceano Rio is nestled in Tybee Island’s beloved South Beach neighborhood at{' '}
             <b>1811a Butler Avenue</b>. Leave your car behind in our private driveway—stroll in
@@ -1387,11 +1376,14 @@ function App() {
           </p>
 
           <div className="location-address">
-            📍 <b>1811a Butler Ave, Tybee Island, GA 31328</b>
-            <br />
-            <span style={{ fontSize: '12px', opacity: 0.85 }}>
-              Coordinates: 31.9974° N, 80.8504° W (Barrier Island of Coastal Georgia)
-            </span>
+            <Icon type="pin" />
+            <div>
+              <b>1811a Butler Ave, Tybee Island, GA 31328</b>
+              <br />
+              <span style={{ fontSize: '13px', opacity: 0.85 }}>
+                Coordinates: 31.9974° N, 80.8504° W
+              </span>
+            </div>
           </div>
 
           <ul>
@@ -1416,21 +1408,30 @@ function App() {
           </ul>
         </div>
 
-        <div className="map-card">
-          <div className="map-lines" />
-          <span className="map-label map-river">SAVANNAH RIVER ESTUARY</span>
-          <span className="map-label map-pier">TYBEE PIER & PAVILION</span>
-          <div className="map-pin-main">
-            <Icon type="pin" /> Casa Oceano Rio
-            <small>1811a Butler Ave · South Beach</small>
+        <div className="location-map">
+          <div className="map-card">
+            <iframe
+              title="Map of Casa Oceano Rio, 1811a Butler Ave, Tybee Island, Georgia"
+              src="https://www.google.com/maps?q=1811a%20Butler%20Ave%2C%20Tybee%20Island%2C%20GA%2031328&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
-          <span className="map-label map-ocean">ATLANTIC OCEAN</span>
+          <a
+            className="map-link"
+            href="https://www.google.com/maps/search/?api=1&query=1811a+Butler+Ave,+Tybee+Island,+GA+31328"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open in Google Maps <Icon type="arrow" />
+          </a>
         </div>
       </section>
 
       {/* --- Reviews Section --- */}
       <section className="reviews section reveal" id="reviews">
-        <p className="eyebrow light">Notes From 200+ 5-Star Guests</p>
+        <p className="eyebrow light">Notes from 200+ five-star guests</p>
         <div className="review-stars">★★★★★</div>
         <blockquote>{reviews[review][0]}</blockquote>
         <p className="author">
@@ -1453,13 +1454,13 @@ function App() {
             className="review-arrow-btn"
             onClick={() => setReview((review - 1 + reviews.length) % reviews.length)}
           >
-            ← Previous Note
+            <Icon type="chevron-left" /> Previous
           </button>
           <button
             className="review-arrow-btn"
             onClick={() => setReview((review + 1) % reviews.length)}
           >
-            Next Note →
+            Next <Icon type="chevron-right" />
           </button>
         </div>
       </section>
@@ -1467,10 +1468,8 @@ function App() {
       {/* --- Interactive Calendar & Rate Estimator --- */}
       <section className="calendar-section section reveal" id="booking">
         <div className="calendar-intro">
-          <p className="eyebrow">Direct Availability & Rates</p>
-          <h2>
-            Plan your <i>escape.</i>
-          </h2>
+          <p className="eyebrow">Direct availability & rates</p>
+          <h2>Plan your stay.</h2>
           <p>
             Select your check-in and check-out dates to calculate your live stay estimate. Direct
             bookings avoid third-party platform service fees!
@@ -1501,8 +1500,8 @@ function App() {
                 </p>
               </div>
               <div className="booking-summary-price">
-                <b>${bookingSummary.total} Total</b>
-                <small>🎉 Saves ~${bookingSummary.directSavings} direct booking fee!</small>
+                <b>${bookingSummary.total} total</b>
+                <small>Saves ~${bookingSummary.directSavings} in platform fees</small>
               </div>
               <button
                 className="primary"
@@ -1512,20 +1511,12 @@ function App() {
                   if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
-                Inquire With These Dates <Icon type="arrow" />
+                Inquire with these dates <Icon type="arrow" />
               </button>
             </div>
           ) : (
-            <div
-              style={{
-                marginTop: '28px',
-                padding: '16px',
-                background: '#f4f0e6',
-                borderLeft: '3px solid var(--blue)',
-                fontSize: '13px',
-              }}
-            >
-              👉 Click a check-in day, then an end day to calculate your exact direct rate.
+            <div className="hint-note">
+              Select a check-in day, then a check-out day to see your exact direct rate.
             </div>
           )}
         </div>
@@ -1627,10 +1618,8 @@ function App() {
       {/* --- FAQ Accordion Section --- */}
       <section className="faq-section section reveal" id="faq">
         <div className="section-head" style={{ textAlign: 'center' }}>
-          <p className="eyebrow">Everything You Need to Know</p>
-          <h2>
-            Frequently asked <i>questions.</i>
-          </h2>
+          <p className="eyebrow">Everything you need to know</p>
+          <h2>Frequently asked questions.</h2>
         </div>
 
         <div className="faq-list">
@@ -1646,7 +1635,7 @@ function App() {
                 >
                   <h3>{faq.q}</h3>
                   <div className="faq-toggle-icon">
-                    <Icon type="close" />
+                    <Icon type="chevron-down" />
                   </div>
                 </button>
                 {isOpen && <div className="faq-answer">{faq.a}</div>}
@@ -1661,15 +1650,16 @@ function App() {
         <div className="contact-layout">
           <div className="contact-info">
             <div>
-              <p className="eyebrow">Direct Host Inquiries</p>
+              <p className="eyebrow">Direct host inquiries</p>
               <h2>
-                Book direct with<br />
-                <i>Willie & Shelly.</i>
+                Book direct with
+                <br />
+                Willie & Shelly.
               </h2>
             </div>
 
             <div className="direct-perks">
-              <h4>Why Book Directly with Us?</h4>
+              <h4>Why book directly with us?</h4>
               <p>
                 We are Savannah locals who built and cherish this home. You skip all third-party
                 booking fees and receive personal assistance with your trip.
@@ -1685,14 +1675,14 @@ function App() {
 
             <div className="host-cards">
               <div className="host-card">
-                <span className="role">Host & Builder</span>
+                <span className="role">Host & builder</span>
                 <strong>Willie</strong>
                 <a className="phone-link" href="tel:9123984113">
                   <Icon type="phone" /> (912) 398-4113
                 </a>
               </div>
               <div className="host-card">
-                <span className="role">Host & Co-Owner</span>
+                <span className="role">Host & co-owner</span>
                 <strong>Shelly</strong>
                 <a className="phone-link" href="tel:9123986901">
                   <Icon type="phone" /> (912) 398-6901
@@ -1700,25 +1690,19 @@ function App() {
               </div>
             </div>
 
-            <div
-              style={{
-                fontSize: '13px',
-                color: '#617375',
-                borderLeft: '2px solid var(--blue)',
-                paddingLeft: '14px',
-              }}
-            >
-              📍 <b>1811a Butler Ave, Tybee Island, GA 31328</b>
-              <br />
-              Prefer email? Reach us at{' '}
-              <a href="mailto:stay@casaoceanorio.com" style={{ textDecoration: 'underline' }}>
-                stay@casaoceanorio.com
-              </a>
+            <div className="contact-note">
+              <Icon type="pin" />
+              <div>
+                <b>1811a Butler Ave, Tybee Island, GA 31328</b>
+                <br />
+                Prefer email? Reach us at{' '}
+                <a href="mailto:stay@casaoceanorio.com">stay@casaoceanorio.com</a>
+              </div>
             </div>
           </div>
 
           <div className="contact-form">
-            <h3>Direct Reservation Inquiry</h3>
+            <h3>Direct reservation inquiry</h3>
             <p className="form-subtitle">
               Fill out this quick form and we’ll get back to you within 24 hours with confirmed
               direct rates and availability.
@@ -1727,11 +1711,11 @@ function App() {
             <form onSubmit={handleFormSubmit} noValidate>
               <div className="form-grid">
                 <div className="form-group full-width">
-                  <label htmlFor="fullName">Your Full Name *</label>
+                  <label htmlFor="fullName">Your full name *</label>
                   <input
                     id="fullName"
                     type="text"
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder="Sarah Jenkins"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   />
@@ -1739,7 +1723,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email Address *</label>
+                  <label htmlFor="email">Email address *</label>
                   <input
                     id="email"
                     type="email"
@@ -1751,7 +1735,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">Phone Number *</label>
+                  <label htmlFor="phone">Phone number *</label>
                   <input
                     id="phone"
                     type="tel"
@@ -1763,7 +1747,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="formCheckIn">Check-in Date *</label>
+                  <label htmlFor="formCheckIn">Check-in date *</label>
                   <input
                     id="formCheckIn"
                     type="date"
@@ -1774,7 +1758,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="formCheckOut">Check-out Date *</label>
+                  <label htmlFor="formCheckOut">Check-out date *</label>
                   <input
                     id="formCheckOut"
                     type="date"
@@ -1785,7 +1769,7 @@ function App() {
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="guests">Number of Guests (Sleeps 12+)</label>
+                  <label htmlFor="guests">Number of guests (sleeps 12+)</label>
                   <select
                     id="guests"
                     value={formData.guests}
@@ -1800,7 +1784,7 @@ function App() {
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="message">Message or Questions (Optional)</label>
+                  <label htmlFor="message">Message or questions (optional)</label>
                   <textarea
                     id="message"
                     rows={4}
@@ -1816,21 +1800,15 @@ function App() {
                   'Sending Inquiry...'
                 ) : (
                   <>
-                    Send Direct Booking Inquiry <Icon type="arrow" />
+                    Send booking inquiry <Icon type="arrow" />
                   </>
                 )}
               </button>
 
-              <div
-                style={{
-                  marginTop: '16px',
-                  fontSize: '11px',
-                  color: '#718183',
-                  textAlign: 'center',
-                }}
-              >
-                🔒 Zero obligation. We never share your contact details. Direct rate guaranteed.
-              </div>
+              <p className="form-fineprint">
+                No obligation. We never share your contact details, and your direct rate is
+                guaranteed.
+              </p>
             </form>
           </div>
         </div>
@@ -1842,12 +1820,13 @@ function App() {
           <div>
             <p className="eyebrow light">Tybee Island, Georgia</p>
             <h2>
-              The ocean is calling.<br />
-              <i>See you on Tybee.</i>
+              Ready when
+              <br />
+              you are.
             </h2>
           </div>
           <a className="footer-book" href="#contact">
-            Reserve Direct
+            Check availability
             <Icon type="arrow" />
           </a>
         </div>
@@ -1855,17 +1834,17 @@ function App() {
         <div className="footer-main-grid">
           <div className="footer-col">
             <a className="brand" href="#top" style={{ color: 'white' }}>
-              <span>CASA</span> OCEANO <em>RIO</em>
-              <small className="location-tag">Tybee Island, GA</small>
+              Casa Oceano Rio
+              <small className="location-tag">Tybee Island, Georgia</small>
             </a>
             <p style={{ marginTop: '14px' }}>
-              "Where the River Meets the Ocean." A 3-story South Beach vacation home handcrafted in
-              1984 by Willie, family-owned with Shelly, welcoming guests since 2010.
+              A three-story South Beach home, built by hand in 1984 by Savannah native Willie and
+              run with Shelly, welcoming guests since 2010.
             </p>
           </div>
 
           <div className="footer-col">
-            <h5>Direct Contact</h5>
+            <h5>Direct contact</h5>
             <ul>
               <li>
                 <a href="tel:9123984113">Willie: (912) 398-4113</a>
@@ -1881,32 +1860,32 @@ function App() {
           </div>
 
           <div className="footer-col">
-            <h5>Quick Links</h5>
+            <h5>Quick links</h5>
             <ul>
               <li>
-                <a href="#story">Our Story</a>
+                <a href="#story">Our story</a>
               </li>
               <li>
-                <a href="#spaces">Rooms & Spaces</a>
+                <a href="#spaces">Rooms & spaces</a>
               </li>
               <li>
-                <a href="#gallery">Photo Gallery</a>
+                <a href="#gallery">Photo gallery</a>
               </li>
               <li>
-                <a href="#video">Tybee Video Tour</a>
+                <a href="#video">Tybee video tour</a>
               </li>
               <li>
-                <a href="#amenities">All Amenities</a>
+                <a href="#amenities">All amenities</a>
               </li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h5>Guest Policies</h5>
+            <h5>Guest policies</h5>
             <ul>
               <li>Check-in: 4:00 PM</li>
               <li>Check-out: 10:00 AM</li>
-              <li>Sleeps 12–14 Guests</li>
+              <li>Sleeps 12–14 guests</li>
               <li>No Pets / No Smoking</li>
               <li>VRBO Premier Host</li>
             </ul>
@@ -1915,13 +1894,13 @@ function App() {
 
         <div className="footer-bottom">
           <small>© {new Date().getFullYear()} Casa Oceano Rio · Tybee Island, Georgia. All rights reserved.</small>
-          <small>Savannah Hospitality · Book Direct to Save</small>
+          <small>Savannah hospitality · Book direct to save</small>
         </div>
       </footer>
 
       {/* --- Sticky Mobile Book Bar & Sheet --- */}
       <button className="mobile-book" onClick={() => setSheet(true)} type="button">
-        Check Direct Dates <span>· Sleeps 12+ · South Beach</span>
+        Check availability <span>Sleeps 12+ · South Beach</span>
       </button>
 
       {sheet && (
@@ -1936,8 +1915,9 @@ function App() {
             </button>
             <p className="eyebrow">Direct Reservation</p>
             <h2>Stay at Casa Oceano Rio</h2>
-            <p style={{ fontSize: '13px', color: '#617375', marginBottom: '20px' }}>
-              1811a Butler Ave, Tybee Island, GA. Book directly with Willie & Shelly to avoid third-party fees!
+            <p style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '20px' }}>
+              1811a Butler Ave, Tybee Island, GA. Book directly with Willie & Shelly to skip the
+              third-party fees.
             </p>
             <BookingBar
               mobile
