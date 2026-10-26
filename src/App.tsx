@@ -23,115 +23,115 @@ const photos: PhotoItem[] = [
   {
     src: "/gallery/exterior.jpg",
     title: "Casa Oceano Rio",
-    desc: "1812 Chatham Avenue in the South Beach area of Tybee Island.",
-    space: "Exterior",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    space: "Lorem ipsum",
   },
   {
     src: "/gallery/dipping-pool.jpg",
     title: "Dipping Pool",
-    desc: "Cool in the summer and warm in the winter.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Dipping Pool",
   },
   {
     src: "/gallery/living-room.jpg",
-    title: 'Living Room with 75" TV',
-    desc: "Wood-burning fireplace and a 75-inch TV.",
+    title: 'Living Room With 75" TV',
+    desc: 'Living Room With 75" TV.',
     space: "Living Room",
   },
   {
     src: "/gallery/kitchen.jpg",
     title: "Kitchen",
-    desc: "Kitchen, breakfast nook, and dining for the house.",
+    desc: "Kitchen.",
     space: "Kitchen",
   },
   {
     src: "/gallery/primary-bedroom.jpg",
     title: "Primary Bedroom",
-    desc: "Open loft with a king bed, adjoining bathroom, and a large walk-in shower.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Primary Bedroom",
   },
   {
     src: "/gallery/rooftop.jpg",
     title: "Rooftop Deck",
-    desc: "Rooftop deck on the third floor.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Rooftop Deck",
   },
   {
     src: "/gallery/primary-bath.jpg",
-    title: "Primary Bath",
-    desc: "Walk-in shower, two vanities, and a makeup area.",
+    title: "Primary Bath Walk-In Shower",
+    desc: "Primary Bath Walk-In Shower.",
     space: "Primary Bath",
   },
   {
     src: "/gallery/open-living.jpg",
-    title: "Open Living",
-    desc: "Open living space looking from the living room into the kitchen.",
+    title: "Open Living Concept",
+    desc: "Open Living Concept.",
     space: "Open Living",
   },
   {
     src: "/gallery/stairs.jpg",
-    title: "Stairs to the 3rd Floor",
-    desc: "Living room stairs up to the third floor.",
+    title: "Living Room - Stairs to 3rd Floor",
+    desc: "Living Room - Stairs to 3rd Floor.",
     space: "Living Room",
   },
   {
     src: "/gallery/breakfast-nook.jpg",
     title: "Breakfast Nook",
-    desc: "Seats 4. A spot for morning coffee or games.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Breakfast Nook",
   },
   {
     src: "/gallery/dining-room.jpg",
     title: "Dining Room",
-    desc: "Dining table for 6, plus 6 bar stools at the kitchen.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Dining Room",
   },
   {
     src: "/gallery/half-bath.jpg",
-    title: "Half Bath",
-    desc: "Half bath off the dining room.",
+    title: "Half Bath Off Dining Room",
+    desc: "Half Bath Off Dining Room.",
     space: "Half Bath",
   },
   {
     src: "/gallery/second-floor-bedroom-1.jpg",
     title: "Second Floor Bedroom 1",
-    desc: "Queen bed and two twins, with an adjoining shared bathroom.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Second Floor",
   },
   {
     src: "/gallery/second-floor-bedroom-2.jpg",
     title: "Second Floor Bedroom 2",
-    desc: "Second-floor bedroom.",
+    desc: "Second Floor Bedroom 2.",
     space: "Second Floor",
   },
   {
     src: "/gallery/first-floor-bedroom-1.jpg",
     title: "First Floor Bedroom 1",
-    desc: "Queen bed, two twins, and a futon.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "First Floor",
   },
   {
     src: "/gallery/first-floor-bedroom-2.jpg",
     title: "First Floor Bedroom 2",
-    desc: "Two queen beds, a TV, and an extra refrigerator.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "First Floor",
   },
   {
     src: "/gallery/laundry-bath.jpg",
-    title: "First Floor Bathroom and Laundry",
-    desc: "One of two first-floor bathrooms, with laundry. Renovated bath house from the 1940s.",
+    title: "1 of 2 First Floor Bathrooms - Laundry",
+    desc: "1 of 2 First Floor Bathrooms - Laundry.",
     space: "First Floor Bath",
   },
   {
     src: "/gallery/first-floor-bath.jpg",
-    title: "First Floor Bathroom",
-    desc: "The second first-floor bathroom, a renovated shower house from the 1940s.",
+    title: "2 of 2 First Floor Bathrooms",
+    desc: "2 of 2 First Floor Bathrooms.",
     space: "First Floor Bath",
   },
   {
     src: "/gallery/main-deck.jpg",
     title: "Second Floor Main Deck",
-    desc: "Main deck overlooking the dipping pool.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     space: "Main Deck",
   },
 ];
@@ -147,46 +147,70 @@ interface SpaceItem {
 
 const spacesData: SpaceItem[] = [
   {
-    floor: "Third floor",
+    floor: "Lorem ipsum",
     img: "/gallery/primary-bedroom.jpg",
-    title: "Primary bedroom",
-    desc: "Open loft with a king bed and an adjoining bath featuring two vanities, a makeup area, and a large walk-in shower.",
-    features: ["King bed in an open loft", "Two vanities & makeup area", "Large walk-in shower"],
+    title: "Primary Bedroom",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      "Primary Bedroom",
+      "Lorem ipsum dolor",
+      "Primary Bath Walk-In Shower",
+    ],
   },
   {
-    floor: "Second floor",
+    floor: "Lorem ipsum",
     img: "/gallery/living-room.jpg",
-    title: "Living room",
-    desc: "Open living room with a 75-inch TV, satellite or cable, and a wood-burning fireplace. Stairs lead up to the third floor.",
-    features: ['75-inch TV with satellite/cable', 'Wood-burning fireplace', 'Open-plan with dining below'],
+    title: 'Living Room With 75" TV',
+    desc: "Living Room - Stairs to 3rd Floor. Satellite or cable. Wood Fireplace.",
+    features: [
+      '75" TV',
+      "Satellite or cable",
+      "Stairs to 3rd Floor",
+    ],
   },
   {
-    floor: "Second floor",
+    floor: "Lorem ipsum",
     img: "/gallery/kitchen.jpg",
-    title: "Kitchen & dining",
-    desc: "Kitchen with a breakfast nook that seats 4 and 6 bar stools. The dining room table seats 6, with a half bath off the dining room.",
-    features: ["Dining table for 6", "Breakfast nook for 4", "Half bath off dining room"],
+    title: "Kitchen",
+    desc: "Kitchen, Breakfast Nook, and Dining Room. Half Bath Off Dining Room.",
+    features: [
+      "Kitchen",
+      "Breakfast Nook",
+      "Half Bath Off Dining Room",
+    ],
   },
   {
     floor: "Second floor",
     img: "/gallery/second-floor-bedroom-1.jpg",
-    title: "Two bedrooms",
-    desc: "Bedroom 1 has a queen and two twins, with an adjoining shared bathroom. Bedroom 2 is the second guest room on this floor.",
-    features: ["Bedroom 1: queen & two twins", "Shared bath for Bedroom 1", "Bedroom 2 on same floor"],
+    title: "Second Floor Bedrooms",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      "Second Floor Bedroom 1",
+      "Second Floor Bedroom 2",
+      "Lorem ipsum dolor",
+    ],
   },
   {
     floor: "First floor",
     img: "/gallery/first-floor-bedroom-1.jpg",
-    title: "Two bedrooms & two baths",
-    desc: "Bedroom 1 has a queen, two twins, and a futon. Bedroom 2 has two queens, a TV, and a refrigerator. One bath has laundry.",
-    features: ["Bedroom 1: queen, twins & futon", "Bedroom 2: two queens & TV", "Washer & dryer in one bath"],
+    title: "First Floor Bedrooms",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1 of 2 First Floor Bathrooms - Laundry.",
+    features: [
+      "First Floor Bedroom 1",
+      "First Floor Bedroom 2",
+      "Washer & Dryer",
+    ],
   },
   {
-    floor: "Outside",
+    floor: "Lorem ipsum",
     img: "/gallery/dipping-pool.jpg",
-    title: "Dipping pool & decks",
-    desc: "The dipping pool is cool in summer and warm in winter. The main deck overlooks the pool, and a rooftop deck crowns the house.",
-    features: ["Dipping pool, year-round", "Main deck & rooftop deck", "Gas grill & Low Country boil pot"],
+    title: "Dipping Pool",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      "Dipping pool",
+      "Rooftop Deck",
+      "Large Gas Grill",
+    ],
   },
 ];
 
@@ -326,7 +350,7 @@ function BookingBar({
   mobile = false,
   initialCheckIn = "2026-06-12",
   initialCheckOut = "2026-06-18",
-  initialGuests = 2,
+  initialGuests = 16,
   onApplyDates,
 }: BookingBarProps) {
   const [checkIn, setCheckIn] = useState(initialCheckIn);
@@ -359,7 +383,7 @@ function BookingBar({
         <DateField id={checkOutId} value={checkOut} onChange={setCheckOut} />
       </label>
       <label htmlFor={guestsId}>
-        <span>Guests (sleeps 16)</span>
+        <span>Guests</span>
         <GuestSelect id={guestsId} value={guests} onChange={setGuests} />
       </label>
       <button className="primary" onClick={handleSearch} type="button">
@@ -390,11 +414,6 @@ function App() {
   const spacesAutoPlay = useRef(true);
   const spacesTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const spacesTouchStartX = useRef<number | null>(null);
-
-  // Amenity Tabs
-  const [activeAmenityTab, setActiveAmenityTab] = useState<
-    "indoor" | "outdoor" | "kitchen" | "beach"
-  >("indoor");
 
   // Reviews
   const [review, setReview] = useState(0);
@@ -659,101 +678,101 @@ function App() {
       {
         icon: "tv" as IconType,
         name: '75" TV',
-        desc: "In the living room, with satellite or cable.",
+        desc: 'Living Room With 75" TV. Satellite or cable.',
       },
       {
         icon: "flame" as IconType,
         name: "Wood Fireplace",
-        desc: "Wood-burning fireplace in the living room.",
+        desc: "Wood Fireplace.",
       },
       {
         icon: "sun" as IconType,
         name: "Air Conditioning and Heat",
-        desc: "The house has air conditioning and heat.",
+        desc: "Air Conditioning. Heat.",
       },
       {
         icon: "wifi" as IconType,
         name: "Internet",
-        desc: "Internet is included with the house.",
+        desc: "Internet.",
       },
       {
         icon: "check" as IconType,
-        name: "Washer and Dryer",
-        desc: "Laundry is in one of the two first-floor bathrooms.",
+        name: "Washer & Dryer",
+        desc: "1 of 2 First Floor Bathrooms - Laundry.",
       },
       {
         icon: "bed" as IconType,
-        name: "Sleeps",
-        desc: "Five bedrooms, including the third-floor primary loft.",
+        name: "Lorem ipsum",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       {
         icon: "check" as IconType,
-        name: "No Smoking and No Pets",
-        desc: "Children are welcome.",
+        name: "No Smoking/Pets",
+        desc: "Children Welcome.",
       },
     ],
     outdoor: [
       {
         icon: "pool" as IconType,
-        name: "Dipping Pool",
-        desc: "Cool in the summer and warm in the winter.",
+        name: "Dipping pool",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       {
         icon: "view" as IconType,
         name: "Rooftop Deck",
-        desc: "A deck on the roof of the house.",
+        desc: "Rooftop Deck.",
       },
       {
         icon: "sun" as IconType,
         name: "Second Floor Main Deck",
-        desc: "Overlooks the dipping pool.",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       {
         icon: "flame" as IconType,
         name: "Large Gas Grill",
-        desc: "For cooking outside.",
+        desc: "Large Gas Grill.",
       },
       {
         icon: "coffee" as IconType,
         name: "Low Country Boil Pot and Gas Burner",
-        desc: "Pot and burner for a Low Country boil.",
+        desc: "Low Country Boil Pot and Gas Burner.",
       },
       {
         icon: "car" as IconType,
         name: "Parking",
-        desc: "Parking at the house.",
+        desc: "Parking.",
       },
     ],
     kitchen: [
       {
         icon: "kitchen" as IconType,
         name: "Kitchen",
-        desc: "Kitchen on the second floor, open to the living room.",
+        desc: "Kitchen.",
       },
       {
         icon: "bed" as IconType,
-        name: "Dining Table for 6",
-        desc: "Dining room off the kitchen.",
+        name: "Dolor sit amet",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       {
         icon: "coffee" as IconType,
-        name: "Breakfast Nook for 4",
-        desc: "For morning coffee or games.",
+        name: "Breakfast Nook",
+        desc: "Breakfast Nook.",
       },
       {
         icon: "sun" as IconType,
-        name: "6 Bar Stools",
-        desc: "Seating at the kitchen.",
+        name: "Consectetur adipiscing",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       {
         icon: "check" as IconType,
-        name: "Half Bath off the Dining Room",
-        desc: "On the main living floor.",
+        name: "Half Bath Off Dining Room",
+        desc: "Half Bath Off Dining Room.",
       },
       {
         icon: "check" as IconType,
-        name: "Extra Refrigerator",
-        desc: "In first-floor bedroom 2, with a TV.",
+        name: "Elit sed do",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
     ],
     beach: [
@@ -785,7 +804,7 @@ function App() {
       {
         icon: "check" as IconType,
         name: "Children Welcome",
-        desc: "The house is set up for families and groups.",
+        desc: "Children Welcome.",
       },
       {
         icon: "view" as IconType,
@@ -794,6 +813,16 @@ function App() {
       },
     ],
   };
+
+  const amenityColumns = [
+    { label: "Lorem ipsum", items: amenityCategories.indoor },
+    { label: "Dolor sit amet", items: amenityCategories.outdoor },
+    { label: "Consectetur elit", items: amenityCategories.kitchen },
+    { label: "Adipiscing elit", items: amenityCategories.beach },
+  ];
+  const amenityRowCount = Math.max(
+    ...amenityColumns.map((column) => column.items.length),
+  );
 
   // Real FAQs for Casa Oceano Rio
   const faqs = [
@@ -807,7 +836,7 @@ function App() {
     },
     {
       q: "Where is the house?",
-      a: "Casa Oceano Rio is at 1812 Chatham Avenue in the South Beach area of Tybee Island. It is within walking distance of Tybee’s commercial district, with shops, restaurants, and nightclubs.",
+      a: "Casa Oceano Rio is in the exclusive South Beach area of Tybee, at 1811a Butler Ave, Tybee Island, Ga 31328. It is within walking distance of Tybee's commercial district, with shops, restaurants, and nightclubs.",
     },
     {
       q: "What beach gear is included?",
@@ -815,11 +844,11 @@ function App() {
     },
     {
       q: "Is there parking?",
-      a: "Yes. Parking is at the house.",
+      a: "Yes. Parking.",
     },
     {
-      q: "How many guests can stay?",
-      a: "The house sleeps 16. There are five bedrooms: a third-floor primary loft with a king bed, a second-floor room with a queen and two twins, another second-floor bedroom, a first-floor room with a queen, two twins, and a futon, and a first-floor room with two queen beds.",
+      q: "Lorem ipsum dolor sit amet?",
+      a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
   ];
 
@@ -882,14 +911,15 @@ function App() {
             </h1>
             <p className="intro">
               Welcome to Casa Oceano Rio, a Tybee Island vacation rental in the
-              exclusive South Beach area. The house sleeps 16, with a dipping
-              pool, and the beach gear is included.
+              exclusive South Beach area, with a dipping pool and beach gear
+              included. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
 
             <div className="hero-direct-badge">
               <Icon type="check" />
               <span>
-                Book directly with Willie and Shelly and avoid booking-site fees.
+                Book directly with Willie and Shelly and avoid booking-site
+                fees.
               </span>
             </div>
           </div>
@@ -915,15 +945,15 @@ function App() {
         <article>
           <Icon type="bed" />
           <div>
-            <strong>Sleeps 16</strong>
-            <span>Five bedrooms on three floors</span>
+            <strong>Lorem ipsum</strong>
+            <span>Dolor sit amet consectetur</span>
           </div>
         </article>
         <article>
           <Icon type="pool" />
           <div>
-            <strong>Dipping Pool</strong>
-            <span>Cool in summer, warm in winter</span>
+            <strong>Dipping pool</strong>
+            <span>Lorem ipsum dolor sit amet</span>
           </div>
         </article>
         <article>
@@ -958,10 +988,10 @@ function App() {
             <p>
               Willie is a Savannah native and built Casa Oceano Rio as a private
               residence in 1984. He and Shelly were married in 1993 and raised
-              their two boys on Tybee Island. After the kids went off to college,
-              they moved to a home in Savannah’s Historic District. In 2010 the
-              residence became Casa Oceano Rio. Willie and Shelly still manage
-              it themselves.
+              their two boys on Tybee Island. After the kids went off to
+              college, they moved to a home in Savannah’s Historic District. In
+              2010 the residence became Casa Oceano Rio. Willie and Shelly still
+              manage it themselves.
             </p>
 
             <div className="stats-grid">
@@ -974,8 +1004,8 @@ function App() {
                 <span>Five-star reviews</span>
               </div>
               <div className="stat-item">
-                <b>16</b>
-                <span>Guests</span>
+                <b>Lorem</b>
+                <span>Ipsum dolor</span>
               </div>
             </div>
 
@@ -988,7 +1018,7 @@ function App() {
             <img
               className="main-photo"
               src={photos[0].src}
-              alt="Casa Oceano Rio at 1812 Chatham Avenue, Tybee Island"
+              alt="Casa Oceano Rio, Tybee Island"
             />
             <img
               className="float-photo"
@@ -1008,20 +1038,27 @@ function App() {
 
         <div
           className="spaces-carousel"
-          onMouseEnter={() => { spacesAutoPlay.current = false; }}
-          onMouseLeave={() => { spacesAutoPlay.current = true; }}
+          onMouseEnter={() => {
+            spacesAutoPlay.current = false;
+          }}
+          onMouseLeave={() => {
+            spacesAutoPlay.current = true;
+          }}
           onTouchStart={(e) => {
             spacesTouchStartX.current = e.touches[0].clientX;
             spacesAutoPlay.current = false;
           }}
           onTouchEnd={(e) => {
             if (spacesTouchStartX.current === null) return;
-            const delta = spacesTouchStartX.current - e.changedTouches[0].clientX;
+            const delta =
+              spacesTouchStartX.current - e.changedTouches[0].clientX;
             const maxIdx = spacesData.length - spacesPerView;
             if (delta > 50) setSpacesIdx((p) => Math.min(p + 1, maxIdx));
             else if (delta < -50) setSpacesIdx((p) => Math.max(p - 1, 0));
             spacesTouchStartX.current = null;
-            setTimeout(() => { spacesAutoPlay.current = true; }, 3000);
+            setTimeout(() => {
+              spacesAutoPlay.current = true;
+            }, 3000);
           }}
         >
           {/* Viewport clips the track */}
@@ -1068,8 +1105,14 @@ function App() {
               <Icon type="chevron-left" />
             </button>
 
-            <div className="spaces-dots" role="tablist" aria-label="Spaces carousel">
-              {Array.from({ length: spacesData.length - spacesPerView + 1 }).map((_, i) => (
+            <div
+              className="spaces-dots"
+              role="tablist"
+              aria-label="Spaces carousel"
+            >
+              {Array.from({
+                length: spacesData.length - spacesPerView + 1,
+              }).map((_, i) => (
                 <button
                   key={i}
                   role="tab"
@@ -1120,7 +1163,8 @@ function App() {
               <div className="gallery-caption">
                 <span className="title">{photo.title}</span>
                 <span className="index">
-                  {String(i + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
+                  {String(i + 1).padStart(2, "0")} /{" "}
+                  {String(photos.length).padStart(2, "0")}
                 </span>
               </div>
             </button>
@@ -1132,11 +1176,7 @@ function App() {
             onClick={() => setLightbox(5)}
             type="button"
           >
-            <img
-              src={photos[5].src}
-              alt={photos[5].title}
-              loading="lazy"
-            />
+            <img src={photos[5].src} alt={photos[5].title} loading="lazy" />
             <div className="gallery-caption">
               <span className="title">{photos[5].title}</span>
               <span className="index">
@@ -1146,7 +1186,10 @@ function App() {
             <div className="gallery-viewall-overlay">
               <button
                 className="primary gallery-viewall-btn"
-                onClick={(e) => { e.stopPropagation(); setLightbox(0); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox(0);
+                }}
                 type="button"
               >
                 View all {photos.length} photos <Icon type="arrow" />
@@ -1260,8 +1303,7 @@ function App() {
               textAlign: "center",
             }}
           >
-            A 15 minute drone tour of Tybee Island, the barrier island where
-            Casa Oceano Rio is located.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
 
           <div className="video-player-wrap">
@@ -1272,81 +1314,60 @@ function App() {
               allowFullScreen
             />
           </div>
-
-
         </div>
       </section>
 
-      {/* --- Amenity Categories with Tabs --- */}
+      {/* --- Amenities --- */}
       <section className="amenities section reveal" id="amenities">
         <div className="section-head">
-          <p className="eyebrow">Every comfort anticipated</p>
-          <h2>Effortless coastal living.</h2>
+          <p className="eyebrow">We are here for you!</p>
+          <h2>Featured Amenities</h2>
         </div>
 
-        {/* Tab Buttons */}
-        <div className="amenity-tabs" role="tablist">
-          <button
-            role="tab"
-            aria-selected={activeAmenityTab === "indoor"}
-            className={`amenity-tab-btn ${activeAmenityTab === "indoor" ? "active" : ""}`}
-            onClick={() => setActiveAmenityTab("indoor")}
-          >
-            Indoor Comforts
-          </button>
-          <button
-            role="tab"
-            aria-selected={activeAmenityTab === "outdoor"}
-            className={`amenity-tab-btn ${activeAmenityTab === "outdoor" ? "active" : ""}`}
-            onClick={() => setActiveAmenityTab("outdoor")}
-          >
-            Outdoor & Pool
-          </button>
-          <button
-            role="tab"
-            aria-selected={activeAmenityTab === "kitchen"}
-            className={`amenity-tab-btn ${activeAmenityTab === "kitchen" ? "active" : ""}`}
-            onClick={() => setActiveAmenityTab("kitchen")}
-          >
-            Kitchen & Dining
-          </button>
-          <button
-            role="tab"
-            aria-selected={activeAmenityTab === "beach"}
-            className={`amenity-tab-btn ${activeAmenityTab === "beach" ? "active" : ""}`}
-            onClick={() => setActiveAmenityTab("beach")}
-          >
-            Beach Gear & Fun
-          </button>
-        </div>
-
-        {/* Amenity Grid */}
-        <div className="amenity-grid">
-          {amenityCategories[activeAmenityTab].map((item) => (
-            <div key={item.name} className="amenity-item">
-              <div className="amenity-item-top">
-                <Icon type={item.icon} />
-              </div>
-              <div>
-                <strong>{item.name}</strong>
-                <p className="desc">{item.desc}</p>
-              </div>
+        <div
+          className="amenity-board"
+          style={
+            { "--amenity-rows": amenityRowCount + 1 } as React.CSSProperties
+          }
+        >
+          {amenityColumns.map((column) => (
+            <div key={column.label} className="amenity-col">
+              <div className="amenity-col-head">{column.label}</div>
+              {Array.from({ length: amenityRowCount }, (_, index) => {
+                const item = column.items[index];
+                if (!item) {
+                  return (
+                    <div
+                      key={`${column.label}-empty-${index}`}
+                      className="amenity-cell is-empty"
+                    />
+                  );
+                }
+                return (
+                  <div key={item.name} className="amenity-cell">
+                    <span className="amenity-name">
+                      <Icon type={item.icon} />
+                      <strong>{item.name}</strong>
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           ))}
         </div>
 
         <div className="amenities-note">
           <span>
-            <b>No smoking</b> anywhere on the property
+            <b>No Smoking</b>
           </span>
           <span>
-            <b>No pets</b>
+            <b>No Pets</b>
           </span>
           <span>
             <b>Children welcome</b>
           </span>
           <span>
-            <b>Parking</b> at the house
+            <b>Parking</b>
           </span>
         </div>
       </section>
@@ -1358,7 +1379,7 @@ function App() {
           <h2>Where the river meets the ocean.</h2>
           <p>
             Casa Oceano Rio is in the exclusive South Beach area of Tybee, at{" "}
-            <b>1812 Chatham Avenue</b>. The commercial district, with shops,
+            <b>1811a Butler Ave</b>. The commercial district, with shops,
             restaurants, and nightclubs, is within walking distance. Chairs,
             floats, umbrellas, a cooler, and large beach carts are included.
           </p>
@@ -1366,34 +1387,24 @@ function App() {
           <div className="location-address">
             <Icon type="pin" />
             <div>
-              <b>1812 Chatham Avenue, Tybee Island, GA 31328</b>
+              <b>1811a Butler Ave, Tybee Island, Ga 31328</b>
             </div>
           </div>
 
           <ul>
-            <li>
-              South Beach area of Tybee Island
-            </li>
-            <li>
-              Walking distance to shops, restaurants, and nightclubs
-            </li>
-            <li>
-              Dipping pool on the property
-            </li>
-            <li>
-              Parking at the house
-            </li>
-            <li>
-              Sleeps 16
-            </li>
+            <li>South Beach area of Tybee Island</li>
+            <li>Walking distance to shops, restaurants, and nightclubs</li>
+            <li>Dipping pool</li>
+            <li>Parking</li>
+            <li>Lorem ipsum dolor sit amet</li>
           </ul>
         </div>
 
         <div className="location-map">
           <div className="map-card">
             <iframe
-              title="Map of Casa Oceano Rio, 1812 Chatham Avenue, Tybee Island, Georgia"
-              src="https://www.google.com/maps?q=1812%20Chatham%20Avenue%2C%20Tybee%20Island%2C%20GA%2031328&output=embed"
+              title="Map of Casa Oceano Rio, 1811a Butler Ave, Tybee Island, Ga 31328"
+              src="https://www.google.com/maps?q=1811a%20Butler%20Ave%2C%20Tybee%20Island%2C%20Ga%2031328&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -1401,7 +1412,7 @@ function App() {
           </div>
           <a
             className="map-link"
-            href="https://www.google.com/maps/search/?api=1&query=1812+Chatham+Avenue,+Tybee+Island,+GA+31328"
+            href="https://www.google.com/maps/search/?api=1&query=1811a+Butler+Ave,+Tybee+Island,+Ga+31328"
             target="_blank"
             rel="noreferrer"
           >
@@ -1473,8 +1484,8 @@ function App() {
               <div className="booking-summary-info">
                 <h4>{bookingSummary.nights} nights at Casa Oceano Rio</h4>
                 <p>
-                  Sleeps 16. We will confirm these dates and reply within 24
-                  hours.
+                  Lorem ipsum dolor sit amet. We will confirm these dates and
+                  reply within 24 hours.
                 </p>
               </div>
               <button
@@ -1561,9 +1572,11 @@ function App() {
               <ul>
                 <li>Willie and Shelly manage the house themselves</li>
                 <li>Call or text anytime</li>
-                <li>Chairs, floats, umbrellas, cooler, and large beach carts</li>
-                <li>Dipping pool, cool in summer and warm in winter</li>
-                <li>The house sleeps 16</li>
+                <li>
+                  Chairs, floats, umbrellas, cooler, and large beach carts
+                </li>
+                <li>Dipping pool</li>
+                <li>Lorem ipsum dolor sit amet</li>
               </ul>
             </div>
 
@@ -1587,7 +1600,7 @@ function App() {
             <div className="contact-note">
               <Icon type="pin" />
               <div>
-                <b>1812 Chatham Avenue, Tybee Island, GA 31328</b>
+                <b>1811a Butler Ave, Tybee Island, Ga 31328</b>
                 <br />
                 Willie:{" "}
                 <a href="mailto:wlfields@bellsouth.net">
@@ -1603,8 +1616,8 @@ function App() {
           <div className="contact-form">
             <h3>Direct reservation inquiry</h3>
             <p className="form-subtitle">
-              Put your requested dates in the message. We will respond within
-              24 hours with availability.
+              Put your requested dates in the message. We will respond within 24
+              hours with availability.
             </p>
 
             <form onSubmit={handleFormSubmit} noValidate>
@@ -1614,7 +1627,7 @@ function App() {
                   <input
                     id="fullName"
                     type="text"
-                    placeholder="Sarah Jenkins"
+                    placeholder="Lorem ipsum"
                     value={formData.fullName}
                     onChange={(e) =>
                       setFormData({ ...formData, fullName: e.target.value })
@@ -1630,7 +1643,7 @@ function App() {
                   <input
                     id="email"
                     type="email"
-                    placeholder="sarah@example.com"
+                    placeholder="Lorem ipsum"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -1646,7 +1659,7 @@ function App() {
                   <input
                     id="phone"
                     type="tel"
-                    placeholder="(912) 555-0199"
+                    placeholder="Lorem ipsum"
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
@@ -1688,7 +1701,7 @@ function App() {
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="guests">Number of guests (sleeps 16)</label>
+                  <label htmlFor="guests">Guests</label>
                   <GuestSelect
                     id="guests"
                     value={formData.guests}
@@ -1759,8 +1772,8 @@ function App() {
             </a>
             <p style={{ marginTop: "14px" }}>
               Willie, a Savannah native, built this South Beach house in 1984.
-              He and Shelly have welcomed guests here since 2010. The house
-              sleeps 16.
+              He and Shelly have welcomed guests here since 2010. Lorem ipsum
+              dolor sit amet.
             </p>
           </div>
 
@@ -1781,7 +1794,7 @@ function App() {
               <li>
                 <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </li>
-              <li>1812 Chatham Avenue, Tybee Island, GA 31328</li>
+              <li>1811a Butler Ave, Tybee Island, Ga 31328</li>
             </ul>
           </div>
 
@@ -1809,7 +1822,7 @@ function App() {
           <div className="footer-col">
             <h5>Guest policies</h5>
             <ul>
-              <li>Sleeps 16</li>
+              <li>Lorem ipsum</li>
               <li>No pets</li>
               <li>No smoking</li>
               <li>Children welcome</li>
@@ -1823,7 +1836,7 @@ function App() {
             © {new Date().getFullYear()} Casa Oceano Rio · Tybee Island,
             Georgia. All rights reserved.
           </small>
-          <small>Savannah hospitality · Book direct to save</small>
+          <small>Lorem ipsum dolor sit amet</small>
         </div>
       </footer>
 
@@ -1833,7 +1846,7 @@ function App() {
         onClick={() => setSheet(true)}
         type="button"
       >
-        Check availability <span>Sleeps 16 · South Beach, Tybee</span>
+        Check availability <span>Lorem ipsum · South Beach, Tybee</span>
       </button>
 
       {sheet && (
@@ -1860,8 +1873,8 @@ function App() {
                 marginBottom: "20px",
               }}
             >
-              1812 Chatham Avenue, Tybee Island. Book directly with Willie
-              and Shelly. We reply within 24 hours with availability.
+              1811a Butler Ave, Tybee Island, Ga 31328. Book directly with
+              Willie and Shelly. We reply within 24 hours with availability.
             </p>
             <BookingBar
               mobile
