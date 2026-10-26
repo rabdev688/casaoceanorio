@@ -13,7 +13,6 @@ import {
 import {
   calendarMonths,
   dateToSelection,
-  getStayRate,
   isBlockedDate,
   monthStart,
   selectionToDate,
@@ -34,9 +33,8 @@ function RateDayButton({
   className,
   ...props
 }: ComponentProps<typeof CalendarDayButton>) {
-  const rate = getStayRate(day.date)
   const blocked = Boolean(modifiers.disabled)
-  const priceLabel = blocked || rate == null ? 'Reserved' : `$${rate}`
+  const priceLabel = blocked ? 'Unavailable' : 'Open'
   const ariaLabel = typeof props['aria-label'] === 'string' ? props['aria-label'] : undefined
 
   return (
@@ -48,7 +46,7 @@ function RateDayButton({
       aria-label={ariaLabel ? `${ariaLabel}, ${priceLabel}` : priceLabel}
     >
       <span className="rate-num">{day.date.getDate()}</span>
-      <span className="rate-price">{blocked || rate == null ? '—' : `$${rate}`}</span>
+      <span className="rate-price">{blocked ? '—' : ''}</span>
     </CalendarDayButton>
   )
 }

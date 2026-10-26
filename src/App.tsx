@@ -21,52 +21,172 @@ interface PhotoItem {
 
 const photos: PhotoItem[] = [
   {
-    src: "https://images.unsplash.com/photo-1790276319738-f7b19d7f7e8c?auto=format&fit=crop&w=1800&q=85",
-    title: "Casa Oceano Rio Exterior & Pool Deck",
-    desc: "Three stories of coastal living just steps from Tybee’s South Beach sands.",
-    space: "Exterior & Grounds",
+    src: "/gallery/exterior.jpg",
+    title: "Casa Oceano Rio",
+    desc: "1812 Chatham Avenue in the South Beach area of Tybee Island.",
+    space: "Exterior",
   },
   {
-    src: "https://images.unsplash.com/photo-1790276319577-6fd4992ada4f?auto=format&fit=crop&w=1200&q=82",
-    title: "Private Dipping Pool Oasis",
-    desc: "Refreshing dip in the summer, gently heated during cool island winters.",
+    src: "/gallery/dipping-pool.jpg",
+    title: "Dipping Pool",
+    desc: "Cool in the summer and warm in the winter.",
     space: "Dipping Pool",
   },
   {
-    src: "https://images.unsplash.com/photo-1790276317950-cd0cad99655d?auto=format&fit=crop&w=1200&q=82",
-    title: 'Open Living Room with 75" TV',
-    desc: "Wood-burning fireplace, soaring ceilings, and room for the whole family.",
+    src: "/gallery/living-room.jpg",
+    title: 'Living Room with 75" TV',
+    desc: "Wood-burning fireplace and a 75-inch TV.",
     space: "Living Room",
   },
   {
-    src: "https://images.unsplash.com/photo-1790276319469-e495208bfd45?auto=format&fit=crop&w=1200&q=82",
-    title: "Gourmet Kitchen & Dining Room",
-    desc: "Full kitchen, breakfast nook, 6 bar stools, plus dining table for 6.",
-    space: "Kitchen & Dining",
+    src: "/gallery/kitchen.jpg",
+    title: "Kitchen",
+    desc: "Kitchen, breakfast nook, and dining for the house.",
+    space: "Kitchen",
   },
   {
-    src: "https://images.unsplash.com/photo-1790276319296-1a47fce989ff?auto=format&fit=crop&w=1200&q=82",
-    title: "Primary Open Loft King Suite",
-    desc: "Expansive master loft with King bed, double vanities, and walk-in shower.",
+    src: "/gallery/primary-bedroom.jpg",
+    title: "Primary Bedroom",
+    desc: "Open loft with a king bed, adjoining bathroom, and a large walk-in shower.",
     space: "Primary Bedroom",
   },
   {
-    src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=82",
-    title: "Panoramic Rooftop & Main Decks",
-    desc: "Breathtaking breezes where the Savannah River meets the Atlantic Ocean.",
+    src: "/gallery/rooftop.jpg",
+    title: "Rooftop Deck",
+    desc: "Rooftop deck on the third floor.",
     space: "Rooftop Deck",
   },
   {
-    src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=82",
-    title: "Guest Suites & Historic 1940s Bath",
-    desc: "Thoughtfully renovated bathrooms and versatile multi-bed family rooms.",
-    space: "Guest Bath & Laundry",
+    src: "/gallery/primary-bath.jpg",
+    title: "Primary Bath",
+    desc: "Walk-in shower, two vanities, and a makeup area.",
+    space: "Primary Bath",
   },
   {
-    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=82",
-    title: "South Beach Shoreline & Beach Gear",
-    desc: "Heavy-duty beach carts, umbrellas, chairs, floats & Yeti cooler included.",
-    space: "Tybee South Beach",
+    src: "/gallery/open-living.jpg",
+    title: "Open Living",
+    desc: "Open living space looking from the living room into the kitchen.",
+    space: "Open Living",
+  },
+  {
+    src: "/gallery/stairs.jpg",
+    title: "Stairs to the 3rd Floor",
+    desc: "Living room stairs up to the third floor.",
+    space: "Living Room",
+  },
+  {
+    src: "/gallery/breakfast-nook.jpg",
+    title: "Breakfast Nook",
+    desc: "Seats 4. A spot for morning coffee or games.",
+    space: "Breakfast Nook",
+  },
+  {
+    src: "/gallery/dining-room.jpg",
+    title: "Dining Room",
+    desc: "Dining table for 6, plus 6 bar stools at the kitchen.",
+    space: "Dining Room",
+  },
+  {
+    src: "/gallery/half-bath.jpg",
+    title: "Half Bath",
+    desc: "Half bath off the dining room.",
+    space: "Half Bath",
+  },
+  {
+    src: "/gallery/second-floor-bedroom-1.jpg",
+    title: "Second Floor Bedroom 1",
+    desc: "Queen bed and two twins, with an adjoining shared bathroom.",
+    space: "Second Floor",
+  },
+  {
+    src: "/gallery/second-floor-bedroom-2.jpg",
+    title: "Second Floor Bedroom 2",
+    desc: "Second-floor bedroom.",
+    space: "Second Floor",
+  },
+  {
+    src: "/gallery/first-floor-bedroom-1.jpg",
+    title: "First Floor Bedroom 1",
+    desc: "Queen bed, two twins, and a futon.",
+    space: "First Floor",
+  },
+  {
+    src: "/gallery/first-floor-bedroom-2.jpg",
+    title: "First Floor Bedroom 2",
+    desc: "Two queen beds, a TV, and an extra refrigerator.",
+    space: "First Floor",
+  },
+  {
+    src: "/gallery/laundry-bath.jpg",
+    title: "First Floor Bathroom and Laundry",
+    desc: "One of two first-floor bathrooms, with laundry. Renovated bath house from the 1940s.",
+    space: "First Floor Bath",
+  },
+  {
+    src: "/gallery/first-floor-bath.jpg",
+    title: "First Floor Bathroom",
+    desc: "The second first-floor bathroom, a renovated shower house from the 1940s.",
+    space: "First Floor Bath",
+  },
+  {
+    src: "/gallery/main-deck.jpg",
+    title: "Second Floor Main Deck",
+    desc: "Main deck overlooking the dipping pool.",
+    space: "Main Deck",
+  },
+];
+
+// --- Spaces Carousel Data ---
+interface SpaceItem {
+  floor: string;
+  img: string;
+  title: string;
+  desc: string;
+  features: string[];
+}
+
+const spacesData: SpaceItem[] = [
+  {
+    floor: "Third floor",
+    img: "/gallery/primary-bedroom.jpg",
+    title: "Primary bedroom",
+    desc: "Open loft with a king bed and an adjoining bath featuring two vanities, a makeup area, and a large walk-in shower.",
+    features: ["King bed in an open loft", "Two vanities & makeup area", "Large walk-in shower"],
+  },
+  {
+    floor: "Second floor",
+    img: "/gallery/living-room.jpg",
+    title: "Living room",
+    desc: "Open living room with a 75-inch TV, satellite or cable, and a wood-burning fireplace. Stairs lead up to the third floor.",
+    features: ['75-inch TV with satellite/cable', 'Wood-burning fireplace', 'Open-plan with dining below'],
+  },
+  {
+    floor: "Second floor",
+    img: "/gallery/kitchen.jpg",
+    title: "Kitchen & dining",
+    desc: "Kitchen with a breakfast nook that seats 4 and 6 bar stools. The dining room table seats 6, with a half bath off the dining room.",
+    features: ["Dining table for 6", "Breakfast nook for 4", "Half bath off dining room"],
+  },
+  {
+    floor: "Second floor",
+    img: "/gallery/second-floor-bedroom-1.jpg",
+    title: "Two bedrooms",
+    desc: "Bedroom 1 has a queen and two twins, with an adjoining shared bathroom. Bedroom 2 is the second guest room on this floor.",
+    features: ["Bedroom 1: queen & two twins", "Shared bath for Bedroom 1", "Bedroom 2 on same floor"],
+  },
+  {
+    floor: "First floor",
+    img: "/gallery/first-floor-bedroom-1.jpg",
+    title: "Two bedrooms & two baths",
+    desc: "Bedroom 1 has a queen, two twins, and a futon. Bedroom 2 has two queens, a TV, and a refrigerator. One bath has laundry.",
+    features: ["Bedroom 1: queen, twins & futon", "Bedroom 2: two queens & TV", "Washer & dryer in one bath"],
+  },
+  {
+    floor: "Outside",
+    img: "/gallery/dipping-pool.jpg",
+    title: "Dipping pool & decks",
+    desc: "The dipping pool is cool in summer and warm in winter. The main deck overlooks the pool, and a rooftop deck crowns the house.",
+    features: ["Dipping pool, year-round", "Main deck & rooftop deck", "Gas grill & Low Country boil pot"],
   },
 ];
 
@@ -206,7 +326,7 @@ function BookingBar({
   mobile = false,
   initialCheckIn = "2026-06-12",
   initialCheckOut = "2026-06-18",
-  initialGuests = 8,
+  initialGuests = 2,
   onApplyDates,
 }: BookingBarProps) {
   const [checkIn, setCheckIn] = useState(initialCheckIn);
@@ -239,7 +359,7 @@ function BookingBar({
         <DateField id={checkOutId} value={checkOut} onChange={setCheckOut} />
       </label>
       <label htmlFor={guestsId}>
-        <span>Guests (sleeps 12+)</span>
+        <span>Guests (sleeps 16)</span>
         <GuestSelect id={guestsId} value={guests} onChange={setGuests} />
       </label>
       <button className="primary" onClick={handleSearch} type="button">
@@ -263,6 +383,13 @@ function App() {
   // Lightbox
   const [lightbox, setLightbox] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
+
+  // Spaces Carousel
+  const [spacesIdx, setSpacesIdx] = useState(0);
+  const [spacesPerView, setSpacesPerView] = useState(3);
+  const spacesAutoPlay = useRef(true);
+  const spacesTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const spacesTouchStartX = useRef<number | null>(null);
 
   // Amenity Tabs
   const [activeAmenityTab, setActiveAmenityTab] = useState<
@@ -302,7 +429,7 @@ function App() {
     phone: "",
     checkIn: "2026-06-08",
     checkOut: "2026-06-12",
-    guests: 8,
+    guests: 2,
     message: "",
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
@@ -350,6 +477,35 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightbox]);
 
+  // Spaces Carousel: responsive per-view & auto-play
+  useEffect(() => {
+    const getPerView = () => {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    };
+    const update = () => {
+      const pv = getPerView();
+      setSpacesPerView(pv);
+      setSpacesIdx((prev) => Math.min(prev, spacesData.length - pv));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useEffect(() => {
+    const maxIdx = spacesData.length - spacesPerView;
+    if (spacesTimer.current) clearInterval(spacesTimer.current);
+    spacesTimer.current = setInterval(() => {
+      if (!spacesAutoPlay.current) return;
+      setSpacesIdx((prev) => (prev >= maxIdx ? 0 : prev + 1));
+    }, 4000);
+    return () => {
+      if (spacesTimer.current) clearInterval(spacesTimer.current);
+    };
+  }, [spacesPerView]);
+
   // Helper to show a Toast notification
   const showToast = (title: string, text: string) => {
     const id = Date.now();
@@ -388,7 +544,7 @@ function App() {
     }));
     showToast(
       "Dates Selected!",
-      `Selected ${calendarMonths[start.monthIdx].name} ${start.day} to ${calendarMonths[end.monthIdx].name} ${end.day}. Rate calculated below.`,
+      `Selected ${calendarMonths[start.monthIdx].name} ${start.day} to ${calendarMonths[end.monthIdx].name} ${end.day}. Send an inquiry and we will confirm availability.`,
     );
   };
 
@@ -397,32 +553,18 @@ function App() {
     if (!selectedStart || !selectedEnd) return null;
 
     let nights = 0;
-    let subtotal = 0;
 
     if (selectedStart.monthIdx === selectedEnd.monthIdx) {
       nights = selectedEnd.day - selectedStart.day;
-      const rates = calendarMonths[selectedStart.monthIdx].rates;
-      for (let d = selectedStart.day; d < selectedEnd.day; d++) {
-        subtotal += rates[d - 1] || 550;
-      }
     } else {
-      // Span across adjacent months
       const startDaysInM = calendarMonths[selectedStart.monthIdx].daysInMonth;
       nights += startDaysInM - selectedStart.day;
       nights += selectedEnd.day;
-      subtotal = nights * 595;
     }
 
-    const cleaningFee = 285;
-    const directSavings = Math.round(subtotal * 0.14); // ~14% third party fee saved!
+    if (nights < 1) return null;
 
-    return {
-      nights,
-      subtotal,
-      cleaningFee,
-      total: subtotal + cleaningFee,
-      directSavings,
-    };
+    return { nights };
   };
 
   const bookingSummary = calculateTotal();
@@ -503,27 +645,11 @@ function App() {
     }
   };
 
-  // Real Reviews for Tybee Island Beach House
   const reviews = [
     [
-      "“Willie and Shelly have created the ultimate Tybee beach retreat! The house comfortably accommodated all 13 of us with space to spare. The dipping pool after long days on South Beach was pure heaven, and sunset from the rooftop deck is unforgettable. Already booked for next summer!”",
-      "The Gallagher Family",
-      "Atlanta, GA",
-    ],
-    [
-      "“Booking directly with Willie and Shelly saved our family group over $600 in VRBO fees! The rolling beach carts, chairs, umbrellas, and the Low Country boil pot made our reunion effortless. You can walk to every great restaurant and the pier in minutes.”",
-      "Marcus & Elena T.",
-      "Charlotte, NC",
-    ],
-    [
-      "“As Savannah natives, Willie and Shelly gave us the warmest Southern hospitality and the best local tips. The open loft master bedroom is gorgeous, the 75-inch TV was great for movie night, and the kitchen had everything we needed to cook for 14 people.”",
-      "Sarah & David K.",
-      "Nashville, TN",
-    ],
-    [
-      "“Over 200 5-star reviews and now we completely understand why. Clean, historic character from 1984, incredible multi-level layout, and the beach is literally a 90-second stroll. This is the gold standard of Tybee vacation rentals.”",
-      "The Henderson Clan",
-      "Cincinnati, OH",
+      "Since 2010, Casa Oceano Rio has welcomed guests from all over the world and has more than 200 five-star reviews.",
+      "Casa Oceano Rio",
+      "Tybee Island, Georgia",
     ],
   ];
 
@@ -532,169 +658,139 @@ function App() {
     indoor: [
       {
         icon: "tv" as IconType,
-        name: '75" Living Room 4K TV',
-        desc: "Plus satellite/cable and additional smart TVs in bedrooms.",
+        name: '75" TV',
+        desc: "In the living room, with satellite or cable.",
       },
       {
         icon: "flame" as IconType,
-        name: "Wood-Burning Fireplace",
-        desc: "Cozy coastal evenings in the grand open-concept living area.",
+        name: "Wood Fireplace",
+        desc: "Wood-burning fireplace in the living room.",
       },
       {
         icon: "sun" as IconType,
-        name: "Dual-Zone Air Conditioning & Heat",
-        desc: "Keeps all 3 floors perfectly cooled during warm Georgia summers.",
+        name: "Air Conditioning and Heat",
+        desc: "The house has air conditioning and heat.",
       },
       {
         icon: "wifi" as IconType,
-        name: "High-Speed Wi-Fi",
-        desc: "Whole-home coverage for streaming, gaming, and remote work.",
+        name: "Internet",
+        desc: "Internet is included with the house.",
       },
       {
         icon: "check" as IconType,
-        name: "Washer & Dryer",
-        desc: "In-unit full laundry facilities in the renovated 1940s bath house.",
+        name: "Washer and Dryer",
+        desc: "Laundry is in one of the two first-floor bathrooms.",
       },
       {
         icon: "bed" as IconType,
-        name: "King Loft Suite",
-        desc: "Primary suite with double vanity, walk-in shower & open views.",
-      },
-      {
-        icon: "view" as IconType,
-        name: "Open Living Architecture",
-        desc: "3-story handcrafted layout designed by owner Willie in 1984.",
+        name: "Sleeps",
+        desc: "Five bedrooms, including the third-floor primary loft.",
       },
       {
         icon: "check" as IconType,
-        name: "Linens & Bath Towels",
-        desc: "Crisp fresh bedding and fluffy towels provided for all guests.",
+        name: "No Smoking and No Pets",
+        desc: "Children are welcome.",
       },
     ],
     outdoor: [
       {
         icon: "pool" as IconType,
-        name: "Private Dipping Pool",
-        desc: "Cool & refreshing in summer, gently heated during the winter months.",
+        name: "Dipping Pool",
+        desc: "Cool in the summer and warm in the winter.",
       },
       {
         icon: "view" as IconType,
-        name: "Rooftop Viewing Deck",
-        desc: "Panoramic vistas where the Savannah River meets the Atlantic Ocean.",
+        name: "Rooftop Deck",
+        desc: "A deck on the roof of the house.",
       },
       {
         icon: "sun" as IconType,
         name: "Second Floor Main Deck",
-        desc: "Spacious outdoor deck overlooking the sparkling pool patio.",
+        desc: "Overlooks the dipping pool.",
       },
       {
         icon: "flame" as IconType,
-        name: "Large Gas BBQ Grill",
-        desc: "Ready for sunset cookouts and poolside dining.",
+        name: "Large Gas Grill",
+        desc: "For cooking outside.",
       },
       {
         icon: "coffee" as IconType,
-        name: "Low Country Boil Pot & Burner",
-        desc: "Complete burner & giant pot for authentic coastal Georgia seafood boils.",
+        name: "Low Country Boil Pot and Gas Burner",
+        desc: "Pot and burner for a Low Country boil.",
       },
       {
         icon: "car" as IconType,
-        name: "Private On-Site Parking",
-        desc: "Complimentary off-street parking for multiple vehicles in South Beach.",
-      },
-      {
-        icon: "wave" as IconType,
-        name: "Covered Lounging Porch",
-        desc: "Comfortable seating to enjoy warm coastal ocean breezes.",
-      },
-      {
-        icon: "check" as IconType,
-        name: "Outdoor Shower Area",
-        desc: "Quick rinse off after a fun day on Tybee’s sunny sands.",
+        name: "Parking",
+        desc: "Parking at the house.",
       },
     ],
     kitchen: [
       {
         icon: "kitchen" as IconType,
-        name: "Full Chef’s Kitchen",
-        desc: "Fully equipped with oven, range, microwave, dishwasher & cookware.",
+        name: "Kitchen",
+        desc: "Kitchen on the second floor, open to the living room.",
       },
       {
         icon: "bed" as IconType,
         name: "Dining Table for 6",
-        desc: "Comfortable dining room table just off the open kitchen concept.",
+        desc: "Dining room off the kitchen.",
       },
       {
         icon: "coffee" as IconType,
-        name: "Breakfast Nook (Seats 4)",
-        desc: "Bright morning dining corner for coffee and family breakfasts.",
+        name: "Breakfast Nook for 4",
+        desc: "For morning coffee or games.",
       },
       {
         icon: "sun" as IconType,
-        name: "6 Kitchen Bar Stools",
-        desc: "Expansive breakfast bar island for casual meals and gathering.",
+        name: "6 Bar Stools",
+        desc: "Seating at the kitchen.",
       },
       {
         icon: "check" as IconType,
-        name: "Extra First Floor Fridge",
-        desc: "Second full-size refrigerator for chilled drinks, watermelon & ice.",
-      },
-      {
-        icon: "coffee" as IconType,
-        name: "Coffee Maker & Blender",
-        desc: "Drip coffee, Keurig, blender for smoothies & frozen drinks.",
+        name: "Half Bath off the Dining Room",
+        desc: "On the main living floor.",
       },
       {
         icon: "check" as IconType,
-        name: "Half Bath off Dining",
-        desc: "Convenient powder room on the main entertaining level.",
-      },
-      {
-        icon: "flame" as IconType,
-        name: "Generous Dinnerware & Cutlery",
-        desc: "Complete sets of plates, glasses, and serving ware for 14+ guests.",
+        name: "Extra Refrigerator",
+        desc: "In first-floor bedroom 2, with a TV.",
       },
     ],
     beach: [
       {
         icon: "car" as IconType,
-        name: "Heavy-Duty Beach Carts",
-        desc: "Easy-rolling large beach wagons to haul gear effortlessly to the sand.",
+        name: "Large Beach Carts",
+        desc: "For hauling chairs and the cooler to the beach.",
       },
       {
         icon: "sun" as IconType,
-        name: "Beach Chairs & Umbrellas",
-        desc: "Sturdy Tommy Bahama beach chairs and oversized shade umbrellas.",
+        name: "Chairs and Umbrellas",
+        desc: "Included for days at the beach.",
       },
       {
         icon: "wave" as IconType,
-        name: "Floats & Boogie Boards",
-        desc: "Fun ocean gear and pool floats ready for kids and adults.",
+        name: "Floats",
+        desc: "Floats are included with the beach gear.",
       },
       {
         icon: "pool" as IconType,
-        name: "Large Beach Cooler",
-        desc: "Yeti-style cooler to keep drinks and beach snacks ice-cold.",
+        name: "Cooler",
+        desc: "A cooler is included with the beach gear.",
       },
       {
         icon: "pin" as IconType,
-        name: "South Beach Footsteps Away",
-        desc: "Just 1 to 2 minute flat walk to the oceanfront and boardwalk.",
+        name: "South Beach, Tybee",
+        desc: "Walking distance to the commercial district.",
       },
       {
         icon: "check" as IconType,
         name: "Children Welcome",
-        desc: "Family-friendly layout with board games, high chair, and safe spaces.",
+        desc: "The house is set up for families and groups.",
       },
       {
         icon: "view" as IconType,
-        name: "Walk to Tybee Pier & Shops",
-        desc: "Stroll to restaurants, ice cream shops, surf shops, and night spots.",
-      },
-      {
-        icon: "check" as IconType,
-        name: "Allergy-Free (No Pets/Smoke)",
-        desc: "Strict non-smoking and no-pet policy keeps the home pristine.",
+        name: "Shops, Restaurants, and Nightclubs",
+        desc: "Within walking distance in Tybee’s commercial district.",
       },
     ],
   };
@@ -703,35 +799,27 @@ function App() {
   const faqs = [
     {
       q: "How do I book directly and avoid platform fees?",
-      a: "You can submit the contact form right on this website or call Willie directly at (912) 398-4113 or Shelly at (912) 398-6901. While we are a top-rated Premier Host on VRBO, reserving directly with us saves you up to 14%–18% in third-party platform service fees and guarantees personal Savannah hospitality from day one!",
+      a: "Use the contact form on this page, or call or text Willie at (912) 398-4113 or Shelly at (912) 398-6901. We are on VRBO, and booking directly avoids the fees those sites charge. Put your requested dates in the message and we will respond within 24 hours with availability.",
     },
     {
-      q: "What is the cancellation policy?",
-      a: "We offer fair and flexible terms. Direct bookings cancelled 30 days or more prior to arrival receive a full refund minus a modest processing fee. Cancellations within 30 days receive credit towards future stays whenever dates can be re-booked.",
+      q: "Are pets allowed?",
+      a: "No smoking and no pets. Children are welcome.",
     },
     {
-      q: "Is Casa Oceano Rio pet-friendly?",
-      a: "To guarantee an immaculate, allergen-free environment for all of our visiting guests and children, pets are strictly not permitted on the property. Thank you for your understanding.",
+      q: "Where is the house?",
+      a: "Casa Oceano Rio is at 1812 Chatham Avenue in the South Beach area of Tybee Island. It is within walking distance of Tybee’s commercial district, with shops, restaurants, and nightclubs.",
     },
     {
-      q: "How far is the beach and what is the neighborhood like?",
-      a: "Casa Oceano Rio is situated in Tybee Island’s premier South Beach district at 1811a Butler Avenue. It is an easy 1-to-2 minute flat walk (less than 200 yards) straight to the sandy beach and ocean boardwalk. You can leave your car parked for your entire stay—restaurants, shops, cafes, and the famous Tybee Pier & Pavilion are all within easy walking distance!",
+      q: "What beach gear is included?",
+      a: "Chairs, floats, umbrellas, a cooler, and large beach carts.",
     },
     {
-      q: "What beach gear is included with our stay?",
-      a: "Everything you need for beach days is provided free of charge! We supply large rolling beach wagons/carts, comfortable Tommy Bahama beach chairs, sturdy umbrellas, boogie boards, pool floats, and a large cooler. Pack light and enjoy!",
+      q: "Is there parking?",
+      a: "Yes. Parking is at the house.",
     },
     {
-      q: "Is parking available on-site?",
-      a: "Yes! We provide complimentary private off-street parking directly at the property that easily accommodates up to 4 vehicles. Parking is heavily regulated and paid throughout Tybee Island, so having free private parking right on Butler Ave is a huge perk.",
-    },
-    {
-      q: "What are the check-in and check-out times?",
-      a: "Check-in is at 4:00 PM and check-out is at 10:00 AM. We offer contactless keyless entry codes tailored for each guest. Early check-in or late check-out can often be arranged depending on seasonal turnover schedules.",
-    },
-    {
-      q: "How many guests can Casa Oceano Rio accommodate?",
-      a: "The property sleeps 12 to 14 guests comfortably across 4 private bedrooms plus an open master loft. The bedding layout includes: 3rd floor Master Loft (King bed), 2nd floor Bedroom 1 (Queen + 2 Twins), 2nd floor Bedroom 2 (Queen bed), 1st floor Bedroom 1 (Queen + 2 Twins + Futon), and 1st floor Bedroom 2 (2 Queen beds + extra fridge). There are multiple living zones, 3.5 bathrooms, and dining seating for 16.",
+      q: "How many guests can stay?",
+      a: "The house sleeps 16. There are five bedrooms: a third-floor primary loft with a king bed, a second-floor room with a queen and two twins, another second-floor bedroom, a first-floor room with a queen, two twins, and a futon, and a first-floor room with two queen beds.",
     },
   ];
 
@@ -793,14 +881,15 @@ function App() {
               meets the ocean.
             </h1>
             <p className="intro">
-              Enjoy ocean breezes, rooftop sunsets, a private dipping pool, and
-              space for 12+ guests in a charming 3-story coastal retreat.
+              Welcome to Casa Oceano Rio, a Tybee Island vacation rental in the
+              exclusive South Beach area. The house sleeps 16, with a dipping
+              pool, and the beach gear is included.
             </p>
 
             <div className="hero-direct-badge">
               <Icon type="check" />
               <span>
-                Book directly with Willie & Shelly and skip the platform fees.
+                Book directly with Willie and Shelly and avoid booking-site fees.
               </span>
             </div>
           </div>
@@ -819,29 +908,29 @@ function App() {
         <article>
           <Icon type="wave" />
           <div>
-            <strong>South Beachfront</strong>
-            <span>Steps to sands & Tybee Pier</span>
+            <strong>South Beach, Tybee</strong>
+            <span>Walk to shops, restaurants, and nightclubs</span>
           </div>
         </article>
         <article>
           <Icon type="bed" />
           <div>
-            <strong>Sleeps 12+ Guests</strong>
-            <span>4 Bedrooms + King Loft & Suites</span>
+            <strong>Sleeps 16</strong>
+            <span>Five bedrooms on three floors</span>
           </div>
         </article>
         <article>
           <Icon type="pool" />
           <div>
-            <strong>Private Dipping Pool</strong>
-            <span>Cool in summer · Heated winter</span>
+            <strong>Dipping Pool</strong>
+            <span>Cool in summer, warm in winter</span>
           </div>
         </article>
         <article>
           <Icon type="view" />
           <div>
-            <strong>Rooftop Viewing Deck</strong>
-            <span>River & Atlantic ocean panoramas</span>
+            <strong>Rooftop Deck</strong>
+            <span>Where the river meets the ocean</span>
           </div>
         </article>
       </section>
@@ -851,33 +940,42 @@ function App() {
         <div className="story-layout">
           <div className="story-copy">
             <div className="section-head">
-              <p className="eyebrow">A Savannah family legacy since 1984</p>
+              <p className="eyebrow">Where the river meets the ocean</p>
               <h2>
-                Built by hand in 1984.
+                Built in 1984.
                 <br />
-                Hosting guests since 2010.
+                Welcoming guests since 2010.
               </h2>
             </div>
             <p>
-              Located in Tybee’s coveted South Beach district at 1811a Butler
-              Avenue, Casa Oceano Rio is where the tranquil Savannah River
-              estuary converges with the rolling Atlantic Ocean. Stroll one
-              minute to the beach, swim in your private dipping pool, or watch
-              coastal sunsets from the panoramic rooftop deck.
+              Since 2010, Casa Oceano Rio has provided accommodations to guests
+              from all over the world, with over 200 five-star reviews. We are
+              individual owners, not part of a corporate rental company, and we
+              take a personal interest in every stay. The house is in the
+              exclusive South Beach area of Tybee, within walking distance of
+              the commercial district, with shops, restaurants, and nightclubs.
+            </p>
+            <p>
+              Willie is a Savannah native and built Casa Oceano Rio as a private
+              residence in 1984. He and Shelly were married in 1993 and raised
+              their two boys on Tybee Island. After the kids went off to college,
+              they moved to a home in Savannah’s Historic District. In 2010 the
+              residence became Casa Oceano Rio. Willie and Shelly still manage
+              it themselves.
             </p>
 
             <div className="stats-grid">
               <div className="stat-item">
                 <b>1984</b>
-                <span>Year Built</span>
+                <span>Built as their home</span>
               </div>
               <div className="stat-item">
                 <b>200+</b>
-                <span>5-Star Reviews</span>
+                <span>Five-star reviews</span>
               </div>
               <div className="stat-item">
-                <b>12+</b>
-                <span>Guests Hosted</span>
+                <b>16</b>
+                <span>Guests</span>
               </div>
             </div>
 
@@ -889,13 +987,13 @@ function App() {
           <div className="overlap">
             <img
               className="main-photo"
-              src={photos[1].src}
-              alt="Casa Oceano Rio private dipping pool and deck"
+              src={photos[0].src}
+              alt="Casa Oceano Rio at 1812 Chatham Avenue, Tybee Island"
             />
             <img
               className="float-photo"
-              src={photos[2].src}
-              alt="Spacious living room with 75 inch TV and fireplace"
+              src="/gallery/willie-shelly.jpg"
+              alt="Willie and Shelly, owners of Casa Oceano Rio"
             />
           </div>
         </div>
@@ -908,108 +1006,93 @@ function App() {
           <h2>Rooms & spaces made to gather.</h2>
         </div>
 
-        <div className="spaces-grid">
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">Third Floor Penthouse</span>
-              <h3>Primary Loft King Suite</h3>
-              <p>
-                A soaring open loft featuring a King bed, adjoining luxury
-                primary bath with two vanities, make-up area, and a large
-                walk-in glass shower.
-              </p>
+        <div
+          className="spaces-carousel"
+          onMouseEnter={() => { spacesAutoPlay.current = false; }}
+          onMouseLeave={() => { spacesAutoPlay.current = true; }}
+          onTouchStart={(e) => {
+            spacesTouchStartX.current = e.touches[0].clientX;
+            spacesAutoPlay.current = false;
+          }}
+          onTouchEnd={(e) => {
+            if (spacesTouchStartX.current === null) return;
+            const delta = spacesTouchStartX.current - e.changedTouches[0].clientX;
+            const maxIdx = spacesData.length - spacesPerView;
+            if (delta > 50) setSpacesIdx((p) => Math.min(p + 1, maxIdx));
+            else if (delta < -50) setSpacesIdx((p) => Math.max(p - 1, 0));
+            spacesTouchStartX.current = null;
+            setTimeout(() => { spacesAutoPlay.current = true; }, 3000);
+          }}
+        >
+          {/* Viewport clips the track */}
+          <div className="spaces-carousel-viewport">
+            <div
+              className="spaces-carousel-track"
+              style={{
+                transform: `translateX(-${(spacesIdx * 100) / spacesPerView}%)`,
+              }}
+            >
+              {spacesData.map((space) => (
+                <div className="spaces-carousel-slide" key={space.title}>
+                  <div className="spaces-card-inner">
+                    <div className="spaces-card-img-wrap">
+                      <img src={space.img} alt={space.title} loading="lazy" />
+                      <div className="spaces-card-img-overlay" />
+                    </div>
+                    <div className="spaces-card-body">
+                      <h3>{space.title}</h3>
+                      <p>{space.desc}</p>
+                      <ul className="space-features">
+                        {space.features.map((f) => (
+                          <li key={f}>{f}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <ul className="space-features">
-              <li>Open loft concept overlooking main floor</li>
-              <li>Dual vanities & dedicated vanity mirror</li>
-              <li>Large walk-in shower & cathedral ceilings</li>
-            </ul>
           </div>
 
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">Second Floor Gathering</span>
-              <h3>Living Room & Fireplace</h3>
-              <p>
-                Open-concept main living space anchored by a 75” 4K Smart TV and
-                wood-burning fireplace. Architectural stairs lead up to the
-                3rd-floor loft.
-              </p>
-            </div>
-            <ul className="space-features">
-              <li>75” 4K TV with cable & streaming</li>
-              <li>Genuine wood-burning fireplace</li>
-              <li>Direct access to pool-view main deck</li>
-            </ul>
-          </div>
+          {/* Controls row: prev — dots — next */}
+          <div className="spaces-controls">
+            <button
+              className="spaces-nav-btn"
+              aria-label="Previous space"
+              type="button"
+              onClick={() => {
+                const maxIdx = spacesData.length - spacesPerView;
+                setSpacesIdx((p) => (p <= 0 ? maxIdx : p - 1));
+              }}
+            >
+              <Icon type="chevron-left" />
+            </button>
 
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">Gourmet Entertaining</span>
-              <h3>Chef’s Kitchen & Dining</h3>
-              <p>
-                Full kitchen ready for feast preparation. Dining table seats 6,
-                breakfast nook seats 4, plus 6 bar stools at the expansive
-                granite kitchen counter.
-              </p>
+            <div className="spaces-dots" role="tablist" aria-label="Spaces carousel">
+              {Array.from({ length: spacesData.length - spacesPerView + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  role="tab"
+                  aria-selected={i === spacesIdx}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`spaces-dot${i === spacesIdx ? " active" : ""}`}
+                  onClick={() => setSpacesIdx(i)}
+                  type="button"
+                />
+              ))}
             </div>
-            <ul className="space-features">
-              <li>Total seating for 16 guests together</li>
-              <li>Half bath conveniently located off dining</li>
-              <li>Low Country boil pot & outdoor gas burner</li>
-            </ul>
-          </div>
 
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">Second Floor Suites</span>
-              <h3>Second Floor Family Rooms</h3>
-              <p>
-                Two generous bedrooms including Bedroom 1 (Queen bed + 2 Twins)
-                and Bedroom 2 (Queen bed), with shared bathroom and peaceful
-                natural light.
-              </p>
-            </div>
-            <ul className="space-features">
-              <li>Queen beds with premium coastal linens</li>
-              <li>Twin beds ideal for kids or siblings</li>
-              <li>Shared full ceramic-tile bath</li>
-            </ul>
-          </div>
-
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">First Floor Living</span>
-              <h3>Ground Level Guest Suites</h3>
-              <p>
-                First Floor Bedroom 1 (Queen + 2 Twins + Futon) and Bedroom 2 (2
-                Queen beds, TV, extra refrigerator for drinks). Plus 2 full
-                baths (one with laundry facilities in renovated 1940s bath
-                house).
-              </p>
-            </div>
-            <ul className="space-features">
-              <li>Extra full-size refrigerator on 1st floor</li>
-              <li>Washer & dryer laundry room</li>
-              <li>Renovated historic 1940s bath house styling</li>
-            </ul>
-          </div>
-
-          <div className="space-card">
-            <div className="space-card-top">
-              <span className="space-tag">Private Oasis & Decks</span>
-              <h3>Dipping Pool & Rooftop</h3>
-              <p>
-                Your private dipping pool is cool in the summer and heated in
-                the winter. Soak up the sun on the 2nd-floor main deck or climb
-                to the rooftop deck for 360° island breezes.
-              </p>
-            </div>
-            <ul className="space-features">
-              <li>Heated in winter, refreshing in summer</li>
-              <li>Large gas BBQ grill on poolside deck</li>
-              <li>Rooftop deck for sunrises and starlight</li>
-            </ul>
+            <button
+              className="spaces-nav-btn"
+              aria-label="Next space"
+              type="button"
+              onClick={() => {
+                const maxIdx = spacesData.length - spacesPerView;
+                setSpacesIdx((p) => (p >= maxIdx ? 0 : p + 1));
+              }}
+            >
+              <Icon type="chevron-right" />
+            </button>
           </div>
         </div>
       </section>
@@ -1037,7 +1120,7 @@ function App() {
               <div className="gallery-caption">
                 <span className="title">{photo.title}</span>
                 <span className="index">
-                  0{i + 1} / 0{photos.length}
+                  {String(i + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
                 </span>
               </div>
             </button>
@@ -1057,7 +1140,7 @@ function App() {
             <div className="gallery-caption">
               <span className="title">{photos[5].title}</span>
               <span className="index">
-                06 / 0{photos.length}
+                06 / {String(photos.length).padStart(2, "0")}
               </span>
             </div>
             <div className="gallery-viewall-overlay">
@@ -1167,8 +1250,8 @@ function App() {
       {/* --- YouTube Video Tour Section --- */}
       <section className="video-section reveal" id="video">
         <div className="video-container">
-          <p className="eyebrow light">Coastal Georgia paradise</p>
-          <h2>Explore Tybee Island.</h2>
+          <p className="eyebrow light">Tybee Island</p>
+          <h2>15 minute drone tour of Tybee.</h2>
           <p
             className="intro"
             style={{
@@ -1177,15 +1260,14 @@ function App() {
               textAlign: "center",
             }}
           >
-            Take a bird’s-eye drone tour of our barrier island home. From sandy
-            South Beach and the famed Tybee Pier right down our street, to
-            lighthouses, dolphin estuaries, and coastal marshes.
+            A 15 minute drone tour of Tybee Island, the barrier island where
+            Casa Oceano Rio is located.
           </p>
 
           <div className="video-player-wrap">
             <iframe
               src="https://www.youtube.com/embed/VPBE2E0TaS8?rel=0&modestbranding=1"
-              title="Tybee Island Drone Tour Video"
+              title="15 minute drone tour of Tybee"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
@@ -1258,13 +1340,13 @@ function App() {
             <b>No smoking</b> anywhere on the property
           </span>
           <span>
-            <b>No pets</b>, which keeps the home allergen-free
+            <b>No pets</b>
           </span>
           <span>
             <b>Children welcome</b>
           </span>
           <span>
-            <b>Free on-site parking</b> for up to 4 vehicles
+            <b>Parking</b> at the house
           </span>
         </div>
       </section>
@@ -1272,46 +1354,37 @@ function App() {
       {/* --- Location Section: Tybee Island & South Beach --- */}
       <section className="location section reveal" id="location">
         <div className="location-copy">
-          <p className="eyebrow light">Tybee Island · South Beach District</p>
-          <h2>One block from the sand.</h2>
+          <p className="eyebrow light">Tybee Island · South Beach</p>
+          <h2>Where the river meets the ocean.</h2>
           <p>
-            Casa Oceano Rio is nestled in Tybee Island’s beloved South Beach
-            neighborhood at <b>1811a Butler Avenue</b>. Leave your car behind in
-            our private driveway—stroll in moments to the sand, beachside
-            boutiques, open-air seafood eateries, and lively evening
-            entertainment.
+            Casa Oceano Rio is in the exclusive South Beach area of Tybee, at{" "}
+            <b>1812 Chatham Avenue</b>. The commercial district, with shops,
+            restaurants, and nightclubs, is within walking distance. Chairs,
+            floats, umbrellas, a cooler, and large beach carts are included.
           </p>
 
           <div className="location-address">
             <Icon type="pin" />
             <div>
-              <b>1811a Butler Ave, Tybee Island, GA 31328</b>
-              <br />
-              <span style={{ fontSize: "13px", opacity: 0.85 }}>
-                Coordinates: 31.9974° N, 80.8504° W
-              </span>
+              <b>1812 Chatham Avenue, Tybee Island, GA 31328</b>
             </div>
           </div>
 
           <ul>
             <li>
-              South Beach Sand & Ocean <b>1 min walk (200 yards)</b>
+              South Beach area of Tybee Island
             </li>
             <li>
-              Tybee Beach Pier & Pavilion <b>5 min walk</b>
+              Walking distance to shops, restaurants, and nightclubs
             </li>
             <li>
-              South Beach Dining, Cafes & Nightclubs <b>3 min walk</b>
+              Dipping pool on the property
             </li>
             <li>
-              Tybee Island Light Station & Museum <b>8 min drive</b>
+              Parking at the house
             </li>
             <li>
-              Historic Fort Screven <b>7 min drive</b>
-            </li>
-            <li>
-              Savannah Historic District (River St & Squares){" "}
-              <b>20 min drive</b>
+              Sleeps 16
             </li>
           </ul>
         </div>
@@ -1319,8 +1392,8 @@ function App() {
         <div className="location-map">
           <div className="map-card">
             <iframe
-              title="Map of Casa Oceano Rio, 1811a Butler Ave, Tybee Island, Georgia"
-              src="https://www.google.com/maps?q=1811a%20Butler%20Ave%2C%20Tybee%20Island%2C%20GA%2031328&output=embed"
+              title="Map of Casa Oceano Rio, 1812 Chatham Avenue, Tybee Island, Georgia"
+              src="https://www.google.com/maps?q=1812%20Chatham%20Avenue%2C%20Tybee%20Island%2C%20GA%2031328&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -1328,7 +1401,7 @@ function App() {
           </div>
           <a
             className="map-link"
-            href="https://www.google.com/maps/search/?api=1&query=1811a+Butler+Ave,+Tybee+Island,+GA+31328"
+            href="https://www.google.com/maps/search/?api=1&query=1812+Chatham+Avenue,+Tybee+Island,+GA+31328"
             target="_blank"
             rel="noreferrer"
           >
@@ -1378,40 +1451,31 @@ function App() {
       {/* --- Interactive Calendar & Rate Estimator --- */}
       <section className="calendar-section section reveal" id="booking">
         <div className="calendar-intro">
-          <p className="eyebrow">Direct availability & rates</p>
+          <p className="eyebrow">Request your dates</p>
           <h2>Plan your stay.</h2>
           <p>
-            Select your check-in and check-out dates to calculate your live stay
-            estimate. Direct bookings avoid third-party platform service fees!
+            Select check-in and check-out, then send a message. We will respond
+            within 24 hours with availability. Booking directly avoids fees
+            charged by booking sites.
           </p>
 
           <div className="legend">
             <span>
-              <i className="available" /> Available
+              <i className="available" /> Open to request
             </span>
             <span>
               <i className="selected-dot" /> Selected
-            </span>
-            <span>
-              <i className="unavailable" /> Reserved
             </span>
           </div>
 
           {bookingSummary ? (
             <div className="booking-summary-card" style={{ marginTop: "30px" }}>
               <div className="booking-summary-info">
-                <h4>{bookingSummary.nights} Nights at Casa Oceano Rio</h4>
+                <h4>{bookingSummary.nights} nights at Casa Oceano Rio</h4>
                 <p>
-                  Nightly subtotal: ${bookingSummary.subtotal}
-                  <br />
-                  Cleaning & linen: ${bookingSummary.cleaningFee}
+                  Sleeps 16. We will confirm these dates and reply within 24
+                  hours.
                 </p>
-              </div>
-              <div className="booking-summary-price">
-                <b>${bookingSummary.total} total</b>
-                <small>
-                  Saves ~${bookingSummary.directSavings} in platform fees
-                </small>
               </div>
               <button
                 className="primary"
@@ -1427,8 +1491,8 @@ function App() {
             </div>
           ) : (
             <div className="hint-note">
-              Select a check-in day, then a check-out day to see your exact
-              direct rate.
+              Select a check-in day, then a check-out day, and send them with
+              your inquiry.
             </div>
           )}
         </div>
@@ -1490,32 +1554,29 @@ function App() {
             <div className="direct-perks">
               <h4>Why book directly with us?</h4>
               <p>
-                We are Savannah locals who built and cherish this home. You skip
-                all third-party booking fees and receive personal assistance
-                with your trip.
+                We are individual owners, not a rental company. Booking directly
+                avoids fees charged by booking sites. Put your dates in the
+                message and we will respond within 24 hours with availability.
               </p>
               <ul>
-                <li>Save 14% to 18% in VRBO / third-party traveler fees</li>
-                <li>Best rate guarantee for multi-night and week-long stays</li>
-                <li>Direct communication with hosts Willie & Shelly</li>
-                <li>Flexible check-in / check-out options when available</li>
-                <li>
-                  Complimentary beach cart, umbrellas, cooler & dipping pool
-                  heat
-                </li>
+                <li>Willie and Shelly manage the house themselves</li>
+                <li>Call or text anytime</li>
+                <li>Chairs, floats, umbrellas, cooler, and large beach carts</li>
+                <li>Dipping pool, cool in summer and warm in winter</li>
+                <li>The house sleeps 16</li>
               </ul>
             </div>
 
             <div className="host-cards">
               <div className="host-card">
-                <span className="role">Host & builder</span>
+                <span className="role">Call or text anytime</span>
                 <strong>Willie</strong>
                 <a className="phone-link" href="tel:9123984113">
                   <Icon type="phone" /> (912) 398-4113
                 </a>
               </div>
               <div className="host-card">
-                <span className="role">Host & co-owner</span>
+                <span className="role">Call or text anytime</span>
                 <strong>Shelly</strong>
                 <a className="phone-link" href="tel:9123986901">
                   <Icon type="phone" /> (912) 398-6901
@@ -1526,12 +1587,15 @@ function App() {
             <div className="contact-note">
               <Icon type="pin" />
               <div>
-                <b>1811a Butler Ave, Tybee Island, GA 31328</b>
+                <b>1812 Chatham Avenue, Tybee Island, GA 31328</b>
                 <br />
-                Prefer email? Reach us at{" "}
-                <a href="mailto:stay@casaoceanorio.com">
-                  stay@casaoceanorio.com
+                Willie:{" "}
+                <a href="mailto:wlfields@bellsouth.net">
+                  wlfields@bellsouth.net
                 </a>
+                <br />
+                Shelly:{" "}
+                <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </div>
             </div>
           </div>
@@ -1539,8 +1603,8 @@ function App() {
           <div className="contact-form">
             <h3>Direct reservation inquiry</h3>
             <p className="form-subtitle">
-              Fill out this quick form and we’ll get back to you within 24 hours
-              with confirmed direct rates and availability.
+              Put your requested dates in the message. We will respond within
+              24 hours with availability.
             </p>
 
             <form onSubmit={handleFormSubmit} noValidate>
@@ -1624,7 +1688,7 @@ function App() {
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="guests">Number of guests (sleeps 12+)</label>
+                  <label htmlFor="guests">Number of guests (sleeps 16)</label>
                   <GuestSelect
                     id="guests"
                     value={formData.guests}
@@ -1639,7 +1703,7 @@ function App() {
                   <textarea
                     id="message"
                     rows={4}
-                    placeholder="Tell us about your family vacation, celebration, or any questions about Casa Oceano Rio..."
+                    placeholder="Requested dates and any questions. We reply within 24 hours with availability."
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
@@ -1663,8 +1727,7 @@ function App() {
               </button>
 
               <p className="form-fineprint">
-                No obligation. We never share your contact details, and your
-                direct rate is guaranteed.
+                We will respond within 24 hours with availability.
               </p>
             </form>
           </div>
@@ -1695,8 +1758,9 @@ function App() {
               <small className="location-tag">Tybee Island, Georgia</small>
             </a>
             <p style={{ marginTop: "14px" }}>
-              A three-story South Beach home, built by hand in 1984 by Savannah
-              native Willie and run with Shelly, welcoming guests since 2010.
+              Willie, a Savannah native, built this South Beach house in 1984.
+              He and Shelly have welcomed guests here since 2010. The house
+              sleeps 16.
             </p>
           </div>
 
@@ -1710,11 +1774,14 @@ function App() {
                 <a href="tel:9123986901">Shelly: (912) 398-6901</a>
               </li>
               <li>
-                <a href="mailto:stay@casaoceanorio.com">
-                  stay@casaoceanorio.com
+                <a href="mailto:wlfields@bellsouth.net">
+                  wlfields@bellsouth.net
                 </a>
               </li>
-              <li>1811a Butler Ave, Tybee Island, GA 31328</li>
+              <li>
+                <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
+              </li>
+              <li>1812 Chatham Avenue, Tybee Island, GA 31328</li>
             </ul>
           </div>
 
@@ -1742,11 +1809,11 @@ function App() {
           <div className="footer-col">
             <h5>Guest policies</h5>
             <ul>
-              <li>Check-in: 4:00 PM</li>
-              <li>Check-out: 10:00 AM</li>
-              <li>Sleeps 12–14 guests</li>
-              <li>No Pets / No Smoking</li>
-              <li>VRBO Premier Host</li>
+              <li>Sleeps 16</li>
+              <li>No pets</li>
+              <li>No smoking</li>
+              <li>Children welcome</li>
+              <li>Book direct, reply within 24 hours</li>
             </ul>
           </div>
         </div>
@@ -1766,7 +1833,7 @@ function App() {
         onClick={() => setSheet(true)}
         type="button"
       >
-        Check availability <span>Sleeps 12+ · South Beach</span>
+        Check availability <span>Sleeps 16 · South Beach, Tybee</span>
       </button>
 
       {sheet && (
@@ -1793,8 +1860,8 @@ function App() {
                 marginBottom: "20px",
               }}
             >
-              1811a Butler Ave, Tybee Island, GA. Book directly with Willie &
-              Shelly to skip the third-party fees.
+              1812 Chatham Avenue, Tybee Island. Book directly with Willie
+              and Shelly. We reply within 24 hours with availability.
             </p>
             <BookingBar
               mobile

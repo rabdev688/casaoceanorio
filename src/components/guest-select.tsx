@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-const GUEST_OPTIONS = [2, 4, 6, 8, 10, 12, 14]
+const GUEST_OPTIONS = Array.from({ length: 16 }, (_, index) => index + 1)
 
 interface GuestSelectProps {
   id: string
@@ -17,7 +17,7 @@ export function GuestSelect({ id, value, onChange }: GuestSelectProps) {
       <SelectContent>
         {GUEST_OPTIONS.map((count) => (
           <SelectItem key={count} value={String(count)}>
-            {count} Guests
+            {count === 1 ? '1 Guest' : `${count} Guests`}
           </SelectItem>
         ))}
       </SelectContent>

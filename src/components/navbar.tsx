@@ -2,8 +2,9 @@ import { useState } from 'react'
 
 const NAV_LINKS = [
   { href: '#story', label: 'About Us' },
-  { href: '#contact', label: 'Contact us' },
   { href: '#gallery', label: 'Gallery' },
+  { href: '#amenities', label: 'Amenities' },
+  { href: '#contact', label: 'Contact Us' },
 ] as const
 
 function NavIcon({ type }: { type: 'menu' | 'close' | 'arrow' }) {

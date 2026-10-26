@@ -258,7 +258,7 @@
   background:
     linear-gradient(90deg, rgba(4, 37, 45, 0.78) 0%, rgba(4, 37, 45, 0.45) 55%, rgba(4, 37, 45, 0.22) 100%),
     linear-gradient(0deg, rgba(4, 37, 45, 0.72), rgba(4, 37, 45, 0.1) 55%),
-    url('https://images.unsplash.com/photo-1790276319738-f7b19d7f7e8c?auto=format&fit=crop&w=2200&q=88')
+    url('/gallery/exterior.jpg')
       center / cover;
 }
 
@@ -567,79 +567,195 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Rooms & spaces */
+/* ==============================
+   Rooms & Spaces Carousel
+   ============================== */
 .spaces-section {
+  background: #f7f6f3;
+  overflow: hidden;
+}
+
+/* Wrapper holds viewport + controls */
+.spaces-carousel {
+  position: relative;
+  margin-top: 44px;
+}
+
+/* Clips the scrolling track */
+.spaces-carousel-viewport {
+  overflow: hidden;
+  width: 100%; /* definite width so slide % flex-basis resolves correctly */
+}
+
+/* Flex track – declared width = viewport width; children overflow via flex-shrink:0 */
+.spaces-carousel-track {
+  display: flex;
+  width: 100%; /* % in translateX is relative to THIS width */
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Each slide: 1/6 of track = 1/3 viewport (desktop 3-up) */
+.spaces-carousel-slide {
+  flex: 0 0 calc(100% / 3);   /* ← desktop: 3 per view */
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+/* The card itself */
+.spaces-card-inner {
   background: #fff;
-}
-
-.spaces-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.space-card {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 26px;
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  transition: border-color 0.2s;
+  height: 100%;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.space-card:hover {
-  border-color: var(--line-strong);
+.spaces-card-inner:hover {
+  box-shadow: 0 16px 48px rgba(10, 40, 60, 0.13);
+  transform: translateY(-5px);
 }
 
-.space-card-top {
-  margin-bottom: 22px;
+/* Image area */
+.spaces-card-img-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
 }
 
-.space-tag {
+.spaces-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  margin-bottom: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--blue);
+  transition: transform 0.55s ease;
 }
 
-.space-card h3 {
-  margin-bottom: 10px;
-  font-size: 20px;
+.spaces-card-inner:hover .spaces-card-img-wrap img {
+  transform: scale(1.06);
+}
+
+.spaces-card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.22) 0%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+
+/* Card text body */
+.spaces-card-body {
+  padding: 22px 22px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.spaces-card-body h3 {
+  margin: 0 0 9px;
+  font-size: 19px;
+  line-height: 1.25;
   color: var(--ocean);
 }
 
-.space-card p {
-  margin: 0;
-  font-size: 14.5px;
-  line-height: 1.6;
+.spaces-card-body p {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
   color: var(--muted);
+  flex: 1;
 }
 
+/* Feature list */
 .space-features {
   list-style: none;
-  margin: 18px 0 0;
-  padding: 16px 0 0;
+  margin: 0;
+  padding: 14px 0 0;
   border-top: 1px solid var(--line);
 }
 
 .space-features li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 9px;
   padding: 4px 0;
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--ink);
 }
 
 .space-features li::before {
-  content: '✓';
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--blue);
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+/* ---- Controls row: prev — dots — next ---- */
+.spaces-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.spaces-nav-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 3px 16px rgba(10, 40, 60, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ocean);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+.spaces-nav-btn:hover {
+  background: var(--ocean);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(10, 40, 60, 0.22);
+}
+
+/* ---- Dot indicators ---- */
+.spaces-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.spaces-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.35s ease, background 0.35s ease, border-radius 0.35s ease;
+}
+
+.spaces-dot.active {
+  width: 26px;
+  border-radius: 4px;
+  background: var(--ocean);
 }
 
 /* Gallery */
@@ -1140,7 +1256,7 @@
   color: white;
   background:
     linear-gradient(rgba(4, 37, 45, 0.88), rgba(4, 37, 45, 0.93)),
-    url('https://images.unsplash.com/photo-1703190960762-78fc090febdc?auto=format&fit=crop&w=1900&q=80')
+    url('/gallery/dipping-pool.jpg')
       center / cover;
 }
 
@@ -2047,8 +2163,9 @@ footer {
     border-right: 0;
   }
 
-  .spaces-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Tablet: 2 slides per view */
+  .spaces-carousel-slide {
+    flex: 0 0 calc(100% / 2);
   }
 
   .amenity-grid {
@@ -2089,7 +2206,7 @@ footer {
   }
 
   .hero-bg {
-    background-position: 65% center;
+    background-position: center 42%;
   }
 
   .intro {
@@ -2133,10 +2250,6 @@ footer {
   .highlights article:last-child {
     border-bottom: 0;
     padding-bottom: 0;
-  }
-
-  .spaces-grid {
-    grid-template-columns: 1fr;
   }
 
   .gallery-grid {
@@ -2658,6 +2771,29 @@ footer {
 
   .rates-calendar .rate-price {
     font-size: 8px;
+  }
+}
+
+/* ── Spaces carousel: mobile 1-per-view (matches JS < 640px breakpoint) ── */
+@media (max-width: 639px) {
+  .spaces-carousel-slide {
+    flex: 0 0 100%;
+    padding: 0 4px;
+  }
+
+  /* No side room needed for arrows on mobile — hide them, rely on swipe + dots */
+  .spaces-carousel {
+    padding: 0;
+  }
+
+  .spaces-controls {
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .spaces-nav-btn {
+    width: 38px;
+    height: 38px;
   }
 }
 

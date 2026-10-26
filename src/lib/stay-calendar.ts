@@ -25,7 +25,7 @@ export const calendarMonths: StayMonth[] = [
     year: 2026,
     daysInMonth: 31,
     firstDayOffset: 5,
-    blocked: [1, 2, 8, 9, 15, 16, 22, 23, 24, 25],
+    blocked: [],
     rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 5) % 7) ? 585 : 520)),
   },
   {
@@ -33,7 +33,7 @@ export const calendarMonths: StayMonth[] = [
     year: 2026,
     daysInMonth: 30,
     firstDayOffset: 1,
-    blocked: [5, 6, 7, 13, 14, 20, 21, 27, 28],
+    blocked: [],
     rates: Array.from({ length: 30 }, (_, i) => ([0, 5, 6].includes((i + 1) % 7) ? 680 : 610)),
   },
   {
@@ -41,7 +41,7 @@ export const calendarMonths: StayMonth[] = [
     year: 2026,
     daysInMonth: 31,
     firstDayOffset: 3,
-    blocked: [2, 3, 4, 5, 11, 12, 18, 19, 25, 26],
+    blocked: [],
     rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 3) % 7) ? 720 : 640)),
   },
   {
@@ -49,7 +49,7 @@ export const calendarMonths: StayMonth[] = [
     year: 2026,
     daysInMonth: 31,
     firstDayOffset: 6,
-    blocked: [1, 2, 7, 8, 14, 15, 21, 22],
+    blocked: [],
     rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 6) % 7) ? 620 : 550)),
   },
 ]
