@@ -1,5 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
+@theme inline {
+  --color-background: var(--cream);
+  --color-foreground: var(--ink);
+  --color-card: #fff;
+  --color-card-foreground: var(--ink);
+  --color-popover: #fff;
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--blue);
+  --color-primary-foreground: #fff;
+  --color-secondary: var(--sand);
+  --color-secondary-foreground: var(--ocean);
+  --color-muted: var(--cream);
+  --color-muted-foreground: var(--muted);
+  --color-accent: #e9f3f2;
+  --color-accent-foreground: var(--ocean);
+  --color-destructive: #c0392b;
+  --color-border: var(--line);
+  --color-input: #dcdcd6;
+  --color-ring: var(--blue);
+  --radius-sm: 8px;
+  --radius-md: var(--r-input);
+  --radius-lg: var(--r-card);
+  --radius-xl: 18px;
+}
 
 :root {
   --ocean: #06333d;
@@ -183,28 +209,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.nav-phone {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: var(--r-pill);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.nav-phone .icon {
-  width: 16px;
-  height: 16px;
-}
-
-.nav-phone:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .nav-cta {
@@ -1905,37 +1909,6 @@
   color: var(--sand);
 }
 
-.mobile-nav-contacts {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.mobile-nav-contacts p {
-  margin: 0 0 10px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.mobile-nav-phone-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 13.5px;
-}
-
-.mobile-nav-phone-row a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--sand);
-}
-
-.mobile-nav-phone-row .icon {
-  width: 16px;
-  height: 16px;
-}
-
 /* Footer */
 footer {
   padding: 96px 6vw 36px;
@@ -2073,8 +2046,7 @@ footer {
   }
 
   .nav nav,
-  .nav-cta,
-  .nav-phone {
+  .nav-cta {
     display: none;
   }
 
@@ -2120,6 +2092,22 @@ footer {
 
   .float-photo {
     height: 160px;
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 36px 24px 20px;
+  }
+
+  .highlights article {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .highlights article:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
 
   .spaces-grid {
@@ -2297,5 +2285,338 @@ footer {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Shadcn calendar, dropdown, and select. Colors, type, and radii come from the tokens above. */
+.month-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.month-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ocean);
+}
+
+.month-picker-icon,
+.date-field-icon,
+[data-slot='select-trigger'] svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--muted);
+  opacity: 1;
+}
+
+.booking [data-slot='popover-trigger'],
+.booking [data-slot='select-trigger'] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.form-group [data-slot='popover-trigger'],
+.form-group [data-slot='select-trigger'] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 12px 14px;
+  border: 1px solid #dcdcd6;
+  border-radius: var(--r-input);
+  background: #fff;
+  box-shadow: none;
+  outline: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group [data-slot='popover-trigger']:focus,
+.form-group [data-slot='select-trigger']:focus,
+.form-group [data-slot='popover-trigger'][data-state='open'],
+.form-group [data-slot='select-trigger'][data-state='open'] {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(11, 99, 115, 0.12);
+}
+
+.booking [data-slot='popover-trigger'][data-empty='true'],
+.form-group [data-slot='popover-trigger'][data-empty='true'] {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+[data-slot='popover-content'],
+[data-slot='select-content'],
+[data-slot='dropdown-menu-content'],
+[data-slot='dropdown-menu-sub-content'] {
+  z-index: 200;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-sans);
+}
+
+.date-popover {
+  width: auto;
+  max-width: calc(100vw - 24px);
+  padding: 8px;
+}
+
+[data-slot='popover-content'] [data-slot='calendar'] {
+  background: transparent;
+  color: var(--ink);
+}
+
+[data-slot='popover-content'] .rdp-month_grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+
+[data-slot='popover-content'] .rdp-weekdays,
+[data-slot='popover-content'] .rdp-week {
+  display: table-row;
+  width: auto;
+  margin: 0;
+}
+
+[data-slot='popover-content'] .rdp-weekday,
+[data-slot='popover-content'] .rdp-day {
+  display: table-cell;
+  width: 14.285%;
+  padding: 0;
+  text-align: center;
+  background: transparent;
+}
+
+[data-slot='popover-content'] .rdp-caption_label {
+  color: var(--ocean);
+  font-weight: 500;
+}
+
+[data-slot='popover-content'] .rdp-weekday {
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+[data-slot='popover-content'] [data-slot='button'] {
+  width: 36px;
+  height: 36px;
+  margin-inline: auto;
+  border-radius: var(--r-input);
+}
+
+[data-slot='popover-content'] .rdp-button_previous,
+[data-slot='popover-content'] .rdp-button_next {
+  color: var(--ocean);
+  border-radius: var(--r-pill);
+}
+
+[data-slot='popover-content'] [data-slot='button'][data-selected-single='true'],
+[data-slot='popover-content'] [data-slot='button'][data-range-start='true'],
+[data-slot='popover-content'] [data-slot='button'][data-range-end='true'] {
+  background: var(--blue);
+  color: #fff;
+}
+
+[data-slot='popover-content'] [data-slot='button'][data-range-middle='true'] {
+  background: #e9f3f2;
+  color: var(--ocean);
+}
+
+[data-slot='select-item'],
+[data-slot='dropdown-menu-item'],
+[data-slot='dropdown-menu-radio-item'],
+[data-slot='dropdown-menu-checkbox-item'] {
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+[data-slot='select-item'][data-highlighted],
+[data-slot='dropdown-menu-item'][data-highlighted],
+[data-slot='dropdown-menu-radio-item'][data-highlighted],
+[data-slot='dropdown-menu-checkbox-item'][data-highlighted] {
+  background: #e9f3f2;
+  color: var(--ocean);
+}
+
+[data-slot='dropdown-menu-radio-item'][data-state='checked'] {
+  color: var(--ocean);
+  font-weight: 500;
+}
+
+[data-slot='select-item'] svg,
+[data-slot='dropdown-menu-radio-item'] svg {
+  color: var(--blue);
+}
+
+.rates-calendar [data-slot='calendar'] {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.rates-calendar .rdp-months,
+.rates-calendar .rdp-month,
+.rates-calendar .rdp-month_grid {
+  width: 100%;
+}
+
+.rates-calendar .rdp-month_caption,
+.rates-calendar .rdp-nav {
+  display: none;
+}
+
+.rates-calendar .rdp-month_grid {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.rates-calendar .rdp-weekdays,
+.rates-calendar .rdp-week {
+  display: table-row;
+  width: auto;
+  margin: 0;
+}
+
+.rates-calendar .rdp-weekday,
+.rates-calendar .rdp-day {
+  display: table-cell;
+  width: 14.285%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.rates-calendar .rdp-weekday {
+  padding: 0 0 14px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.rates-calendar [data-slot='button'] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1.05;
+  padding: 4px;
+  border: 1px solid #ecebe6;
+  border-radius: var(--r-input);
+  background: #fff;
+  box-shadow: none;
+  color: var(--ink);
+  opacity: 1;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.rates-calendar [data-slot='button']:hover:not(:disabled) {
+  border-color: var(--blue);
+  background: #eff7f6;
+  color: var(--ink);
+}
+
+.rates-calendar [data-slot='button']:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
+.rates-calendar .rate-num {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  opacity: 1;
+}
+
+.rates-calendar .rate-price {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--blue);
+  opacity: 1;
+}
+
+.rates-calendar [data-slot='button'][data-range-start='true'],
+.rates-calendar [data-slot='button'][data-range-end='true'],
+.rates-calendar [data-slot='button'][data-selected-single='true'] {
+  border-color: var(--ocean);
+  background: var(--blue);
+  color: #fff;
+}
+
+.rates-calendar [data-slot='button'][data-range-start='true'] .rate-price,
+.rates-calendar [data-slot='button'][data-range-end='true'] .rate-price,
+.rates-calendar [data-slot='button'][data-selected-single='true'] .rate-price {
+  color: var(--sand);
+}
+
+.rates-calendar [data-slot='button'][data-range-middle='true'] {
+  border-color: #cfe6e4;
+  background: #e9f3f2;
+  color: var(--ink);
+}
+
+.rates-calendar [data-slot='button']:disabled {
+  background: #f5f4f1;
+  color: #a9b2b0;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.rates-calendar [data-slot='button']:disabled .rate-price {
+  color: #b6bcba;
+}
+
+@media (max-width: 860px) {
+  .rates-calendar [data-slot='button'] {
+    aspect-ratio: 0.9;
+  }
+
+  .rates-calendar .rate-price {
+    font-size: 8px;
   }
 }
