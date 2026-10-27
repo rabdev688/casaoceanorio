@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BookingBar } from "@/components/booking-bar";
 import { Icon } from "@/components/icon";
 import { amenityColumns } from "@/data/amenities";
@@ -9,6 +9,7 @@ import { Book } from "@/pages/Book";
 
 export function Home() {
   useReveal();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -49,10 +50,13 @@ export function Home() {
 
         {/* Desktop Quick Booking Bar */}
         <BookingBar
-          onApplyDates={() => {
-            document
-              .getElementById("booking")
-              ?.scrollIntoView({ behavior: "smooth" });
+          onApplyDates={(checkIn, checkOut, guests) => {
+            const params = new URLSearchParams();
+            if (checkIn) params.set("checkIn", checkIn);
+            if (checkOut) params.set("checkOut", checkOut);
+            params.set("guests", String(guests));
+            navigate({ pathname: "/", search: params.toString() }, { replace: true });
+            document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
           }}
         />
       </div>

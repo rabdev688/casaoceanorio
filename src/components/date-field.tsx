@@ -5,6 +5,7 @@ import { CalendarIcon } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { parseISODate, toISODate } from '@/lib/stay-calendar'
+import { todayInTimeZone } from '../../server/dates.ts'
 
 interface DateFieldProps {
   id: string
@@ -12,19 +13,37 @@ interface DateFieldProps {
   onChange: (value: string) => void
   placeholder?: string
   invalid?: boolean
+  disabled?: (date: Date) => boolean
+  startMonth?: Date
+  endMonth?: Date
 }
 
-export function DateField({ id, value, onChange, placeholder = 'Select date', invalid = false }: DateFieldProps) {
+function currentMonth() {
+  const today = todayInTimeZone()
+  const [year, month] = today.split('-').map(Number)
+  return new Date(year, month - 1, 1)
+}
+
+export function DateField({
+  id,
+  value,
+  onChange,
+  placeholder = 'Select date',
+  invalid = false,
+  disabled,
+  startMonth,
+  endMonth,
+}: DateFieldProps) {
   const [open, setOpen] = useState(false)
   const selected = parseISODate(value)
-  const [month, setMonth] = useState<Date>(selected ?? new Date(2026, 5, 1))
+  const [month, setMonth] = useState<Date>(selected ?? currentMonth())
 
   return (
     <Popover
       open={open}
       onOpenChange={(next) => {
         setOpen(next)
-        if (next) setMonth(selected ?? new Date(2026, 5, 1))
+        if (next) setMonth(selected ?? startMonth ?? currentMonth())
       }}
     >
       <PopoverTrigger
@@ -43,6 +62,9 @@ export function DateField({ id, value, onChange, placeholder = 'Select date', in
           selected={selected}
           month={month}
           onMonthChange={setMonth}
+          startMonth={startMonth}
+          endMonth={endMonth}
+          disabled={disabled}
           onSelect={(date) => {
             if (!date) return
             onChange(toISODate(date))
