@@ -136,8 +136,8 @@ function App() {
                 <a href="tel:9123986901">Shelly: (912) 398-6901</a>
               </li>
               <li>
-                <a href="mailto:wlfields@bellsouth.net">
-                  wlfields@bellsouth.net
+                <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
+                  {import.meta.env.VITE_CONTACT_EMAIL}
                 </a>
               </li>
               <li>

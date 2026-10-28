@@ -293,8 +293,8 @@ export function Book() {
                 <b>{import.meta.env.VITE_ADDRESS}</b>
                 <br />
                 Willie:{" "}
-                <a href="mailto:wlfields@bellsouth.net">
-                  wlfields@bellsouth.net
+                <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
+                  {import.meta.env.VITE_CONTACT_EMAIL}
                 </a>
                 <br />
                 Shelly:{" "}
