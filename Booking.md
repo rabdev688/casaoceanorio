@@ -94,10 +94,10 @@ The home page and `/book` both render the booking section.
 
 Sent with Nodemailer through the SMTP settings already in `.env`. A failed send never rolls back a saved stay or a cancellation.
 
-- Host is `MAIL_HOST`, port is `MAIL_PORT`. Port 465 uses implicit TLS (`secure: true`).
-- Auth user and the From address are `MAIL_FROM`. The password is `MAIL_PASSWORD`.
+- Host is `MAIL_HOST`, port is `MAIL_PORT`. Port 465 uses implicit TLS. Any other port, including 587, uses STARTTLS.
+- Auth user is `MAIL_USER`, or `MAIL_FROM` when `MAIL_USER` is not set. The From address is `MAIL_FROM`, or the auth user when `MAIL_FROM` is not set. The password is `MAIL_PASSWORD`.
 - Guest confirmation and guest cancellation go to the email on the booking.
-- Host booking, conflict, and cancel notices go to `MAIL_TO`. Several addresses are separated by commas. That value is the Gmail inbox already in the env. This does not switch the server to `smtp.gmail.com`.
+- Host booking, conflict, and cancel notices go to `MAIL_TO`. Several addresses are separated by commas.
 
 Guest confirmation:
 
@@ -241,7 +241,7 @@ Inbound events use `UID`. A missing UID gets a stable fallback from the start, e
 Already set, and read as-is:
 
 - `DATABASE_URL`: the Neon pooled connection string in `.env`. The app does not create a new database and does not run `db/schema.sql`.
-- `MAIL_HOST`, `MAIL_PORT`, `MAIL_FROM`, `MAIL_PASSWORD`, `MAIL_TO`
+- `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASSWORD`, `MAIL_TO`. `MAIL_FROM` is optional.
 
 Still required before admin and VRBO sync work:
 

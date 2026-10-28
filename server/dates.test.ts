@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
+import { asDate } from './db.ts'
 import { eachNight, horizonCheckout, nightCount, rangesOverlap, validateStayDates } from './dates.ts'
 
 describe('night overlap', () => {
@@ -12,6 +13,11 @@ describe('night overlap', () => {
 
   it('rejects a range that shares a night', () => {
     assert.equal(rangesOverlap('2026-11-10', '2026-11-13', '2026-11-12', '2026-11-14'), true)
+  })
+
+  it('keeps a local calendar day when the database returns a Date', () => {
+    assert.equal(asDate(new Date(2026, 10, 11)), '2026-11-11')
+    assert.equal(asDate('2026-11-11'), '2026-11-11')
   })
 
   it('keeps the booking window at 18 months of nights', () => {

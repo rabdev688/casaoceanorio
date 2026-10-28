@@ -37,16 +37,20 @@ export function exportUrl() {
 
 async function sendMail(to: string | string[], subject: string, text: string) {
   const host = process.env.MAIL_HOST
-  const from = process.env.MAIL_FROM
+  const user = process.env.MAIL_USER || process.env.MAIL_FROM
+  const from = process.env.MAIL_FROM || user
   const pass = process.env.MAIL_PASSWORD
   const port = Number(process.env.MAIL_PORT || 465)
   const recipients = (Array.isArray(to) ? to : [to]).filter(Boolean)
-  if (!host || !from || !pass || recipients.length === 0 || !Number.isFinite(port)) return false
+  if (!host || !user || !from || !pass || recipients.length === 0 || !Number.isFinite(port)) return false
   const transport = nodemailer.createTransport({
     host,
     port,
     secure: port === 465,
-    auth: { user: from, pass },
+    auth: { user, pass },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
   })
   await transport.sendMail({ from, to: recipients, subject, text })
   return true
