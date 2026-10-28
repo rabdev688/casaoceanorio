@@ -3753,17 +3753,60 @@ footer {
   }
 }
 
+.admin-mobile-label {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .toast-container {
+    right: 14px;
+    bottom: 82px;
+    left: 14px;
+    max-width: none;
+  }
+
+  .admin-page {
+    padding-bottom: 112px;
+  }
+}
+
 @media (max-width: 600px) {
   .admin-table thead { display: none; }
 
+  .admin-table th:nth-child(n),
+  .admin-table td:nth-child(n) {
+    width: 100%;
+  }
+
   .admin-table tbody tr {
     display: grid;
-    gap: 4px;
-    padding: 10px 0;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 0;
   }
 
   .admin-table tbody td {
+    width: 100%;
+    max-width: none;
     padding: 0;
+  }
+
+  .admin-mobile-label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .admin-ref {
+    font-size: 15px;
+  }
+
+  .admin-row-actions {
+    width: 100%;
   }
 
   .admin-block-form {

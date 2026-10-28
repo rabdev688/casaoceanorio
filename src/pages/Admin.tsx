@@ -527,6 +527,7 @@ function StayRow({
   return (
     <tr className={stay.conflict ? "is-conflict" : undefined}>
       <td>
+        <span className="admin-mobile-label">Reference</span>
         <span className="admin-ref">{stay.reference}</span>
         <div className="admin-pills">
           <span className={`admin-pill is-${stay.source}`}>
@@ -534,8 +535,12 @@ function StayRow({
           </span>
         </div>
       </td>
-      <td className="admin-dates">{dateRange}</td>
+      <td className="admin-dates">
+        <span className="admin-mobile-label">Dates</span>
+        {dateRange}
+      </td>
       <td className="admin-guest">
+        <span className="admin-mobile-label">Guest</span>
         <span className="admin-guest-name">
           {stay.guestName || "No guest name"}
           {stay.guests ? ` · ${stay.guests} ${stay.guests === 1 ? "guest" : "guests"}` : ""}
@@ -545,9 +550,11 @@ function StayRow({
         {stay.message ? <span className="admin-guest-line">{stay.message}</span> : null}
       </td>
       <td>
+        <span className="admin-mobile-label">Status</span>
         <span className={`admin-pill is-${statusKind}`}>{statusLabel}</span>
       </td>
       <td className="admin-row-actions">
+        <span className="admin-mobile-label">Actions</span>
         {stay.source === "website" && stay.status === "confirmed" ? (
           <button className="admin-action-btn is-danger" type="button" onClick={() => onCancel(stay.id)} disabled={busy}>
             Cancel Booking
