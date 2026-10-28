@@ -149,7 +149,7 @@ export const faqs = [
   },
   {
     q: "Where is the house?",
-    a: "Casa Oceano Rio is in the exclusive South Beach area of Tybee, at 1811a Butler Ave, Tybee Island, Ga 31328. It is within walking distance of Tybee's commercial district, with shops, restaurants, and nightclubs.",
+    a: `Casa Oceano Rio is in the exclusive South Beach area of Tybee, at ${import.meta.env.VITE_ADDRESS}. It is within walking distance of Tybee's commercial district, with shops, restaurants, and nightclubs.`,
   },
   {
     q: "What beach gear is included?",

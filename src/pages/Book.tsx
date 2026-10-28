@@ -290,7 +290,7 @@ export function Book() {
             <div className="contact-note">
               <Icon type="pin" />
               <div>
-                <b>1811a Butler Ave, Tybee Island, Ga 31328</b>
+                <b>{import.meta.env.VITE_ADDRESS}</b>
                 <br />
                 Willie:{" "}
                 <a href="mailto:wlfields@bellsouth.net">

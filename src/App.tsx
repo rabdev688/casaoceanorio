@@ -143,7 +143,7 @@ function App() {
               <li>
                 <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </li>
-              <li>1811a Butler Ave, Tybee Island, Ga 31328</li>
+              <li>{import.meta.env.VITE_ADDRESS}</li>
             </ul>
           </div>
 
@@ -215,7 +215,7 @@ function App() {
                 marginBottom: "20px",
               }}
             >
-              1811a Butler Ave, Tybee Island, Ga 31328. Book directly with
+              {import.meta.env.VITE_ADDRESS}. Book directly with
               Willie and Shelly. We reply within 24 hours with availability.
             </p>
             <BookingBar
