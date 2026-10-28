@@ -65,11 +65,6 @@ export const amenityCategories: {
       name: "Low Country Boil Pot and Gas Burner",
       desc: "Low Country Boil Pot and Gas Burner.",
     },
-    {
-      icon: "car" as IconType,
-      name: "Garage parking",
-      desc: "Garage parking, a rare offering in the area.",
-    },
   ],
   kitchen: [
     {
