@@ -19,14 +19,9 @@ export const amenityCategories: {
       desc: 'Living Room With 75" TV. Satellite or cable.',
     },
     {
-      icon: "flame" as IconType,
-      name: "Wood Fireplace",
-      desc: "Wood Fireplace.",
-    },
-    {
-      icon: "wave" as IconType,
-      name: "Everything You Need",
-      desc: "Beach chairs, boogie boards, umbrellas, toys and more.",
+      icon: "sun" as IconType,
+      name: "Air Conditioning and Heat",
+      desc: "Air Conditioning. Heat.",
     },
     {
       icon: "wifi" as IconType,
@@ -79,8 +74,8 @@ export const amenityCategories: {
   kitchen: [
     {
       icon: "kitchen" as IconType,
-      name: "Kitchen",
-      desc: "Kitchen.",
+      name: "Fully Equipped Kitchen",
+      desc: "Fully Equipped Kitchen.",
     },
     {
       icon: "coffee" as IconType,
