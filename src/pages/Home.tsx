@@ -35,9 +35,10 @@ export function Home() {
 
             <div className="hero-direct-badge">
               <Icon type="check" />
-              <span>
-                Book directly with Willie and Shelly and avoid booking-site
-                fees.
+              <span className="badge-text">
+                Book direct and save up to{" "}
+                <strong className="badge-highlight">20%</strong>{" "}
+                from needless booking platform fees.
               </span>
             </div>
           </div>

@@ -247,9 +247,9 @@ export function Book() {
             <div>
               <p className="eyebrow">Direct host inquiries</p>
               <h2>
-                Book direct with
+                Book Direct and Save Up to 20%
                 <br />
-                Willie & Shelly.
+                with Willie & Shelly.
               </h2>
             </div>
 
