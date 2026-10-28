@@ -67,10 +67,10 @@ export function Home() {
           </div>
         </article>
         <article>
-          <Icon type="air" />
+          <Icon type="wave" />
           <div>
-            <strong>Air conditioning  </strong>
-            <span>Keep your home cool and comfortable</span>
+            <strong>Everything You Need</strong>
+            <span>Beach chairs, boogie boards, umbrellas, toys and more</span>
           </div>
         </article>
         <article>
@@ -96,8 +96,6 @@ export function Home() {
             <div className="section-head">
               <p className="eyebrow">Where the river meets the ocean</p>
               <h2>
-                Built in 1984.
-                <br />
                 Welcoming guests since 2010.
               </h2>
             </div>
@@ -110,14 +108,13 @@ export function Home() {
 
             <div className="stats-grid">
               <div className="stat-item">
-                <b>1984</b>
-                <span>Built as their home</span>
-              </div>
-              <div className="stat-item">
                 <b>200+</b>
                 <span>Five-star reviews</span>
               </div>
-            
+              <div className="stat-item">
+                <b>9.8</b>
+                <span>Vrbo guest score</span>
+              </div>
             </div>
 
             <Link className="text-link" to="/about">

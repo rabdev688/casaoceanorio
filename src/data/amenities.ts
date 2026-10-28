@@ -24,9 +24,9 @@ export const amenityCategories: {
       desc: "Wood Fireplace.",
     },
     {
-      icon: "sun" as IconType,
-      name: "Air Conditioning and Heat",
-      desc: "Air Conditioning. Heat.",
+      icon: "wave" as IconType,
+      name: "Everything You Need",
+      desc: "Beach chairs, boogie boards, umbrellas, toys and more.",
     },
     {
       icon: "wifi" as IconType,

@@ -122,8 +122,7 @@ function App() {
               <small className="location-tag">Tybee Island, Georgia</small>
             </Link>
             <p style={{ marginTop: "14px" }}>
-              Willie, a Savannah native, built this South Beach house in 1984. <br />
-              He and Shelly have welcomed guests here since 2010.
+              Willie and Shelly have welcomed guests to this South Beach house since 2010.
             </p>
           </div>
 
