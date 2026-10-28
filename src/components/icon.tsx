@@ -24,7 +24,8 @@ export type IconType =
   | "star"
   | "air"
   | "calendar"
-  | "board";
+  | "board"
+  | "egg";
 
 export const Icon = ({ type, className }: { type: IconType; className?: string }) => {
   const iconClass = className || "icon";
@@ -104,6 +105,12 @@ export const Icon = ({ type, className }: { type: IconType; className?: string }
         <line x1="16" y1="2" x2="16" y2="6" />
         <line x1="8" y1="2" x2="8" y2="6" />
         <line x1="3" y1="10" x2="21" y2="10" />
+      </>
+    ),
+    egg: (
+      <>
+        <path d="M12 3.4c3.1 1.3 4.8 4.5 4.8 8.2 0 3.5-2 6.1-4.8 6.6-2.8-.5-4.8-3.1-4.8-6.6 0-3.7 1.7-6.9 4.8-8.2Z" />
+        <path d="M8.3 11.2h7.4" />
       </>
     ),
     board: (

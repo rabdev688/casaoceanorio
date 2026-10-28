@@ -61,6 +61,11 @@ export const amenityCategories: {
       desc: "Large Gas Grill.",
     },
     {
+      icon: "egg" as IconType,
+      name: "Big Green Egg",
+      desc: "Big Green Egg.",
+    },
+    {
       icon: "coffee" as IconType,
       name: "Low Country Boil Pot and Gas Burner",
       desc: "Low Country Boil Pot and Gas Burner.",
