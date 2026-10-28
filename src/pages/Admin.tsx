@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 import { formatLongDate, todayInTimeZone } from "../../server/dates.ts";
+import { Icon } from "@/components/icon.tsx";
 
 interface Stay {
   id: string;
@@ -62,6 +63,7 @@ export function Admin() {
   const [loginError, setLoginError] = useState("");
   const [data, setData] = useState<AdminPayload | null>(null);
   const [notice, setNotice] = useState("");
+  const [toasts, setToasts] = useState<{ id: number; title: string; text: string }[]>([]);
   const [busy, setBusy] = useState(false);
   const [month, setMonth] = useState(() => {
     const today = todayInTimeZone();
@@ -72,6 +74,14 @@ export function Admin() {
   const [blockOut, setBlockOut] = useState("");
   const [note, setNote] = useState("");
   const today = todayInTimeZone();
+
+  function showToast(title: string, text = "") {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, title, text }]);
+    window.setTimeout(() => {
+      setToasts((prev) => prev.filter((item) => item.id !== id));
+    }, 5500);
+  }
 
   async function load() {
     const response = await fetch("/api/admin/stays", { cache: "no-store" });
@@ -195,8 +205,10 @@ export function Admin() {
       body: JSON.stringify({ checkIn: blockIn, checkOut: blockOut, note }),
     });
     const body = (await response.json().catch(() => ({}))) as { error?: string };
-    if (!response.ok) setNotice(body.error || "The block was not saved.");
-    else {
+    if (!response.ok) {
+      setNotice("");
+      showToast(body.error || "The block was not saved.");
+    } else {
       setNotice("Manual block saved.");
       setBlockIn("");
       setBlockOut("");
@@ -215,6 +227,7 @@ export function Admin() {
     setBusy(false);
   }
 
+  // ---- Login screen ----
   if (!authed) {
     return (
       <section className="admin-page">
@@ -244,187 +257,250 @@ export function Admin() {
   }
 
   const monthName = month.toLocaleString("en-US", { month: "long", year: "numeric" });
+  const lastSyncLabel = data?.syncStatus.lastSync
+    ? new Date(data.syncStatus.lastSync).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })
+    : "Never";
 
+  // ---- Dashboard ----
   return (
     <section className="admin-page">
-      <div className="admin-top">
-        <div>
+      <div className="toast-container" aria-live="polite">
+        {toasts.map((toast) => (
+          <div key={toast.id} className="toast">
+            <div className="toast-text">
+              <strong>{toast.title}</strong>
+              {toast.text ? <p>{toast.text}</p> : null}
+            </div>
+            <button
+              className="toast-close"
+              type="button"
+              onClick={() => setToasts((prev) => prev.filter((item) => item.id !== toast.id))}
+              aria-label="Close notification"
+            >
+              <Icon type="close" />
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* ---- Header ---- */}
+      <div className="admin-header">
+        <div className="admin-header-left">
           <p className="eyebrow">Listing 294715</p>
           <h1>Bookings</h1>
-          <p className="admin-lead">Direct stays, owner blocks, and read-only nights imported from VRBO.</p>
         </div>
-        <button className="admin-quiet" type="button" onClick={() => void signOut()}>
-          Sign out
-        </button>
+
+        <div className="admin-header-right">
+          <div className="admin-stats">
+            <div className="admin-stat">
+              <strong>{upcoming.filter((s) => s.source === "website").length}</strong>
+              <span>Open stays</span>
+            </div>
+            <div className="admin-stat">
+              <strong>{upcoming.filter((s) => s.source === "manual").length}</strong>
+              <span>Owner blocks</span>
+            </div>
+            <div className="admin-stat">
+              <strong>{data?.vrboBlocks.length ?? 0}</strong>
+              <span>VRBO nights</span>
+            </div>
+            <div className={conflictCount ? "admin-stat is-alert" : "admin-stat"}>
+              <strong>{conflictCount}</strong>
+              <span>Conflicts</span>
+            </div>
+          </div>
+
+          <div className="admin-header-actions">
+            <button className="admin-btn" type="button" onClick={() => void syncNow()} disabled={busy}>
+              Sync VRBO
+            </button>
+            <button className="admin-btn is-quiet" type="button" onClick={() => void signOut()}>
+              Sign out
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="admin-stats">
-        <div className="admin-stat">
-          <span>Open stays</span>
-          <strong>{upcoming.filter((stay) => stay.source === "website").length}</strong>
-        </div>
-        <div className="admin-stat">
-          <span>Owner blocks</span>
-          <strong>{upcoming.filter((stay) => stay.source === "manual").length}</strong>
-        </div>
-        <div className="admin-stat">
-          <span>VRBO nights</span>
-          <strong>{data?.vrboBlocks.length ?? 0}</strong>
-        </div>
-        <div className={conflictCount ? "admin-stat is-alert" : "admin-stat"}>
-          <span>Conflicts</span>
-          <strong>{conflictCount}</strong>
-        </div>
-      </div>
-
+      {/* ---- Notices ---- */}
       {data?.banner ? <div className="admin-banner">{data.banner}</div> : null}
-      {data?.syncStatus.lastError ? <p className="admin-error">Last sync error: {data.syncStatus.lastError}</p> : null}
-      {notice ? <p className="admin-note">{notice}</p> : null}
+      {data?.syncStatus.lastError ? <p className="admin-notice is-error">Sync error: {data.syncStatus.lastError}</p> : null}
+      {notice ? <p className="admin-notice">{notice}</p> : null}
 
-      <div className="admin-split">
-        <div className="admin-card">
-          <div className="admin-month-head">
-            <h2>{monthName}</h2>
-            <div className="admin-actions">
+      {/* ---- Two-column body ---- */}
+      <div className="admin-body">
+
+        {/* LEFT: Calendar */}
+        <div className="admin-cal-col">
+          <div className="admin-card">
+            <div className="admin-month-head">
               <button
+                className="admin-btn is-quiet is-small"
                 type="button"
                 onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))}
               >
                 Prev
               </button>
+              <h2>{monthName}</h2>
               <button
+                className="admin-btn is-quiet is-small"
                 type="button"
                 onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))}
               >
                 Next
               </button>
             </div>
-          </div>
-          <div className="admin-legend">
-            <span>
-              <i className="admin-swatch is-website" /> Website
-            </span>
-            <span>
-              <i className="admin-swatch is-manual" /> Manual
-            </span>
-            <span>
-              <i className="admin-swatch is-vrbo" /> VRBO
-            </span>
-          </div>
-          <div className="admin-month" aria-label={monthName}>
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <span key={day} className="admin-weekday">
-                {day}
-              </span>
-            ))}
-            {cells.map((cell) => (
-              <span
-                key={cell.iso}
-                className={
-                  cell.label
-                    ? `admin-day is-${cell.source || "open"}${cell.conflict ? " is-conflict" : ""}${cell.iso === today ? " is-today" : ""}`
-                    : "admin-day is-pad"
-                }
-              >
-                {cell.label}
-              </span>
-            ))}
+
+            <div className="admin-legend">
+              <span><i className="admin-swatch is-website" /> Website</span>
+              <span><i className="admin-swatch is-manual" /> Manual</span>
+              <span><i className="admin-swatch is-vrbo" /> VRBO</span>
+            </div>
+
+            <div className="admin-month" aria-label={monthName}>
+              {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
+                <span key={d} className="admin-weekday">{d}</span>
+              ))}
+              {cells.map((cell) => {
+                const sourceLabel =
+                  cell.source === "website" ? "Website" : cell.source === "manual" ? "Manual" : cell.source === "vrbo" ? "VRBO" : "Open";
+                return (
+                  <span
+                    key={cell.iso}
+                    className={
+                      cell.label
+                        ? `admin-day is-${cell.source || "open"}${cell.conflict ? " is-conflict" : ""}${cell.iso === today ? " is-today" : ""}`
+                        : "admin-day is-pad"
+                    }
+                    title={cell.label ? sourceLabel : undefined}
+                  >
+                    {cell.label}
+                    {cell.label ? <span className="admin-day-tip">{sourceLabel}</span> : null}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <div className="admin-card">
-          <h2>VRBO calendar</h2>
-          <p className="admin-meta">
-            Last sync: {data?.syncStatus.lastSync ? new Date(data.syncStatus.lastSync).toLocaleString() : "Never"}
-          </p>
-          <div className="admin-export">
-            <span>Paste this into VRBO's import calendar</span>
-            {data?.exportUrl ? <code>{data.exportUrl}</code> : <span>Set PUBLIC_SITE_URL and ICS_EXPORT_TOKEN.</span>}
-          </div>
-          <div className="admin-actions">
-            <button className="primary" type="button" onClick={() => void syncNow()} disabled={busy}>
-              Sync now
-            </button>
-            <button className="admin-quiet" type="button" onClick={() => void copyExport()} disabled={!data?.exportUrl}>
-              Copy export URL
-            </button>
-          </div>
-        </div>
-      </div>
+        {/* RIGHT: Panel */}
+        <div className="admin-panel">
 
-      <div className="admin-stack">
-        <form className="admin-card" onSubmit={addBlock}>
-          <h2>Block nights</h2>
-          <p className="form-subtitle">Use this for an owner stay or maintenance. It is included in the VRBO export.</p>
-          <div className="form-grid">
-            <div className="form-group">
-              <label htmlFor="blockIn">Check-in</label>
-              <input id="blockIn" type="date" value={blockIn} onChange={(event) => setBlockIn(event.target.value)} required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="blockOut">Check-out</label>
-              <input
-                id="blockOut"
-                type="date"
-                value={blockOut}
-                onChange={(event) => setBlockOut(event.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group full-width">
-              <label htmlFor="blockNote">Note</label>
-              <input id="blockNote" value={note} onChange={(event) => setNote(event.target.value)} placeholder="Owner stay" />
-            </div>
+          {/* Section 1: Upcoming stays */}
+          <div className="admin-section">
+            <h2 className="admin-section-title">
+              Upcoming stays
+              {conflictCount > 0 && (
+                <span className="admin-pill is-conflict" style={{ marginLeft: 10 }}>
+                  {conflictCount} conflict{conflictCount > 1 ? "s" : ""}
+                </span>
+              )}
+            </h2>
+
+            {upcoming.length === 0 ? (
+              <p className="admin-empty">No upcoming stays.</p>
+            ) : (
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Ref</th>
+                    <th>Dates</th>
+                    <th>Guest</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {upcoming.map((stay) => (
+                    <StayRow
+                      key={stay.id}
+                      stay={stay}
+                      busy={busy}
+                      onCancel={cancelStay}
+                      onResend={resend}
+                      onRemove={removeBlock}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
-          <button className="primary" type="submit" disabled={busy}>
-            Block these nights
-          </button>
-        </form>
 
-        <div className="admin-card">
-          <h2>Stays</h2>
-          <p className="admin-group-label">Coming up</p>
-          {upcoming.map((stay) => (
-            <StayRow
-              key={stay.id}
-              stay={stay}
-              busy={busy}
-              onCancel={cancelStay}
-              onResend={resend}
-              onRemove={removeBlock}
-            />
-          ))}
-          {upcoming.length === 0 ? <p className="admin-meta">No upcoming stays.</p> : null}
-          <p className="admin-group-label">Earlier</p>
-          {earlier.map((stay) => (
-            <StayRow
-              key={stay.id}
-              stay={stay}
-              busy={busy}
-              onCancel={cancelStay}
-              onResend={resend}
-              onRemove={removeBlock}
-            />
-          ))}
-          {earlier.length === 0 ? <p className="admin-meta">No earlier stays.</p> : null}
-        </div>
+          {/* Section 2: Earlier / Cancelled (collapsed) */}
+          {earlier.length > 0 && (
+            <details className="admin-section admin-collapsible">
+              <summary className="admin-section-title is-toggle">
+                Earlier &amp; cancelled
+                <span className="admin-count">{earlier.length}</span>
+                <Icon type="chevron-down" />
+              </summary>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Ref</th>
+                    <th>Dates</th>
+                    <th>Guest</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {earlier.map((stay) => (
+                    <StayRow
+                      key={stay.id}
+                      stay={stay}
+                      busy={busy}
+                      onCancel={cancelStay}
+                      onResend={resend}
+                      onRemove={removeBlock}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </details>
+          )}
 
-        <div className="admin-card">
-          <h2>VRBO blocks</h2>
-          <p className="form-subtitle">Read only. Change or cancel these on VRBO, then sync.</p>
-          {(data?.vrboBlocks ?? []).map((block) => (
-            <article key={block.id} className="admin-stay">
-              <div className="admin-pills">
-                <span className="admin-pill is-vrbo">VRBO</span>
-                <span className="admin-pill">Read only</span>
+          {/* Section 3: Block nights */}
+          <div className="admin-section">
+            <h2 className="admin-section-title">Block nights</h2>
+            <p className="admin-section-desc">Owner stay or maintenance. Included in the VRBO export.</p>
+            <form className="admin-block-form" onSubmit={addBlock}>
+              <div className="form-group">
+                <label htmlFor="blockIn">Check-in</label>
+                <input id="blockIn" type="date" value={blockIn} onChange={(e) => setBlockIn(e.target.value)} required />
               </div>
-              <h3>
-                {formatLongDate(block.checkIn)} to {formatLongDate(block.checkOut)}
-              </h3>
-              {block.summary ? <p>{block.summary}</p> : null}
-            </article>
-          ))}
-          {data && data.vrboBlocks.length === 0 ? <p className="admin-meta">No VRBO blocks stored.</p> : null}
+              <div className="form-group">
+                <label htmlFor="blockOut">Check-out</label>
+                <input id="blockOut" type="date" value={blockOut} onChange={(e) => setBlockOut(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="blockNote">Note</label>
+                <input id="blockNote" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Owner stay" />
+              </div>
+              <button className="admin-btn" type="submit" disabled={busy}>
+                Block nights
+              </button>
+            </form>
+          </div>
+
+          {/* Section 4: VRBO sync */}
+          <div className="admin-section">
+            <h2 className="admin-section-title">VRBO calendar</h2>
+            <div className="admin-vrbo-row">
+              <span className="admin-vrbo-sync-label">
+                Last sync: <strong>{lastSyncLabel}</strong>
+              </span>
+              <div className="admin-vrbo-actions">
+                <button className="admin-btn is-quiet is-small" type="button" onClick={() => void syncNow()} disabled={busy}>
+                  Sync now
+                </button>
+                <button className="admin-btn is-quiet is-small" type="button" onClick={() => void copyExport()} disabled={!data?.exportUrl}>
+                  Copy export URL
+                </button>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>
@@ -444,51 +520,50 @@ function StayRow({
   onResend: (id: string) => void;
   onRemove: (id: string) => void;
 }) {
+  const dateRange = `${formatLongDate(stay.checkIn)} to ${formatLongDate(stay.checkOut)}`;
+  const statusLabel = stay.conflict ? "Conflict" : stay.status === "confirmed" ? "Confirmed" : "Cancelled";
+  const statusKind = stay.conflict ? "conflict" : stay.status;
+
   return (
-    <article className={stay.conflict ? "admin-stay is-conflict" : "admin-stay"}>
-      <div className="admin-stay-top">
-        <h3>{stay.reference}</h3>
+    <tr className={stay.conflict ? "is-conflict" : undefined}>
+      <td>
+        <span className="admin-ref">{stay.reference}</span>
         <div className="admin-pills">
-          <span className={`admin-pill is-${stay.source}`}>{stay.source === "website" ? "Website" : "Manual"}</span>
-          <span className={`admin-pill is-${stay.status}`}>{stay.status === "confirmed" ? "Confirmed" : "Cancelled"}</span>
-          {stay.conflict ? <span className="admin-pill is-conflict">Conflict</span> : null}
+          <span className={`admin-pill is-${stay.source}`}>
+            {stay.source === "website" ? "Website" : "Manual"}
+          </span>
         </div>
-      </div>
-      <p>
-        {formatLongDate(stay.checkIn)} to {formatLongDate(stay.checkOut)}
-        {stay.guests ? ` · ${stay.guests} ${stay.guests === 1 ? "guest" : "guests"}` : ""}
-      </p>
-      {stay.guestName ? (
-        <p>
-          {stay.guestName}
-          {stay.guestEmail ? ` · ${stay.guestEmail}` : ""}
-          {stay.guestPhone ? ` · ${stay.guestPhone}` : ""}
-        </p>
-      ) : null}
-      {stay.message ? <p>{stay.message}</p> : null}
-      {stay.source === "website" ? (
-        <div className="admin-pills">
-          <span className={`admin-pill is-${stay.guestEmailStatus}`}>Guest email {stay.guestEmailStatus}</span>
-          <span className={`admin-pill is-${stay.hostEmailStatus}`}>Host email {stay.hostEmailStatus}</span>
-        </div>
-      ) : null}
-      <div className="admin-actions">
+      </td>
+      <td className="admin-dates">{dateRange}</td>
+      <td className="admin-guest">
+        <span className="admin-guest-name">
+          {stay.guestName || "No guest name"}
+          {stay.guests ? ` · ${stay.guests} ${stay.guests === 1 ? "guest" : "guests"}` : ""}
+        </span>
+        {stay.guestEmail ? <span className="admin-guest-line">{stay.guestEmail}</span> : null}
+        {stay.guestPhone ? <span className="admin-guest-line">{stay.guestPhone}</span> : null}
+        {stay.message ? <span className="admin-guest-line">{stay.message}</span> : null}
+      </td>
+      <td>
+        <span className={`admin-pill is-${statusKind}`}>{statusLabel}</span>
+      </td>
+      <td className="admin-row-actions">
         {stay.source === "website" && stay.status === "confirmed" ? (
-          <button className="admin-quiet danger" type="button" onClick={() => onCancel(stay.id)} disabled={busy}>
-            Cancel booking
+          <button className="admin-action-btn is-danger" type="button" onClick={() => onCancel(stay.id)} disabled={busy}>
+            Cancel Booking
           </button>
         ) : null}
         {stay.source === "website" ? (
-          <button className="admin-quiet" type="button" onClick={() => onResend(stay.id)} disabled={busy}>
-            Resend guest email
+          <button className="admin-action-btn" type="button" onClick={() => onResend(stay.id)} disabled={busy}>
+            Resend Email
           </button>
         ) : null}
         {stay.source === "manual" ? (
-          <button className="admin-quiet danger" type="button" onClick={() => onRemove(stay.id)} disabled={busy}>
-            Remove block
+          <button className="admin-action-btn is-danger" type="button" onClick={() => onRemove(stay.id)} disabled={busy}>
+            Remove Block
           </button>
         ) : null}
-      </div>
-    </article>
+      </td>
+    </tr>
   );
 }
