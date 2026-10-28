@@ -1,4 +1,4 @@
-import { addDays, isIsoDate } from './dates.ts'
+import { addDays, isIsoDate } from './dates.js'
 
 export interface CalendarEvent {
   uid: string

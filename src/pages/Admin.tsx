@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 
-import { formatLongDate, todayInTimeZone } from "../../server/dates.ts";
+import { formatLongDate, todayInTimeZone } from "../../server/dates.js";
 import { Icon } from "@/components/icon.tsx";
 
 interface Stay {

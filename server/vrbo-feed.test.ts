@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { loadLocalEnv } from './env.ts'
-import { parseIcal } from './ical.ts'
+import { loadLocalEnv } from './env.js'
+import { parseIcal } from './ical.js'
 
 loadLocalEnv()
 

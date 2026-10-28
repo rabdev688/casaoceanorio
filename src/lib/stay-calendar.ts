@@ -1,4 +1,4 @@
-import { horizonCheckout, todayInTimeZone } from '../../server/dates.ts'
+import { horizonCheckout, todayInTimeZone } from '../../server/dates.js'
 
 export function toISODate(date: Date) {
   const year = date.getFullYear()

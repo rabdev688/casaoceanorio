@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { asDate } from './db.ts'
-import { eachNight, horizonCheckout, nightCount, rangesOverlap, validateStayDates } from './dates.ts'
+import { asDate } from './db.js'
+import { eachNight, horizonCheckout, nightCount, rangesOverlap, validateStayDates } from './dates.js'
 
 describe('night overlap', () => {
   it('treats checkout morning as free', () => {

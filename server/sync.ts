@@ -1,8 +1,8 @@
-import { SYNC_MAX_AGE_MS } from './dates.ts'
-import { asDate, getSql, mapStay, mapSync, type StayRecord, type SyncRecord } from './db.ts'
-import { sendHostConflict } from './email.ts'
-import { errorText } from './http.ts'
-import { dedupeEvents, parseIcal, type CalendarEvent } from './ical.ts'
+import { SYNC_MAX_AGE_MS } from './dates.js'
+import { asDate, getSql, mapStay, mapSync, type StayRecord, type SyncRecord } from './db.js'
+import { sendHostConflict } from './email.js'
+import { errorText } from './http.js'
+import { dedupeEvents, parseIcal, type CalendarEvent } from './ical.js'
 
 export interface SyncStatus {
   state: 'not_configured' | 'never_synced' | 'ok' | 'error'

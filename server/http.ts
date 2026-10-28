@@ -1,4 +1,4 @@
-import { loadLocalEnv } from './env.ts'
+import { loadLocalEnv } from './env.js'
 
 loadLocalEnv()
 

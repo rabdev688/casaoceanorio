@@ -1,14 +1,14 @@
 import nodemailer from 'nodemailer'
 
-import { loadLocalEnv } from './env.ts'
+import { loadLocalEnv } from './env.js'
 import {
   PROPERTY_ADDRESS,
   SHELLY_PHONE,
   VRBO_LISTING,
   WILLIE_PHONE,
   formatLongDate,
-} from './dates.ts'
-import type { StayRecord } from './db.ts'
+} from './dates.js'
+import type { StayRecord } from './db.js'
 import {
   alertBanner,
   buttonLink,
@@ -19,7 +19,7 @@ import {
   renderEmail,
   sectionTitle,
   textLink,
-} from './emailTemplate.ts'
+} from './emailTemplate.js'
 
 loadLocalEnv()
 

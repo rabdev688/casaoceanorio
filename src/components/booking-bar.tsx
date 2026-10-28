@@ -5,7 +5,7 @@ import { GuestSelect } from "@/components/guest-select";
 import { Icon } from "@/components/icon";
 import { monthStarts, toISODate } from "@/lib/stay-calendar";
 import { useAvailability } from "@/lib/use-availability";
-import { horizonCheckout, todayInTimeZone } from "../../server/dates.ts";
+import { horizonCheckout, todayInTimeZone } from "../../server/dates.js";
 
 export interface BookingBarProps {
   mobile?: boolean;

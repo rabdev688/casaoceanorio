@@ -1,18 +1,18 @@
-import { parseBookingInput, parseManualInput, todayInTimeZone } from './dates.ts'
+import { parseBookingInput, parseManualInput, todayInTimeZone } from './dates.js'
 import {
   getSql,
   mapStay,
   type EmailStatus,
   type StayRecord,
-} from './db.ts'
+} from './db.js'
 import {
   sendGuestCancellation,
   sendGuestConfirmation,
   sendHostBooking,
   sendHostCancel,
-} from './email.ts'
-import { errorCode, json, readJson } from './http.ts'
-import { syncVrbo } from './sync.ts'
+} from './email.js'
+import { errorCode, json, readJson } from './http.js'
+import { syncVrbo } from './sync.js'
 
 const TAKEN = 'Those nights are no longer open.'
 
