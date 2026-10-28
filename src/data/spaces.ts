@@ -47,6 +47,7 @@ export const spacesData: SpaceItem[] = [
     features: [
       "Second Floor Bedroom 1",
       "Second Floor Bedroom 2",
+      "Full shared bath with tub",
     ],
   },
   {
