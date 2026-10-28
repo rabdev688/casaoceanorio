@@ -98,6 +98,7 @@ Sent with Nodemailer through the SMTP settings already in `.env`. A failed send 
 - Auth user is `MAIL_USER`, or `MAIL_FROM` when `MAIL_USER` is not set. The From address is `MAIL_FROM`, or the auth user when `MAIL_FROM` is not set. The password is `MAIL_PASSWORD`.
 - Guest confirmation and guest cancellation go to the email on the booking.
 - Host booking, conflict, and cancel notices go to `MAIL_TO`. Several addresses are separated by commas.
+- When `MAIL_CC` is set, every outgoing message includes those addresses as Cc. Several addresses are separated by commas.
 
 Guest confirmation:
 
@@ -241,7 +242,7 @@ Inbound events use `UID`. A missing UID gets a stable fallback from the start, e
 Already set, and read as-is:
 
 - `DATABASE_URL`: the Neon pooled connection string in `.env`. The app does not create a new database and does not run `db/schema.sql`.
-- `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASSWORD`, `MAIL_TO`. `MAIL_FROM` is optional.
+- `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASSWORD`, `MAIL_TO`. `MAIL_FROM` and `MAIL_CC` are optional.
 
 Still required before admin and VRBO sync work:
 

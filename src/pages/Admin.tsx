@@ -233,8 +233,8 @@ export function Admin() {
       <section className="admin-page">
         <div className="admin-login">
           <p className="eyebrow">Hosts only</p>
-          <h1>Booking admin</h1>
-          <p className="admin-lead">Willie and Shelly sign in here to see blocked nights and direct bookings.</p>
+          <h1 className="text-2xl font-bold mb-16">Booking admin</h1>
+
           <form className="admin-card" onSubmit={onLogin}>
             <div className="form-group">
               <label htmlFor="adminPassword">Password</label>
