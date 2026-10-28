@@ -15,7 +15,7 @@ export function Location() {
             Casa Oceano Rio is in the exclusive South Beach area of Tybee, at{" "}
             <b>{import.meta.env.VITE_ADDRESS_SHORT}</b>. The commercial district, with shops,
             restaurants, and nightclubs, is within walking distance. Chairs,
-            floats, umbrellas, a cooler, and large beach carts are included.
+            umbrellas, a cooler, and large beach carts are included.
           </p>
 
           <div className="location-address">

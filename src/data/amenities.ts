@@ -153,7 +153,7 @@ export const faqs = [
   },
   {
     q: "What beach gear is included?",
-    a: "Chairs, floats, umbrellas, a cooler, and large beach carts.",
+    a: "Chairs, umbrellas, a cooler, and large beach carts.",
   },
   {
     q: "Is there parking?",

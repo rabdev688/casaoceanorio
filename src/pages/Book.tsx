@@ -264,7 +264,7 @@ export function Book() {
                 <li>Willie and Shelly manage the house themselves</li>
                 <li>Call or text anytime</li>
                 <li>
-                  Chairs, floats, umbrellas, cooler, and large beach carts
+                  Chairs, umbrellas, cooler, and large beach carts
                 </li>
                 <li>Dipping pool</li>
               </ul>
