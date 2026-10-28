@@ -95,9 +95,9 @@ export const amenityCategories: {
       desc: "Included for days at the beach.",
     },
     {
-      icon: "wave" as IconType,
-      name: "Floats",
-      desc: "Floats are included with the beach gear.",
+      icon: "board" as IconType,
+      name: "Boogie boards",
+      desc: "Boogie boards are included with the beach gear.",
     },
     {
       icon: "pool" as IconType,
