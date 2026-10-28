@@ -15,8 +15,6 @@ export function About() {
             <div className="section-head">
               <p className="eyebrow">Where the river meets the ocean</p>
               <h2>
-                Built in 1984.
-                <br />
                 Welcoming guests since 2010.
               </h2>
             </div>
@@ -29,19 +27,14 @@ export function About() {
               the commercial district, with shops, restaurants, and nightclubs.
             </p>
             <p>
-              Willie is a Savannah native and built Casa Oceano Rio as a private
-              residence in 1984. He and Shelly were married in 1993 and raised
-              their two boys on Tybee Island. After the kids went off to
-              college, they moved to a home in Savannah's Historic District. In
-              2010 the residence became Casa Oceano Rio. Willie and Shelly still
-              manage it themselves.
+              Willie and Shelly were married in 1993 and raised their two boys
+              on Tybee Island. After the kids went off to college, they moved to
+              a home in Savannah's Historic District. In 2010 the residence
+              became Casa Oceano Rio. Willie and Shelly still manage it
+              themselves.
             </p>
 
             <div className="stats-grid">
-              <div className="stat-item">
-                <b>1984</b>
-                <span>Built as their home</span>
-              </div>
               <div className="stat-item">
                 <b>200+</b>
                 <span>Five-star reviews</span>

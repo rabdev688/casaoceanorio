@@ -47,13 +47,14 @@ export const spacesData: SpaceItem[] = [
     features: [
       "Second Floor Bedroom 1",
       "Second Floor Bedroom 2",
+      "Full shared bath with tub",
     ],
   },
   {
     floor: "First floor",
     img: "/gallery/first-floor-bedroom-1.jpg",
     title: "First Floor Bedrooms",
-    desc: "Two bedrooms on the first floor, with a laundry bath.",
+    desc: "Two bedrooms, two baths, three showers, and laundry.",
     features: [
       "First Floor Bedroom 1",
       "First Floor Bedroom 2",

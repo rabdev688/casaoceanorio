@@ -124,8 +124,7 @@ function App() {
               <small className="location-tag">Tybee Island, Georgia</small>
             </Link>
             <p style={{ marginTop: "14px" }}>
-              Willie, a Savannah native, built this South Beach house in 1984. <br />
-              He and Shelly have welcomed guests here since 2010.
+              Willie and Shelly have welcomed guests to this South Beach house since 2010.
             </p>
           </div>
 
@@ -139,14 +138,14 @@ function App() {
                 <a href="tel:9123986901">Shelly: (912) 398-6901</a>
               </li>
               <li>
-                <a href="mailto:wlfields@bellsouth.net">
-                  wlfields@bellsouth.net
+                <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
+                  {import.meta.env.VITE_CONTACT_EMAIL}
                 </a>
               </li>
               <li>
                 <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </li>
-              <li>1811a Butler Ave, Tybee Island, Ga 31328</li>
+              <li>{import.meta.env.VITE_ADDRESS}</li>
             </ul>
           </div>
 
@@ -218,9 +217,8 @@ function App() {
                 marginBottom: "20px",
               }}
             >
-              1811a Butler Ave, Tybee Island, Ga 31328. Book directly with
-              Willie and Shelly. If the nights are open, your stay is confirmed
-              by email.
+              {import.meta.env.VITE_ADDRESS}. Book directly with
+              Willie and Shelly. We reply within 24 hours with availability.
             </p>
             <BookingBar
               mobile

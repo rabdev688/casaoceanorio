@@ -321,9 +321,9 @@ export function Book() {
             <div>
               <p className="eyebrow">Direct host booking</p>
               <h2>
-                Book direct with
+                Book Direct and Save Up to 20%
                 <br />
-                Willie & Shelly.
+                with Willie & Shelly.
               </h2>
             </div>
 
@@ -336,7 +336,9 @@ export function Book() {
               <ul>
                 <li>Willie and Shelly manage the house themselves</li>
                 <li>Call or text anytime</li>
-                <li>Chairs, floats, umbrellas, cooler, and large beach carts</li>
+                <li>
+                  Chairs, umbrellas, cooler, and large beach carts
+                </li>
                 <li>Dipping pool</li>
               </ul>
             </div>
@@ -361,9 +363,12 @@ export function Book() {
             <div className="contact-note">
               <Icon type="pin" />
               <div>
-                <b>1811a Butler Ave, Tybee Island, Ga 31328</b>
+                <b>{import.meta.env.VITE_ADDRESS}</b>
                 <br />
-                Willie: <a href="mailto:wlfields@bellsouth.net">wlfields@bellsouth.net</a>
+                Willie:{" "}
+                <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
+                  {import.meta.env.VITE_CONTACT_EMAIL}
+                </a>
                 <br />
                 Shelly: <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </div>

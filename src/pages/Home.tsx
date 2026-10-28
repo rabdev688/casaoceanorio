@@ -36,9 +36,10 @@ export function Home() {
 
             <div className="hero-direct-badge">
               <Icon type="check" />
-              <span>
-                Book directly with Willie and Shelly and avoid booking-site
-                fees.
+              <span className="badge-text">
+                Book direct and save up to{" "}
+                <strong className="badge-highlight">20%</strong>{" "}
+                from needless booking platform fees.
               </span>
             </div>
           </div>
@@ -71,10 +72,10 @@ export function Home() {
           </div>
         </article>
         <article>
-          <Icon type="air" />
+          <Icon type="wave" />
           <div>
-            <strong>Air conditioning  </strong>
-            <span>Keep your home cool and comfortable</span>
+            <strong>Everything You Need</strong>
+            <span>Beach chairs, boogie boards, umbrellas, toys and more</span>
           </div>
         </article>
         <article>
@@ -100,8 +101,6 @@ export function Home() {
             <div className="section-head">
               <p className="eyebrow">Where the river meets the ocean</p>
               <h2>
-                Built in 1984.
-                <br />
                 Welcoming guests since 2010.
               </h2>
             </div>
@@ -114,14 +113,13 @@ export function Home() {
 
             <div className="stats-grid">
               <div className="stat-item">
-                <b>1984</b>
-                <span>Built as their home</span>
-              </div>
-              <div className="stat-item">
                 <b>200+</b>
                 <span>Five-star reviews</span>
               </div>
-            
+              <div className="stat-item">
+                <b>9.8</b>
+                <span>Vrbo guest score</span>
+              </div>
             </div>
 
             <Link className="text-link" to="/about">
@@ -323,13 +321,13 @@ export function Home() {
           <h2>Where the river meets the ocean.</h2>
           <p>
             Casa Oceano Rio is in the exclusive South Beach area of Tybee, at{" "}
-            <b>1811a Butler Ave</b>. Shops, restaurants, and nightclubs are
+            <b>{import.meta.env.VITE_ADDRESS_SHORT}</b>. Shops, restaurants, and nightclubs are
             within walking distance.
           </p>
           <div className="location-address">
             <Icon type="pin" />
             <div>
-              <b>1811a Butler Ave, Tybee Island, Ga 31328</b>
+              <b>{import.meta.env.VITE_ADDRESS}</b>
             </div>
           </div>
           <Link className="text-link on-dark" to="/location">
@@ -339,8 +337,8 @@ export function Home() {
         <div className="location-map">
           <div className="map-card">
             <iframe
-              title="Map of Casa Oceano Rio, 1811a Butler Ave, Tybee Island, Ga 31328"
-              src="https://www.google.com/maps?q=1811a%20Butler%20Ave%2C%20Tybee%20Island%2C%20Ga%2031328&output=embed"
+              title={`Map of Casa Oceano Rio, ${import.meta.env.VITE_ADDRESS}`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(import.meta.env.VITE_ADDRESS)}&output=embed`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen

@@ -19,11 +19,6 @@ export const amenityCategories: {
       desc: 'Living Room With 75" TV. Satellite or cable.',
     },
     {
-      icon: "flame" as IconType,
-      name: "Wood Fireplace",
-      desc: "Wood Fireplace.",
-    },
-    {
       icon: "sun" as IconType,
       name: "Air Conditioning and Heat",
       desc: "Air Conditioning. Heat.",
@@ -66,21 +61,21 @@ export const amenityCategories: {
       desc: "Large Gas Grill.",
     },
     {
+      icon: "egg" as IconType,
+      name: "Big Green Egg",
+      desc: "Big Green Egg.",
+    },
+    {
       icon: "coffee" as IconType,
       name: "Low Country Boil Pot and Gas Burner",
       desc: "Low Country Boil Pot and Gas Burner.",
-    },
-    {
-      icon: "car" as IconType,
-      name: "Garage parking",
-      desc: "Garage parking, a rare offering in the area.",
     },
   ],
   kitchen: [
     {
       icon: "kitchen" as IconType,
-      name: "Kitchen",
-      desc: "Kitchen.",
+      name: "Fully Equipped Kitchen",
+      desc: "Fully Equipped Kitchen.",
     },
     {
       icon: "coffee" as IconType,
@@ -105,9 +100,9 @@ export const amenityCategories: {
       desc: "Included for days at the beach.",
     },
     {
-      icon: "wave" as IconType,
-      name: "Floats",
-      desc: "Floats are included with the beach gear.",
+      icon: "board" as IconType,
+      name: "Boogie boards",
+      desc: "Boogie boards are included with the beach gear.",
     },
     {
       icon: "pool" as IconType,
@@ -154,11 +149,11 @@ export const faqs = [
   },
   {
     q: "Where is the house?",
-    a: "Casa Oceano Rio is in the exclusive South Beach area of Tybee, at 1811a Butler Ave, Tybee Island, Ga 31328. It is within walking distance of Tybee's commercial district, with shops, restaurants, and nightclubs.",
+    a: `Casa Oceano Rio is in the exclusive South Beach area of Tybee, at ${import.meta.env.VITE_ADDRESS}. It is within walking distance of Tybee's commercial district, with shops, restaurants, and nightclubs.`,
   },
   {
     q: "What beach gear is included?",
-    a: "Chairs, floats, umbrellas, a cooler, and large beach carts.",
+    a: "Chairs, umbrellas, a cooler, and large beach carts.",
   },
   {
     q: "Is there parking?",
