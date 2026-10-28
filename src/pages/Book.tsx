@@ -56,6 +56,7 @@ export function Book() {
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checking, setChecking] = useState(false);
 
   useEffect(() => {
     const checkIn = params.get("checkIn") || "";
@@ -124,6 +125,32 @@ export function Book() {
       "Dates selected",
       `${formatLongDate(start)} to ${formatLongDate(end)}. Submit the form to confirm this stay.`,
     );
+  };
+
+  const checkAvailability = async () => {
+    setChecking(true);
+    try {
+      const next = await reload();
+      if (!next?.bookingEnabled) {
+        showToast("Calendar unavailable", "Call or text Willie or Shelly to reserve.");
+        return;
+      }
+      const taken = next.blocked.some((block) =>
+        rangesOverlap(formData.checkIn, formData.checkOut, block.checkIn, block.checkOut),
+      );
+      if (taken) {
+        showToast("Those nights are closed", "The latest VRBO calendar has these dates blocked.");
+        return;
+      }
+      if (next.syncStatus.lastError && next.syncStatus.state !== "ok") {
+        showToast("VRBO calendar was not updated", next.syncStatus.lastError);
+        return;
+      }
+      showToast("Those nights are open", "Submit the form to confirm this stay.");
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    } finally {
+      setChecking(false);
+    }
   };
 
   const nights = nightCount(formData.checkIn, formData.checkOut);
@@ -260,10 +287,11 @@ export function Book() {
               <button
                 className="primary"
                 style={{ width: "100%", marginTop: "14px" }}
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => void checkAvailability()}
                 type="button"
+                disabled={checking}
               >
-                Confirm these dates <Icon type="arrow" />
+                {checking ? "Checking the calendar..." : "Check availability"} {!checking && <Icon type="arrow" />}
               </button>
             </div>
           ) : (

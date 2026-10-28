@@ -26,7 +26,8 @@ export function BookingBar({
   const [checkOut, setCheckOut] = useState(initialCheckOut);
   const [guests, setGuests] = useState(initialGuests);
   const navigate = useNavigate();
-  const { data } = useAvailability();
+  const { data, reload } = useAvailability();
+  const [checking, setChecking] = useState(false);
   const today = data?.today ?? todayInTimeZone();
   const horizonEnd = data?.horizonEnd ?? horizonCheckout(today);
   const months = monthStarts(today);
@@ -40,7 +41,13 @@ export function BookingBar({
     return iso < today || iso > horizonEnd;
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    setChecking(true);
+    try {
+      await reload();
+    } finally {
+      setChecking(false);
+    }
     if (onApplyDates) {
       onApplyDates(checkIn, checkOut, guests);
     } else {
@@ -76,8 +83,8 @@ export function BookingBar({
         <span>Guests</span>
         <GuestSelect id={guestsId} value={guests} onChange={setGuests} />
       </label>
-      <button className="primary" onClick={handleSearch} type="button">
-        Check availability <Icon type="arrow" />
+      <button className="primary" onClick={() => void handleSearch()} type="button" disabled={checking}>
+        {checking ? "Checking..." : "Check availability"} {!checking && <Icon type="arrow" />}
       </button>
     </div>
   );

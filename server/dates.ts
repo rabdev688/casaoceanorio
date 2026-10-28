@@ -4,7 +4,7 @@ export const WILLIE_PHONE = '(912) 398-4113'
 export const SHELLY_PHONE = '(912) 398-6901'
 export const TIMEZONE = 'America/New_York'
 export const HORIZON_MONTHS = 18
-export const SYNC_MAX_AGE_MS = 15 * 60 * 1000
+export const SYNC_MAX_AGE_MS = 6 * 60 * 60 * 1000
 export const MAX_GUESTS = 16
 
 export function todayInTimeZone(now = new Date(), timeZone = TIMEZONE): string {

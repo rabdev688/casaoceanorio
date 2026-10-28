@@ -12,7 +12,7 @@ import {
   sendHostCancel,
 } from './email.ts'
 import { errorCode, json, readJson } from './http.ts'
-import { ensureFreshSync } from './sync.ts'
+import { syncVrbo } from './sync.ts'
 
 const TAKEN = 'Those nights are no longer open.'
 
@@ -107,7 +107,7 @@ export async function createWebsiteBooking(request: Request) {
   const parsed = parseBookingInput(await readJson(request), today)
   if (!parsed.ok) return json({ error: parsed.error }, 400)
 
-  await ensureFreshSync()
+  await syncVrbo()
   const { value } = parsed
   let stay: StayRecord | 'conflict'
   try {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { SYNC_MAX_AGE_MS } from '../../server/dates.ts'
 
 export interface BlockedRange {
   checkIn: string
@@ -19,22 +20,33 @@ export interface AvailabilityPayload {
 }
 
 let cached: AvailabilityPayload | null = null
+let cachedAt = 0
 let pending: Promise<AvailabilityPayload> | null = null
+const listeners = new Set<(data: AvailabilityPayload) => void>()
+
+function publish(data: AvailabilityPayload) {
+  cached = data
+  cachedAt = Date.now()
+  listeners.forEach((listener) => listener(data))
+}
 
 export function loadAvailability(force = false) {
-  if (!force && cached) return Promise.resolve(cached)
+  if (!force && cached && Date.now() - cachedAt < SYNC_MAX_AGE_MS) return Promise.resolve(cached)
   if (!force && pending) return pending
-  pending = fetch('/api/availability', { cache: 'no-store' })
-    .then(async (response) => {
-      const body = (await response.json()) as AvailabilityPayload & { error?: string }
-      if (!response.ok) throw new Error(body.error || 'The calendar could not be loaded.')
-      cached = body
-      return body
-    })
-    .finally(() => {
+  const url = force ? '/api/availability?refresh=1' : '/api/availability'
+  const request = fetch(url, { cache: 'no-store' }).then(async (response) => {
+    const body = (await response.json()) as AvailabilityPayload & { error?: string }
+    if (!response.ok) throw new Error(body.error || 'The calendar could not be loaded.')
+    publish(body)
+    return body
+  })
+  if (!force) {
+    pending = request.finally(() => {
       pending = null
     })
-  return pending
+    return pending
+  }
+  return request
 }
 
 export function useAvailability() {
@@ -48,10 +60,23 @@ export function useAvailability() {
       const next = await loadAvailability(true)
       setData(next)
       setError(null)
+      return next
     } catch (err) {
       setError(err instanceof Error ? err.message : 'The calendar could not be loaded.')
+      return null
     } finally {
       setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    const listener = (next: AvailabilityPayload) => {
+      setData(next)
+      setError(null)
+    }
+    listeners.add(listener)
+    return () => {
+      listeners.delete(listener)
     }
   }, [])
 

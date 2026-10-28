@@ -13,7 +13,7 @@ Dates use the America/New_York calendar day.
 A stay that starts on VRBO is not typed in by hand.
 
 - The secret VRBO export URL is `VRBO_ICAL_URL`. The listing number is only a label. It is not a URL.
-- If that URL was last pulled successfully more than 15 minutes ago, `GET /api/availability` pulls it again before it answers. `/admin` also has Sync now.
+- A normal availability load reuses the last successful VRBO pull for 6 hours. Check availability, and saving the booking form, call a fresh pull and ignore that cache. `/admin` also has Sync now.
 - Each feed event becomes one `vrbo_blocks` row. The primary key for identity is the event UID, so a second sync updates the row instead of duplicating it.
 - Admin shows these rows labeled VRBO. There is no edit and no delete.
 - The public calendar never shows a guest name from the feed. It only shows that the nights are taken.
@@ -197,7 +197,7 @@ Order:
 
 1. Reject a missing database with 503.
 2. Reject bad fields with 400. Check-in is today or later. Check-out is after check-in and on or before `horizonEnd`. Guests are 1 through 16.
-3. Refresh the VRBO feed when it is older than 15 minutes.
+3. Pull the VRBO feed immediately. The booking form ignores the 6 hour cache.
 4. In one statement, refuse the insert if a confirmed stay or a VRBO block overlaps, take the next daily reference, and insert `status = confirmed`.
 5. The exclusion constraint is the backstop if two inserts race. The loser gets 409 and nothing is saved.
 6. Email the guest and the hosts. Update the two email status columns.

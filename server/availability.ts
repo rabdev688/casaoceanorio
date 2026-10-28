@@ -6,9 +6,10 @@ import { json } from './http.ts'
 import { describeSync, ensureFreshSync, readSyncRow, syncBanner, syncVrbo } from './sync.ts'
 import { secretsMatch } from './auth.ts'
 
-export async function getAvailability() {
+export async function getAvailability(request: Request) {
   const today = todayInTimeZone()
   const horizonEnd = horizonCheckout(today)
+  const refresh = new URL(request.url).searchParams.get('refresh') === '1'
   if (!getSql()) {
     return json({
       today,
@@ -24,7 +25,8 @@ export async function getAvailability() {
   }
 
   try {
-    await ensureFreshSync()
+    if (refresh) await syncVrbo()
+    else await ensureFreshSync()
     const sql = getSql()
     if (!sql) throw new Error('Database is not configured.')
     const rows = (await sql`
