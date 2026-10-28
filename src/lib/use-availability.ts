@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { SYNC_MAX_AGE_MS } from '../../server/dates.ts'
+import { SYNC_MAX_AGE_MS } from '../../server/dates.js'
 
 export interface BlockedRange {
   checkIn: string

@@ -1,4 +1,4 @@
-import { getAvailability } from '../server/availability.ts'
+import { getAvailability } from '../server/availability.js'
 
 export function GET(request: Request) {
   return getAvailability(request)

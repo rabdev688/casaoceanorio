@@ -1,5 +1,5 @@
-import { requireAdmin } from '../../server/auth.ts'
-import { postAdminSync } from '../../server/availability.ts'
+import { requireAdmin } from '../../server/auth.js'
+import { postAdminSync } from '../../server/availability.js'
 
 export async function POST(request: Request) {
   const denied = await requireAdmin(request)

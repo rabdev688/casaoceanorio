@@ -1,10 +1,10 @@
-import { horizonCheckout, todayInTimeZone } from './dates.ts'
-import { asDate, getSql, mapBlock, mapStay } from './db.ts'
-import { exportUrl } from './email.ts'
-import { buildIcal } from './ical.ts'
-import { json } from './http.ts'
-import { describeSync, ensureFreshSync, readSyncRow, syncBanner, syncVrbo } from './sync.ts'
-import { secretsMatch } from './auth.ts'
+import { horizonCheckout, todayInTimeZone } from './dates.js'
+import { asDate, getSql, mapBlock, mapStay } from './db.js'
+import { exportUrl } from './email.js'
+import { buildIcal } from './ical.js'
+import { json } from './http.js'
+import { describeSync, ensureFreshSync, readSyncRow, syncBanner, syncVrbo } from './sync.js'
+import { secretsMatch } from './auth.js'
 
 export async function getAvailability(request: Request) {
   const today = todayInTimeZone()

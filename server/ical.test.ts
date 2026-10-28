@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { buildIcal, parseIcal } from './ical.ts'
+import { buildIcal, parseIcal } from './ical.js'
 
 const sample = `BEGIN:VCALENDAR
 VERSION:2.0

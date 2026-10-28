@@ -1,6 +1,6 @@
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto'
 
-import { json, readJson } from './http.ts'
+import { json, readJson } from './http.js'
 
 const COOKIE = 'casa_admin'
 const WEEK = 7 * 24 * 60 * 60

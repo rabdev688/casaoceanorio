@@ -15,7 +15,7 @@ import {
   nightCount,
   rangesOverlap,
   todayInTimeZone,
-} from "../../server/dates.ts";
+} from "../../server/dates.js";
 
 interface ToastMessage {
   id: number;

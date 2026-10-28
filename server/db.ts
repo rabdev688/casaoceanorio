@@ -1,6 +1,6 @@
 import { neon, type NeonQueryFunction } from '@neondatabase/serverless'
 
-import { loadLocalEnv } from './env.ts'
+import { loadLocalEnv } from './env.js'
 
 loadLocalEnv()
 

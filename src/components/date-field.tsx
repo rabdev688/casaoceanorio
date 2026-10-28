@@ -5,7 +5,7 @@ import { CalendarIcon } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { parseISODate, toISODate } from '@/lib/stay-calendar'
-import { todayInTimeZone } from '../../server/dates.ts'
+import { todayInTimeZone } from '../../server/dates.js'
 
 interface DateFieldProps {
   id: string

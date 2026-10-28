@@ -1,5 +1,5 @@
-import { requireAdmin } from '../../server/auth.ts'
-import { cancelWebsiteStay } from '../../server/booking.ts'
+import { requireAdmin } from '../../server/auth.js'
+import { cancelWebsiteStay } from '../../server/booking.js'
 
 export async function POST(request: Request) {
   const denied = await requireAdmin(request)

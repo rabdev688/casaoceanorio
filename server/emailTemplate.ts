@@ -1,4 +1,4 @@
-import { PROPERTY_ADDRESS } from './dates.ts'
+import { PROPERTY_ADDRESS } from './dates.js'
 
 const OCEAN = '#06333d'
 const BLUE = '#0b6373'
