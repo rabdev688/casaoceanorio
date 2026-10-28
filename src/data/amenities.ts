@@ -141,7 +141,7 @@ export const amenityRowCount = Math.max(
 export const faqs = [
   {
     q: "How do I book directly and avoid platform fees?",
-    a: "Use the contact form on this page, or call or text Willie at (912) 398-4113 or Shelly at (912) 398-6901. We are on VRBO, and booking directly avoids the fees those sites charge. Put your requested dates in the message and we will respond within 24 hours with availability.",
+    a: "Choose your dates on the booking page and send your details. If the nights are open, the stay is confirmed and you receive an email. You can also call or text Willie at (912) 398-4113 or Shelly at (912) 398-6901. We are on VRBO, and booking directly avoids the fees those sites charge. To change or cancel, call or text the hosts.",
   },
   {
     q: "Are pets allowed?",

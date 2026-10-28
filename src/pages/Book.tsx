@@ -1,16 +1,21 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import type { DateRange } from "react-day-picker";
 
 import { DateField } from "@/components/date-field";
 import { GuestSelect } from "@/components/guest-select";
 import { Icon } from "@/components/icon";
 import { RatesCalendar } from "@/components/rates-calendar";
-import {
-  calendarMonths,
-  dateToSelection,
-  toISODate,
-} from "@/lib/stay-calendar";
+import { monthStarts, parseISODate, toISODate } from "@/lib/stay-calendar";
+import { useAvailability } from "@/lib/use-availability";
 import { useReveal } from "@/lib/useReveal";
+import {
+  formatLongDate,
+  horizonCheckout,
+  nightCount,
+  rangesOverlap,
+  todayInTimeZone,
+} from "../../server/dates.ts";
 
 interface ToastMessage {
   id: number;
@@ -18,160 +23,222 @@ interface ToastMessage {
   text: string;
 }
 
+function guestCount(value: string | null, fallback: number) {
+  const guests = Number(value);
+  return Number.isInteger(guests) && guests >= 1 && guests <= 16 ? guests : fallback;
+}
+
 export function Book() {
   useReveal();
+  const [params] = useSearchParams();
+  const { data, error, loading, reload } = useAvailability();
+  const today = data?.today ?? todayInTimeZone();
+  const horizonEnd = data?.horizonEnd ?? horizonCheckout(today);
+  const months = monthStarts(today);
+  const blocks = data?.blocked ?? [];
 
-  // Calendar State
-  const [currentMonthIdx, setCurrentMonthIdx] = useState(1);
-  const [selectedStart, setSelectedStart] = useState<{
-    monthIdx: number;
-    day: number;
-  } | null>({
-    monthIdx: 1,
-    day: 8,
+  const [month, setMonth] = useState(() => {
+    const parsed = parseISODate(params.get("checkIn") || "");
+    if (parsed) return new Date(parsed.getFullYear(), parsed.getMonth(), 1);
+    const [year, monthNumber] = todayInTimeZone().split("-").map(Number);
+    return new Date(year, monthNumber - 1, 1);
   });
-  const [selectedEnd, setSelectedEnd] = useState<{
-    monthIdx: number;
-    day: number;
-  } | null>({
-    monthIdx: 1,
-    day: 12,
-  });
-
-  // Toast System
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [confirmation, setConfirmation] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    checkIn: params.get("checkIn") || "",
+    checkOut: params.get("checkOut") || "",
+    guests: guestCount(params.get("guests"), 2),
+    message: "",
+  });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checking, setChecking] = useState(false);
+
+  useEffect(() => {
+    const checkIn = params.get("checkIn") || "";
+    const checkOut = params.get("checkOut") || "";
+    if (!checkIn && !checkOut && !params.get("guests")) return;
+    setFormData((prev) => ({
+      ...prev,
+      checkIn,
+      checkOut,
+      guests: guestCount(params.get("guests"), prev.guests),
+    }));
+    const parsed = parseISODate(checkIn);
+    if (parsed) setMonth(new Date(parsed.getFullYear(), parsed.getMonth(), 1));
+  }, [params]);
 
   const showToast = (title: string, text: string) => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, title, text }]);
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
+      setToasts((prev) => prev.filter((item) => item.id !== id));
     }, 5500);
   };
 
-  // Contact Form State
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    checkIn: "2026-06-08",
-    checkOut: "2026-06-12",
-    guests: 2,
-    message: "",
-  });
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const nightTaken = (iso: string) =>
+    blocks.some((block) => iso >= block.checkIn && iso < block.checkOut);
+
+  const disableDate = (date: Date) => {
+    const iso = toISODate(date);
+    return iso < today || iso > horizonEnd;
+  };
 
   const handleRangeSelect = (range: DateRange | undefined) => {
     if (!range?.from) {
-      setSelectedStart(null);
-      setSelectedEnd(null);
+      setFormData((prev) => ({ ...prev, checkIn: "", checkOut: "" }));
       return;
     }
-
-    const start = dateToSelection(range.from);
-    if (!start) return;
-
-    const end = range.to ? dateToSelection(range.to) : null;
-    const sameDay =
-      end && start.monthIdx === end.monthIdx && start.day === end.day;
-
-    if (!end || sameDay) {
-      setSelectedStart(start);
-      setSelectedEnd(null);
+    const start = toISODate(range.from);
+    if (start < today || start >= horizonEnd) {
+      showToast("Outside the booking window", "Choose a check-in inside the open months.");
       return;
     }
-
-    setSelectedStart(start);
-    setSelectedEnd(end);
-    setFormData((prev) => ({
-      ...prev,
-      checkIn: toISODate(range.from as Date),
-      checkOut: toISODate(range.to as Date),
-    }));
+    if (nightTaken(start)) {
+      showToast("Night unavailable", "That night is already taken. Choose an open check-in.");
+      setFormData((prev) => ({ ...prev, checkIn: "", checkOut: "" }));
+      return;
+    }
+    const end = range.to ? toISODate(range.to) : "";
+    if (!end || end === start) {
+      setFormData((prev) => ({ ...prev, checkIn: start, checkOut: "" }));
+      return;
+    }
+    if (end > horizonEnd) {
+      showToast("Outside the booking window", "Choose an earlier check-out.");
+      return;
+    }
+    if (blocks.some((block) => rangesOverlap(start, end, block.checkIn, block.checkOut))) {
+      showToast(
+        "Those dates include a taken night",
+        "Pick a checkout that stops before the next guest.",
+      );
+      setFormData((prev) => ({ ...prev, checkIn: start, checkOut: "" }));
+      return;
+    }
+    setFormData((prev) => ({ ...prev, checkIn: start, checkOut: end }));
     showToast(
-      "Dates Selected!",
-      `Selected ${calendarMonths[start.monthIdx].name} ${start.day} to ${calendarMonths[end.monthIdx].name} ${end.day}. Send an inquiry and we will confirm availability.`,
+      "Dates selected",
+      `${formatLongDate(start)} to ${formatLongDate(end)}. Submit the form to confirm this stay.`,
     );
   };
 
-  // Calculate nights
-  const calculateTotal = () => {
-    if (!selectedStart || !selectedEnd) return null;
-
-    let nights = 0;
-
-    if (selectedStart.monthIdx === selectedEnd.monthIdx) {
-      nights = selectedEnd.day - selectedStart.day;
-    } else {
-      const startDaysInM = calendarMonths[selectedStart.monthIdx].daysInMonth;
-      nights += startDaysInM - selectedStart.day;
-      nights += selectedEnd.day;
+  const checkAvailability = async () => {
+    setChecking(true);
+    try {
+      const next = await reload();
+      if (!next?.bookingEnabled) {
+        showToast("Calendar unavailable", "Call or text Willie or Shelly to reserve.");
+        return;
+      }
+      const taken = next.blocked.some((block) =>
+        rangesOverlap(formData.checkIn, formData.checkOut, block.checkIn, block.checkOut),
+      );
+      if (taken) {
+        showToast("Those nights are closed", "The latest VRBO calendar has these dates blocked.");
+        return;
+      }
+      if (next.syncStatus.lastError && next.syncStatus.state !== "ok") {
+        showToast("VRBO calendar was not updated", next.syncStatus.lastError);
+        return;
+      }
+      showToast("Those nights are open", "Submit the form to confirm this stay.");
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    } finally {
+      setChecking(false);
     }
-
-    if (nights < 1) return null;
-
-    return { nights };
   };
 
-  const bookingSummary = calculateTotal();
+  const nights = nightCount(formData.checkIn, formData.checkOut);
+  const selectedFrom = parseISODate(formData.checkIn);
+  const selectedTo = parseISODate(formData.checkOut);
+  const selected = selectedFrom ? { from: selectedFrom, to: selectedTo } : undefined;
+  const bookingEnabled = data?.bookingEnabled === true;
 
-  // Form Submission & Validation
-  const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleFormSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     const errors: Record<string, string> = {};
-
     if (!formData.fullName.trim() || formData.fullName.trim().length < 2) {
       errors.fullName = "Please enter your full name.";
     }
-    if (
-      !formData.email.trim() ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-    ) {
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       errors.email = "Please provide a valid email address.";
     }
     if (!formData.phone.trim() || formData.phone.trim().length < 7) {
       errors.phone = "Please provide a direct contact phone number.";
     }
-    if (!formData.checkIn) {
-      errors.checkIn = "Check-in date is required.";
-    }
-    if (!formData.checkOut) {
-      errors.checkOut = "Check-out date is required.";
-    } else if (formData.checkIn && formData.checkOut <= formData.checkIn) {
+    if (!formData.checkIn) errors.checkIn = "Check-in date is required.";
+    if (!formData.checkOut) errors.checkOut = "Check-out date is required.";
+    else if (formData.checkIn && formData.checkOut <= formData.checkIn) {
       errors.checkOut = "Check-out date must be after check-in date.";
+    } else if (
+      formData.checkIn &&
+      blocks.some((block) => rangesOverlap(formData.checkIn, formData.checkOut, block.checkIn, block.checkOut))
+    ) {
+      errors.checkOut = "Those dates include a taken night.";
+    }
+    if (formData.checkIn && nightTaken(formData.checkIn)) {
+      errors.checkIn = "That check-in night is already taken.";
+    }
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+    if (!bookingEnabled) {
+      showToast("Booking is unavailable", "Call or text Willie or Shelly to reserve.");
+      return;
     }
 
-    setFormErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        showToast(
-          "Inquiry Sent to Willie & Shelly!",
-          `Thank you, ${formData.fullName}! Your direct booking inquiry has been received. We will respond within 24 hours.`,
-        );
-        setFormData((prev) => ({ ...prev, message: "" }));
-      }, 700);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          checkIn: formData.checkIn,
+          checkOut: formData.checkOut,
+          guests: formData.guests,
+          guestName: formData.fullName,
+          guestEmail: formData.email,
+          guestPhone: formData.phone,
+          message: formData.message,
+        }),
+      });
+      const body = (await response.json().catch(() => ({}))) as { error?: string; reference?: string };
+      if (response.status === 409) {
+        showToast("Those nights are no longer open", "Nothing was saved. Pick another set of dates.");
+        await reload();
+        return;
+      }
+      if (!response.ok || !body.reference) {
+        showToast("Booking was not saved", body.error || "Call or text Willie or Shelly to reserve.");
+        return;
+      }
+      setConfirmation(body.reference);
+      setFormData((prev) => ({ ...prev, message: "" }));
+      showToast("Stay confirmed", `Reference ${body.reference}. A confirmation email is on its way.`);
+      await reload();
+    } catch {
+      showToast("Booking was not saved", "Call or text Willie or Shelly to reserve.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <>
-      {/* Page-level toast container */}
       <div className="toast-container" aria-live="polite">
-        {toasts.map((t) => (
-          <div key={t.id} className="toast">
+        {toasts.map((toast) => (
+          <div key={toast.id} className="toast">
             <div className="toast-text">
-              <strong>{t.title}</strong>
-              <p>{t.text}</p>
+              <strong>{toast.title}</strong>
+              <p>{toast.text}</p>
             </div>
             <button
               className="toast-close"
-              onClick={() =>
-                setToasts((prev) => prev.filter((item) => item.id !== t.id))
-              }
+              onClick={() => setToasts((prev) => prev.filter((item) => item.id !== toast.id))}
               aria-label="Close notification"
             >
               <Icon type="close" />
@@ -180,72 +247,79 @@ export function Book() {
         ))}
       </div>
 
-      {/* --- Interactive Calendar & Rate Estimator --- */}
       <section className="calendar-section section reveal" id="booking">
         <div className="calendar-intro">
           <p className="eyebrow">Request your dates</p>
           <h2>Plan your stay.</h2>
           <p>
-            Select check-in and check-out, then send a message. We will respond
-            within 24 hours with availability. Booking directly avoids fees
-            charged by booking sites.
+            Select check-in and check-out, then send your details. If those nights are open, the stay is
+            confirmed and you get an email with your reference.
           </p>
 
           <div className="legend">
             <span>
-              <i className="available" /> Open to request
+              <i className="available" /> Open
             </span>
             <span>
               <i className="selected-dot" /> Selected
             </span>
+            <span>
+              <i className="available day-booked-dot" /> Closed
+            </span>
           </div>
 
-          {bookingSummary ? (
+          {loading ? <div className="hint-note">Loading open nights.</div> : null}
+          {error ? <div className="hint-note">{error}</div> : null}
+          {!loading && data && !bookingEnabled ? (
+            <div className="hint-note">
+              The booking calendar is not connected yet. Call or text Willie or Shelly to reserve.
+            </div>
+          ) : null}
+
+          {nights > 0 ? (
             <div className="booking-summary-card" style={{ marginTop: "30px" }}>
               <div className="booking-summary-info">
-                <h4>{bookingSummary.nights} nights at Casa Oceano Rio</h4>
-                <p>
-                  We will confirm these dates and
-                  reply within 24 hours.
-                </p>
+                <h4>
+                  {nights} {nights === 1 ? "night" : "nights"} at Casa Oceano Rio
+                </h4>
+                <p>Submit the form to confirm this stay if the nights are still open.</p>
               </div>
               <button
                 className="primary"
                 style={{ width: "100%", marginTop: "14px" }}
-                onClick={() => {
-                  const contactEl = document.getElementById("contact");
-                  if (contactEl)
-                    contactEl.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => void checkAvailability()}
+                type="button"
+                disabled={checking}
               >
-                Inquire with these dates <Icon type="arrow" />
+                {checking ? "Checking the calendar..." : "Check availability"} {!checking && <Icon type="arrow" />}
               </button>
             </div>
           ) : (
-            <div className="hint-note">
-              Select a check-in day, then a check-out day, and send them with
-              your inquiry.
-            </div>
+            <div className="hint-note">Select a check-in day, then a check-out day.</div>
           )}
+          <p className="form-fineprint">
+            A clash between this website and VRBO is uncommon. Willie and Shelly resolve it by phone.
+          </p>
         </div>
 
         <div className="calendar">
           <RatesCalendar
-            monthIdx={currentMonthIdx}
-            onMonthIdxChange={setCurrentMonthIdx}
-            selectedStart={selectedStart}
-            selectedEnd={selectedEnd}
+            month={month}
+            months={months}
+            onMonthChange={setMonth}
+            selected={selected}
             onRangeSelect={handleRangeSelect}
+            disabled={disableDate}
+            booked={(date) => nightTaken(toISODate(date))}
           />
         </div>
       </section>
 
-      {/* --- Direct Booking & Contact Form Section --- */}
       <section className="contact-section section reveal" id="contact">
         <div className="contact-layout">
           <div className="contact-info">
             <div>
-              <p className="eyebrow">Direct host inquiries</p>
+              <p className="eyebrow">Direct host booking</p>
               <h2>
                 Book Direct and Save Up to 20%
                 <br />
@@ -256,9 +330,8 @@ export function Book() {
             <div className="direct-perks">
               <h4>Why book directly with us?</h4>
               <p>
-                We are individual owners, not a rental company. Booking directly
-                avoids fees charged by booking sites. Put your dates in the
-                message and we will respond within 24 hours with availability.
+                We are individual owners, not a rental company. Booking directly avoids fees charged by
+                booking sites. If the nights are open, your stay is confirmed by email.
               </p>
               <ul>
                 <li>Willie and Shelly manage the house themselves</li>
@@ -297,18 +370,23 @@ export function Book() {
                   {import.meta.env.VITE_CONTACT_EMAIL}
                 </a>
                 <br />
-                Shelly:{" "}
-                <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
+                Shelly: <a href="mailto:tybeeshelly@yahoo.com">tybeeshelly@yahoo.com</a>
               </div>
             </div>
           </div>
 
           <div className="contact-form">
-            <h3>Direct reservation inquiry</h3>
-            <p className="form-subtitle">
-              Put your requested dates in the message. We will respond within 24
-              hours with availability.
-            </p>
+            <h3>Direct reservation</h3>
+            {confirmation ? (
+              <p className="form-subtitle">
+                Your stay is confirmed. Reference {confirmation}. Check your email, and call or text Willie
+                or Shelly if you need to change it.
+              </p>
+            ) : (
+              <p className="form-subtitle">
+                Send your details. If the nights are still open, you will get a confirmation email.
+              </p>
+            )}
 
             <form onSubmit={handleFormSubmit} noValidate>
               <div className="form-grid">
@@ -319,13 +397,9 @@ export function Book() {
                     type="text"
                     placeholder="Your full name"
                     value={formData.fullName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, fullName: e.target.value })
-                    }
+                    onChange={(event) => setFormData({ ...formData, fullName: event.target.value })}
                   />
-                  {formErrors.fullName && (
-                    <span className="error-msg">{formErrors.fullName}</span>
-                  )}
+                  {formErrors.fullName && <span className="error-msg">{formErrors.fullName}</span>}
                 </div>
 
                 <div className="form-group">
@@ -335,13 +409,9 @@ export function Book() {
                     type="email"
                     placeholder="Your email address"
                     value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
+                    onChange={(event) => setFormData({ ...formData, email: event.target.value })}
                   />
-                  {formErrors.email && (
-                    <span className="error-msg">{formErrors.email}</span>
-                  )}
+                  {formErrors.email && <span className="error-msg">{formErrors.email}</span>}
                 </div>
 
                 <div className="form-group">
@@ -351,13 +421,9 @@ export function Book() {
                     type="tel"
                     placeholder="phone number"
                     value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
+                    onChange={(event) => setFormData({ ...formData, phone: event.target.value })}
                   />
-                  {formErrors.phone && (
-                    <span className="error-msg">{formErrors.phone}</span>
-                  )}
+                  {formErrors.phone && <span className="error-msg">{formErrors.phone}</span>}
                 </div>
 
                 <div className="form-group">
@@ -365,14 +431,13 @@ export function Book() {
                   <DateField
                     id="formCheckIn"
                     value={formData.checkIn}
-                    onChange={(checkIn) =>
-                      setFormData({ ...formData, checkIn })
-                    }
+                    onChange={(checkIn) => setFormData({ ...formData, checkIn })}
                     invalid={Boolean(formErrors.checkIn)}
+                    disabled={disableDate}
+                    startMonth={months[0]}
+                    endMonth={months[months.length - 1]}
                   />
-                  {formErrors.checkIn && (
-                    <span className="error-msg">{formErrors.checkIn}</span>
-                  )}
+                  {formErrors.checkIn && <span className="error-msg">{formErrors.checkIn}</span>}
                 </div>
 
                 <div className="form-group">
@@ -380,14 +445,13 @@ export function Book() {
                   <DateField
                     id="formCheckOut"
                     value={formData.checkOut}
-                    onChange={(checkOut) =>
-                      setFormData({ ...formData, checkOut })
-                    }
+                    onChange={(checkOut) => setFormData({ ...formData, checkOut })}
                     invalid={Boolean(formErrors.checkOut)}
+                    disabled={disableDate}
+                    startMonth={months[0]}
+                    endMonth={months[months.length - 1]}
                   />
-                  {formErrors.checkOut && (
-                    <span className="error-msg">{formErrors.checkOut}</span>
-                  )}
+                  {formErrors.checkOut && <span className="error-msg">{formErrors.checkOut}</span>}
                 </div>
 
                 <div className="form-group full-width">
@@ -401,37 +465,30 @@ export function Book() {
 
                 <div className="form-group full-width">
                   <label htmlFor="message">
-                    Inquiry message 
-                    <span className="form-fineprint">(optional)</span>
+                    Message <span className="form-fineprint">(optional)</span>
                   </label>
                   <textarea
                     id="message"
                     rows={4}
                     placeholder="your message or questions"
                     value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
+                    onChange={(event) => setFormData({ ...formData, message: event.target.value })}
                   />
                 </div>
               </div>
 
-              <button
-                className="primary submit-btn"
-                type="submit"
-                disabled={isSubmitting}
-              >
+              <button className="primary submit-btn" type="submit" disabled={isSubmitting || !bookingEnabled}>
                 {isSubmitting ? (
-                  "Sending Inquiry..."
+                  "Confirming stay..."
                 ) : (
                   <>
-                    Send booking inquiry <Icon type="arrow" />
+                    Confirm booking <Icon type="arrow" />
                   </>
                 )}
               </button>
 
               <p className="form-fineprint">
-                We will respond within 24 hours with availability.
+                To change or cancel later, call or text Willie at (912) 398-4113 or Shelly at (912) 398-6901.
               </p>
             </form>
           </div>

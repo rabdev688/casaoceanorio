@@ -1,94 +1,4 @@
-export interface StayMonth {
-  name: string
-  year: number
-  daysInMonth: number
-  firstDayOffset: number
-  blocked: number[]
-  rates: number[]
-}
-
-export interface StaySelection {
-  monthIdx: number
-  day: number
-}
-
-const MONTH_INDEX: Record<string, number> = {
-  May: 4,
-  June: 5,
-  July: 6,
-  August: 7,
-}
-
-export const calendarMonths: StayMonth[] = [
-  {
-    name: 'May',
-    year: 2026,
-    daysInMonth: 31,
-    firstDayOffset: 5,
-    blocked: [],
-    rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 5) % 7) ? 585 : 520)),
-  },
-  {
-    name: 'June',
-    year: 2026,
-    daysInMonth: 30,
-    firstDayOffset: 1,
-    blocked: [],
-    rates: Array.from({ length: 30 }, (_, i) => ([0, 5, 6].includes((i + 1) % 7) ? 680 : 610)),
-  },
-  {
-    name: 'July',
-    year: 2026,
-    daysInMonth: 31,
-    firstDayOffset: 3,
-    blocked: [],
-    rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 3) % 7) ? 720 : 640)),
-  },
-  {
-    name: 'August',
-    year: 2026,
-    daysInMonth: 31,
-    firstDayOffset: 6,
-    blocked: [],
-    rates: Array.from({ length: 31 }, (_, i) => ([0, 5, 6].includes((i + 6) % 7) ? 620 : 550)),
-  },
-]
-
-export function monthStart(monthIdx: number) {
-  const month = calendarMonths[monthIdx]
-  return new Date(month.year, MONTH_INDEX[month.name], 1)
-}
-
-function monthIndexForDate(date: Date) {
-  return calendarMonths.findIndex((month) => {
-    return month.year === date.getFullYear() && MONTH_INDEX[month.name] === date.getMonth()
-  })
-}
-
-export function dateToSelection(date: Date): StaySelection | null {
-  const monthIdx = monthIndexForDate(date)
-  if (monthIdx < 0) return null
-  return { monthIdx, day: date.getDate() }
-}
-
-export function selectionToDate(selection: StaySelection | null | undefined) {
-  if (!selection) return undefined
-  const month = calendarMonths[selection.monthIdx]
-  if (!month) return undefined
-  return new Date(month.year, MONTH_INDEX[month.name], selection.day)
-}
-
-export function isBlockedDate(date: Date) {
-  const monthIdx = monthIndexForDate(date)
-  if (monthIdx < 0) return true
-  return calendarMonths[monthIdx].blocked.includes(date.getDate())
-}
-
-export function getStayRate(date: Date) {
-  const monthIdx = monthIndexForDate(date)
-  if (monthIdx < 0) return null
-  return calendarMonths[monthIdx].rates[date.getDate() - 1] ?? null
-}
+import { horizonCheckout, todayInTimeZone } from '../../server/dates.ts'
 
 export function toISODate(date: Date) {
   const year = date.getFullYear()
@@ -104,8 +14,28 @@ export function parseISODate(value: string) {
   const month = Number(match[2])
   const day = Number(match[3])
   const date = new Date(year, month - 1, day)
-  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
-    return undefined
-  }
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return undefined
   return date
+}
+
+export function monthStarts(today = todayInTimeZone()) {
+  const end = horizonCheckout(today)
+  const [startYear, startMonth] = today.split('-').map(Number)
+  const [endYear, endMonth] = end.split('-').map(Number)
+  const months: Date[] = []
+  let year = startYear
+  let month = startMonth
+  while (year < endYear || (year === endYear && month <= endMonth)) {
+    months.push(new Date(year, month - 1, 1))
+    month += 1
+    if (month === 13) {
+      month = 1
+      year += 1
+    }
+  }
+  return months
+}
+
+export function monthLabel(date: Date) {
+  return `${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`
 }

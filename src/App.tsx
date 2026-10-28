@@ -11,6 +11,7 @@ import { About } from "@/pages/About";
 import { Amenities } from "@/pages/Amenities";
 import { Location } from "@/pages/Location";
 import { Book } from "@/pages/Book";
+import { Admin } from "@/pages/Admin";
 
 // Scrolls to the top of the page on every route change
 function ScrollToTop() {
@@ -95,6 +96,7 @@ function App() {
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/location" element={<Location />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
 
@@ -220,14 +222,21 @@ function App() {
             </p>
             <BookingBar
               mobile
-              onApplyDates={() => {
+              onApplyDates={(checkIn, checkOut, guests) => {
                 setSheet(false);
+                const params = new URLSearchParams();
+                if (checkIn) params.set("checkIn", checkIn);
+                if (checkOut) params.set("checkOut", checkOut);
+                params.set("guests", String(guests));
+                const target = pathname === "/" ? "/" : "/book";
+                navigate(
+                  { pathname: target, search: params.toString() },
+                  { replace: pathname === target },
+                );
                 if (pathname === "/") {
                   document
                     .getElementById("booking")
                     ?.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  navigate("/book");
                 }
               }}
             />
