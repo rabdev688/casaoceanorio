@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Booking and admin APIs are not pages.
+Disallow: /api/
+
+# /admin is intentionally allowed. Crawlers must be able to read its
+# noindex header. Blocking the URL here can still leave it in search results.
+
+Sitemap: https://www.casaoceanorio.com/sitemap.xml

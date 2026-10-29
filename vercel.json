@@ -5,8 +5,30 @@
       "includeFiles": "server/**"
     }
   },
+  "headers": [
+    {
+      "source": "/admin",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/admin/",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/api/calendar.ics", "destination": "/api/calendar" },
+    { "source": "/.well-known/ard.json", "destination": "/api/no-agent-manifest" },
+    { "source": "/.well-known/ai-catalog.json", "destination": "/api/no-agent-manifest" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

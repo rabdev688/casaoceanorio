@@ -7,7 +7,7 @@ export interface PhotoItem {
 
 export const photos: PhotoItem[] = [
   {
-    src: "/gallery/exterior.jpg",
+    src: "/gallery/exterior.webp",
     title: "Casa Oceano Rio",
     desc: "South Beach house with a rooftop deck, dipping pool, and steps to the beach.",
     space: "Exterior",
