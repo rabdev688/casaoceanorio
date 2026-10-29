@@ -22,7 +22,7 @@ interface RatesCalendarProps {
   booked: (date: Date) => boolean
 }
 
-function RateDayButton({
+export function RateDayButton({
   day,
   modifiers,
   className,
@@ -32,12 +32,13 @@ function RateDayButton({
   const closed = Boolean(modifiers.disabled) || taken
   const priceLabel = closed ? 'Unavailable' : 'Open'
   const ariaLabel = typeof props['aria-label'] === 'string' ? props['aria-label'] : undefined
+  const dayClass = ['day-rate', taken ? 'day-booked' : '', className || ''].filter(Boolean).join(' ')
 
   return (
     <CalendarDayButton
       day={day}
       modifiers={modifiers}
-      className={taken ? `${className || ''} day-booked` : className}
+      className={dayClass}
       {...props}
       aria-label={ariaLabel ? `${ariaLabel}, ${priceLabel}` : priceLabel}
     >

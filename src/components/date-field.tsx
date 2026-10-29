@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
 
+import { RateDayButton } from '@/components/rates-calendar'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { parseISODate, toISODate } from '@/lib/stay-calendar'
@@ -10,10 +11,11 @@ import { todayInTimeZone } from '../../server/dates.js'
 interface DateFieldProps {
   id: string
   value: string
-  onChange: (value: string) => void
+  onChange: (value: string) => void | boolean
   placeholder?: string
   invalid?: boolean
   disabled?: (date: Date) => boolean
+  booked?: (date: Date) => boolean
   startMonth?: Date
   endMonth?: Date
 }
@@ -31,6 +33,7 @@ export function DateField({
   placeholder = 'Select date',
   invalid = false,
   disabled,
+  booked,
   startMonth,
   endMonth,
 }: DateFieldProps) {
@@ -65,9 +68,11 @@ export function DateField({
           startMonth={startMonth}
           endMonth={endMonth}
           disabled={disabled}
+          modifiers={booked ? { booked } : undefined}
+          components={booked ? { DayButton: RateDayButton } : undefined}
           onSelect={(date) => {
             if (!date) return
-            onChange(toISODate(date))
+            if (onChange(toISODate(date)) === false) return
             setOpen(false)
           }}
           autoFocus

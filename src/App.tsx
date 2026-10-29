@@ -5,6 +5,8 @@ import { DocumentHead } from "@/components/document-head";
 import { Navbar } from "@/components/navbar";
 import { BookingBar } from "@/components/booking-bar";
 import { Icon } from "@/components/icon";
+import { scrollToStay } from "@/lib/scroll-to-section";
+import { subscribeToasts } from "@/lib/toast";
 
 import { Home } from "@/pages/Home";
 import { Gallery } from "@/pages/Gallery";
@@ -18,7 +20,7 @@ import { Admin } from "@/pages/Admin";
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname]);
   return null;
 }
@@ -35,6 +37,16 @@ function App() {
   const [sheet, setSheet] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  useEffect(() => {
+    return subscribeToasts((notice) => {
+      const id = Date.now();
+      setToasts((prev) => [...prev, { id, ...notice }]);
+      window.setTimeout(() => {
+        setToasts((prev) => prev.filter((item) => item.id !== id));
+      }, 5500);
+    });
+  }, []);
 
   // Scroll listener for Back to Top button
   useEffect(() => {
@@ -224,7 +236,7 @@ function App() {
             </p>
             <BookingBar
               mobile
-              onApplyDates={(checkIn, checkOut, guests) => {
+              onApplyDates={(checkIn, checkOut, guests, open) => {
                 setSheet(false);
                 const params = new URLSearchParams();
                 if (checkIn) params.set("checkIn", checkIn);
@@ -235,11 +247,7 @@ function App() {
                   { pathname: target, search: params.toString() },
                   { replace: pathname === target },
                 );
-                if (pathname === "/") {
-                  document
-                    .getElementById("booking")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }
+                scrollToStay(checkIn, checkOut, open);
               }}
             />
           </div>

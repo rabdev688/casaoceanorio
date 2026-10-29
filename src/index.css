@@ -2556,6 +2556,11 @@ footer {
     scroll-margin-top: 88px;
   }
 
+  #guestNameField {
+    scroll-margin-top: 96px;
+    scroll-margin-bottom: 170px;
+  }
+
   .calendar-section {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -2814,6 +2819,46 @@ footer {
   width: auto;
   max-width: calc(100vw - 24px);
   padding: 8px;
+}
+
+.date-popover [data-slot="button"].day-rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 42px;
+  height: 46px;
+  padding: 2px;
+}
+
+.date-popover .rate-num {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.date-popover .rate-price {
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.date-popover [data-slot="button"].day-booked {
+  background: #f5f4f1;
+  color: #a9b2b0;
+}
+
+.date-popover [data-slot="button"].day-booked .rate-price {
+  color: #b6bcba;
+}
+
+.date-popover [data-slot="button"][data-selected-single="true"] .rate-price {
+  color: var(--sand);
 }
 
 [data-slot="popover-content"] [data-slot="calendar"] {

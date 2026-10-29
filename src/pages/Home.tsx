@@ -4,6 +4,7 @@ import { Icon } from "@/components/icon";
 import { amenityColumns } from "@/data/amenities";
 import { photos } from "@/data/photos";
 import { spacesData } from "@/data/spaces";
+import { scrollToStay } from "@/lib/scroll-to-section";
 import { useReveal } from "@/lib/useReveal";
 import { Book } from "@/pages/Book";
 
@@ -51,7 +52,7 @@ export function Home() {
 
         {/* Desktop Quick Booking Bar */}
         <BookingBar
-          onApplyDates={(checkIn, checkOut, guests) => {
+          onApplyDates={(checkIn, checkOut, guests, open) => {
             const params = new URLSearchParams();
             if (checkIn) params.set("checkIn", checkIn);
             if (checkOut) params.set("checkOut", checkOut);
@@ -60,9 +61,7 @@ export function Home() {
               { pathname: "/", search: params.toString() },
               { replace: true },
             );
-            document
-              .getElementById("booking")
-              ?.scrollIntoView({ behavior: "smooth" });
+            scrollToStay(checkIn, checkOut, open);
           }}
         />
       </div>

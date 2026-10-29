@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { DateField } from "@/components/date-field";
 import { GuestSelect } from "@/components/guest-select";
 import { Icon } from "@/components/icon";
+import { describeStay } from "@/lib/stay-availability";
 import { monthStarts, toISODate } from "@/lib/stay-calendar";
+import { showToast } from "@/lib/toast";
 import { useAvailability } from "@/lib/use-availability";
-import { horizonCheckout, todayInTimeZone } from "../../server/dates.js";
+import { horizonCheckout, rangesOverlap, todayInTimeZone } from "../../server/dates.js";
 
 export interface BookingBarProps {
   mobile?: boolean;
   initialCheckIn?: string;
   initialCheckOut?: string;
   initialGuests?: number;
-  onApplyDates?: (checkIn: string, checkOut: string, guests: number) => void;
+  onApplyDates?: (checkIn: string, checkOut: string, guests: number, open: boolean) => void;
 }
 
 export function BookingBar({
@@ -36,20 +38,62 @@ export function BookingBar({
   const checkOutId = useId();
   const guestsId = useId();
 
+  const blocks = data?.blocked ?? [];
+
+  const nightTaken = (date: Date) => {
+    const iso = toISODate(date);
+    return blocks.some((block) => iso >= block.checkIn && iso < block.checkOut);
+  };
+
   const disableDate = (date: Date) => {
     const iso = toISODate(date);
     return iso < today || iso > horizonEnd;
   };
 
+  const disableCheckOut = (date: Date) => disableDate(date) || Boolean(checkIn && toISODate(date) <= checkIn);
+
+  const chooseCheckIn = (next: string) => {
+    if (blocks.some((block) => next >= block.checkIn && next < block.checkOut)) {
+      showToast("Night unavailable", "That night is already taken. Choose an open check-in.");
+      return false;
+    }
+    const overlaps =
+      Boolean(checkOut) && blocks.some((block) => rangesOverlap(next, checkOut, block.checkIn, block.checkOut));
+    if (overlaps) {
+      showToast("Those dates include a taken night", "Pick a checkout that stops before the next guest.");
+    }
+    if (overlaps || (checkOut && next >= checkOut)) setCheckOut("");
+    setCheckIn(next);
+  };
+
+  const chooseCheckOut = (next: string) => {
+    if (checkIn && next <= checkIn) {
+      showToast("Check-out is too early", "Choose a check-out after check-in.");
+      return false;
+    }
+    if (checkIn && blocks.some((block) => rangesOverlap(checkIn, next, block.checkIn, block.checkOut))) {
+      showToast("Those dates include a taken night", "Pick a checkout that stops before the next guest.");
+      return false;
+    }
+    setCheckOut(next);
+  };
+
   const handleSearch = async () => {
     setChecking(true);
+    let open = false;
     try {
-      await reload();
+      const next = await reload();
+      const ready = Boolean(checkIn && checkOut && checkOut > checkIn);
+      if (ready) {
+        const result = describeStay(checkIn, checkOut, next);
+        showToast(result.title, result.text);
+        open = result.open;
+      }
     } finally {
       setChecking(false);
     }
     if (onApplyDates) {
-      onApplyDates(checkIn, checkOut, guests);
+      onApplyDates(checkIn, checkOut, guests, open);
     } else {
       navigate("/book");
     }
@@ -62,8 +106,9 @@ export function BookingBar({
         <DateField
           id={checkInId}
           value={checkIn}
-          onChange={setCheckIn}
+          onChange={chooseCheckIn}
           disabled={disableDate}
+          booked={nightTaken}
           startMonth={months[0]}
           endMonth={months[months.length - 1]}
         />
@@ -73,8 +118,9 @@ export function BookingBar({
         <DateField
           id={checkOutId}
           value={checkOut}
-          onChange={setCheckOut}
-          disabled={disableDate}
+          onChange={chooseCheckOut}
+          disabled={disableCheckOut}
+          booked={nightTaken}
           startMonth={months[0]}
           endMonth={months[months.length - 1]}
         />

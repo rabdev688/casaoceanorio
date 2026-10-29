@@ -8,6 +8,8 @@ import { Icon } from "@/components/icon";
 import { RatesCalendar } from "@/components/rates-calendar";
 import { monthStarts, parseISODate, toISODate } from "@/lib/stay-calendar";
 import { useAvailability } from "@/lib/use-availability";
+import { scrollToRequestForm } from "@/lib/scroll-to-section";
+import { describeStay } from "@/lib/stay-availability";
 import { useReveal } from "@/lib/useReveal";
 import {
   formatLongDate,
@@ -131,26 +133,42 @@ export function Book() {
     setChecking(true);
     try {
       const next = await reload();
-      if (!next?.bookingEnabled) {
-        showToast("Calendar unavailable", "Call or text Willie or Shelly to reserve.");
-        return;
-      }
-      const taken = next.blocked.some((block) =>
-        rangesOverlap(formData.checkIn, formData.checkOut, block.checkIn, block.checkOut),
-      );
-      if (taken) {
-        showToast("Those nights are closed", "The latest VRBO calendar has these dates blocked.");
-        return;
-      }
-      if (next.syncStatus.lastError && next.syncStatus.state !== "ok") {
-        showToast("VRBO calendar was not updated", next.syncStatus.lastError);
-        return;
-      }
-      showToast("Those nights are open", "Submit the form to confirm this stay.");
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+      const result = describeStay(formData.checkIn, formData.checkOut, next);
+      showToast(result.title, result.text);
+      if (result.open) scrollToRequestForm();
     } finally {
       setChecking(false);
     }
+  };
+
+  const chooseFormCheckIn = (checkIn: string) => {
+    if (nightTaken(checkIn)) {
+      showToast("Night unavailable", "That night is already taken. Choose an open check-in.");
+      return false;
+    }
+    const overlaps =
+      Boolean(formData.checkOut) &&
+      blocks.some((block) => rangesOverlap(checkIn, formData.checkOut, block.checkIn, block.checkOut));
+    if (overlaps) {
+      showToast("Those dates include a taken night", "Pick a checkout that stops before the next guest.");
+    }
+    const checkOut = overlaps || (formData.checkOut && checkIn >= formData.checkOut) ? "" : formData.checkOut;
+    setFormData((prev) => ({ ...prev, checkIn, checkOut }));
+  };
+
+  const chooseFormCheckOut = (checkOut: string) => {
+    if (formData.checkIn && checkOut <= formData.checkIn) {
+      showToast("Check-out is too early", "Choose a check-out after check-in.");
+      return false;
+    }
+    if (
+      formData.checkIn &&
+      blocks.some((block) => rangesOverlap(formData.checkIn, checkOut, block.checkIn, block.checkOut))
+    ) {
+      showToast("Those dates include a taken night", "Pick a checkout that stops before the next guest.");
+      return false;
+    }
+    setFormData((prev) => ({ ...prev, checkOut }));
   };
 
   const nights = nightCount(formData.checkIn, formData.checkOut);
@@ -390,7 +408,7 @@ export function Book() {
 
             <form onSubmit={handleFormSubmit} noValidate>
               <div className="form-grid">
-                <div className="form-group full-width">
+                <div className="form-group full-width" id="guestNameField">
                   <label htmlFor="fullName">Your full name *</label>
                   <input
                     id="fullName"
@@ -431,9 +449,10 @@ export function Book() {
                   <DateField
                     id="formCheckIn"
                     value={formData.checkIn}
-                    onChange={(checkIn) => setFormData({ ...formData, checkIn })}
+                    onChange={chooseFormCheckIn}
                     invalid={Boolean(formErrors.checkIn)}
                     disabled={disableDate}
+                    booked={(date) => nightTaken(toISODate(date))}
                     startMonth={months[0]}
                     endMonth={months[months.length - 1]}
                   />
@@ -445,9 +464,12 @@ export function Book() {
                   <DateField
                     id="formCheckOut"
                     value={formData.checkOut}
-                    onChange={(checkOut) => setFormData({ ...formData, checkOut })}
+                    onChange={chooseFormCheckOut}
                     invalid={Boolean(formErrors.checkOut)}
-                    disabled={disableDate}
+                    disabled={(date) =>
+                      disableDate(date) || Boolean(formData.checkIn && toISODate(date) <= formData.checkIn)
+                    }
+                    booked={(date) => nightTaken(toISODate(date))}
                     startMonth={months[0]}
                     endMonth={months[months.length - 1]}
                   />
