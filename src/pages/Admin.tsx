@@ -63,25 +63,13 @@ export function Admin() {
   const [loginError, setLoginError] = useState("");
   const [data, setData] = useState<AdminPayload | null>(null);
   const [notice, setNotice] = useState("");
-  const [toasts, setToasts] = useState<{ id: number; title: string; text: string }[]>([]);
   const [busy, setBusy] = useState(false);
   const [month, setMonth] = useState(() => {
     const today = todayInTimeZone();
     const [year, monthNumber] = today.split("-").map(Number);
     return new Date(year, monthNumber - 1, 1);
   });
-  const [blockIn, setBlockIn] = useState("");
-  const [blockOut, setBlockOut] = useState("");
-  const [note, setNote] = useState("");
   const today = todayInTimeZone();
-
-  function showToast(title: string, text = "") {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, title, text }]);
-    window.setTimeout(() => {
-      setToasts((prev) => prev.filter((item) => item.id !== id));
-    }, 5500);
-  }
 
   async function load() {
     const response = await fetch("/api/admin/stays", { cache: "no-store" });
@@ -196,28 +184,6 @@ export function Admin() {
     setBusy(false);
   }
 
-  async function addBlock(event: FormEvent) {
-    event.preventDefault();
-    setBusy(true);
-    const response = await fetch("/api/admin/manual-block", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ checkIn: blockIn, checkOut: blockOut, note }),
-    });
-    const body = (await response.json().catch(() => ({}))) as { error?: string };
-    if (!response.ok) {
-      setNotice("");
-      showToast(body.error || "The block was not saved.");
-    } else {
-      setNotice("Manual block saved.");
-      setBlockIn("");
-      setBlockOut("");
-      setNote("");
-    }
-    await load();
-    setBusy(false);
-  }
-
   async function removeBlock(id: string) {
     setBusy(true);
     const response = await fetch(`/api/admin/manual-block?id=${encodeURIComponent(id)}`, { method: "DELETE" });
@@ -264,25 +230,6 @@ export function Admin() {
   // ---- Dashboard ----
   return (
     <section className="admin-page">
-      <div className="toast-container" aria-live="polite">
-        {toasts.map((toast) => (
-          <div key={toast.id} className="toast">
-            <div className="toast-text">
-              <strong>{toast.title}</strong>
-              {toast.text ? <p>{toast.text}</p> : null}
-            </div>
-            <button
-              className="toast-close"
-              type="button"
-              onClick={() => setToasts((prev) => prev.filter((item) => item.id !== toast.id))}
-              aria-label="Close notification"
-            >
-              <Icon type="close" />
-            </button>
-          </div>
-        ))}
-      </div>
-
       {/* ---- Header ---- */}
       <div className="admin-header">
         <div className="admin-header-left">
@@ -459,30 +406,7 @@ export function Admin() {
             </details>
           )}
 
-          {/* Section 3: Block nights */}
-          <div className="admin-section">
-            <h2 className="admin-section-title">Block nights</h2>
-            <p className="admin-section-desc">Owner stay or maintenance. Included in the VRBO export.</p>
-            <form className="admin-block-form" onSubmit={addBlock}>
-              <div className="form-group">
-                <label htmlFor="blockIn">Check-in</label>
-                <input id="blockIn" type="date" value={blockIn} onChange={(e) => setBlockIn(e.target.value)} required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="blockOut">Check-out</label>
-                <input id="blockOut" type="date" value={blockOut} onChange={(e) => setBlockOut(e.target.value)} required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="blockNote">Note</label>
-                <input id="blockNote" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Owner stay" />
-              </div>
-              <button className="admin-btn" type="submit" disabled={busy}>
-                Block nights
-              </button>
-            </form>
-          </div>
-
-          {/* Section 4: VRBO sync */}
+          {/* Section 3: VRBO sync */}
           <div className="admin-section">
             <h2 className="admin-section-title">VRBO calendar</h2>
             <div className="admin-vrbo-row">
