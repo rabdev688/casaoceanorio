@@ -1,0 +1,18 @@
+# Casa Oceano Rio
+
+> Casa Oceano Rio is a vacation rental in the South Beach area of Tybee Island, Georgia. Guests book directly with the owners, Willie and Shelly.
+
+Use the public pages below for descriptions of the house, photos, amenities, location, and how to request dates. Availability changes, so the site is the current source for open nights.
+
+## Pages
+
+- [Home](https://www.casaoceanorio.com/): South Beach vacation rental overview and direct booking
+- [Our story](https://www.casaoceanorio.com/about): Willie and Shelly, hosting since 2010
+- [Photo gallery](https://www.casaoceanorio.com/gallery): Rooms, decks, kitchen, and the dipping pool
+- [Rooms and amenities](https://www.casaoceanorio.com/amenities): Bedrooms, beach gear, and included amenities
+- [Location](https://www.casaoceanorio.com/location): 1812 Chatham Ave., South Beach, Tybee Island
+- [Check availability](https://www.casaoceanorio.com/book): Request dates directly with Willie and Shelly
+
+## Optional
+
+- [Sitemap](https://www.casaoceanorio.com/sitemap.xml): List of the public pages

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 
+import { DocumentHead } from "@/components/document-head";
 import { Navbar } from "@/components/navbar";
 import { BookingBar } from "@/components/booking-bar";
 import { Icon } from "@/components/icon";
@@ -84,6 +85,7 @@ function App() {
         </svg>
       </button>
 
+      <DocumentHead />
       <Navbar />
       <ScrollToTop />
 

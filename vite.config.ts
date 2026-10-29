@@ -8,6 +8,11 @@ import { fileURLToPath } from 'node:url'
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 
+const agentManifestPaths = new Set([
+  '/.well-known/ard.json',
+  '/.well-known/ai-catalog.json',
+])
+
 function apiFile(pathname: string) {
   const route = pathname === '/api/calendar.ics' ? '/api/calendar' : pathname
   if (!route.startsWith('/api/')) return null
@@ -57,6 +62,12 @@ function casaApi(): Plugin {
     configureServer(devServer) {
       devServer.middlewares.use(async (req, res, next) => {
         const pathname = (req.url || '/').split('?')[0] || '/'
+        if (agentManifestPaths.has(pathname)) {
+          res.statusCode = 404
+          res.setHeader('content-type', 'text/plain; charset=utf-8')
+          res.end('Not found')
+          return
+        }
         if (!pathname.startsWith('/api/')) {
           next()
           return

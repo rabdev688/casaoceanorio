@@ -38,8 +38,8 @@ export function Home() {
               <Icon type="check" />
               <span className="badge-text">
                 Book direct and save up to{" "}
-                <strong className="badge-highlight">20%</strong>{" "}
-                from needless booking platform fees.
+                <strong className="badge-highlight">20%</strong> from needless
+                booking platform fees.
               </span>
             </div>
           </div>
@@ -56,8 +56,13 @@ export function Home() {
             if (checkIn) params.set("checkIn", checkIn);
             if (checkOut) params.set("checkOut", checkOut);
             params.set("guests", String(guests));
-            navigate({ pathname: "/", search: params.toString() }, { replace: true });
-            document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+            navigate(
+              { pathname: "/", search: params.toString() },
+              { replace: true },
+            );
+            document
+              .getElementById("booking")
+              ?.scrollIntoView({ behavior: "smooth" });
           }}
         />
       </div>
@@ -100,9 +105,7 @@ export function Home() {
           <div className="story-copy">
             <div className="section-head">
               <p className="eyebrow">Where the river meets the ocean</p>
-              <h2>
-                Welcoming guests since 2010.
-              </h2>
+              <h2>Welcoming guests since 2010.</h2>
             </div>
             <p>
               Since 2010, Casa Oceano Rio has provided accommodations to guests
@@ -135,7 +138,7 @@ export function Home() {
             />
             <img
               className="float-photo"
-              src="/gallery/willie-shelly.jpg"
+              src="/gallery/willie-shelly.webp"
               alt="Willie and Shelly, owners of Casa Oceano Rio"
             />
           </div>
@@ -321,8 +324,8 @@ export function Home() {
           <h2>Where the river meets the ocean.</h2>
           <p>
             Casa Oceano Rio is in the exclusive South Beach area of Tybee, at{" "}
-            <b>{import.meta.env.VITE_ADDRESS_SHORT}</b>. Shops, restaurants, and nightclubs are
-            within walking distance.
+            <b>{import.meta.env.VITE_ADDRESS_SHORT}</b>. Shops, restaurants, and
+            nightclubs are within walking distance.
           </p>
           <div className="location-address">
             <Icon type="pin" />

@@ -14,9 +14,7 @@ export function About() {
           <div className="story-copy">
             <div className="section-head">
               <p className="eyebrow">Where the river meets the ocean</p>
-              <h2>
-                Welcoming guests since 2010.
-              </h2>
+              <h2>Welcoming guests since 2010.</h2>
             </div>
             <p>
               Since 2010, Casa Oceano Rio has provided accommodations to guests
@@ -58,7 +56,7 @@ export function About() {
             />
             <img
               className="float-photo"
-              src="/gallery/willie-shelly.jpg"
+              src="/gallery/willie-shelly.webp"
               alt="Willie and Shelly, owners of Casa Oceano Rio"
             />
           </div>
